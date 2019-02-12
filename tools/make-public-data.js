@@ -1,6 +1,5 @@
 import {join} from 'path';
 import * as fs from 'fs-extra';
-import glob from 'globby';
 import {DOMParser} from 'xmldom';
 
 import xmlDocumentToDocumentBudgetaire from '../src/shared/js/finance/xmlDocumentToDocumentBudgetaire';
