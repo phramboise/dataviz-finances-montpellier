@@ -7,6 +7,10 @@ cache: npm
 # Travis Lifecycle
 before_script: npm run build-demo
 
+# Ajoute les artéfacts au déploiement
+on_success:
+- rm build/.gitignore
+
 deploy:
   skip_cleanup: true
   provider: pages
