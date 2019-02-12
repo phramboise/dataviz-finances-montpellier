@@ -58,4 +58,7 @@ Promise.all([
 })
 .then( docBudgs => JSON.stringify(docBudgs, null, 2) )
 .then(str => writeFile(join(BUILD_FINANCE_DIR, 'm52-strings.json'), str, {encoding: 'utf8'}))
-.catch(err => console.error('make-doc-budg-strings', err))
+.catch(err => {
+    console.error('make-doc-budg-strings', err)
+    process.exit(1)
+})

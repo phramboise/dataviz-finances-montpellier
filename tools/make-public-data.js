@@ -51,4 +51,5 @@ mkdir(BUILD_FINANCE_DIR)
 })
 .catch(err => {
     console.error('err', err);
+    process.exit(1);
 })
