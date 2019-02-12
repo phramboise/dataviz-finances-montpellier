@@ -1,0 +1,21 @@
+# Language and env
+
+language: node_js
+node_js: 'node'
+
+# Travis Lifecycle
+before_script: npm run build-demo
+
+deploy:
+  skip_cleanup: true
+  provider: pages
+  github-token: $GH_TOKEN
+  keep-history: false
+  local-dir: build
+  on:
+    branch: master
+
+# Other configs
+
+git:
+  depth: 10
