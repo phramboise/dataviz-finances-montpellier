@@ -8,7 +8,7 @@ cache: npm
 before_script: npm run build-demo
 
 # Ajoute les artéfacts au déploiement
-on_success:
+after_success:
 - mkdir deploy
 - cp index.html ./dist
 - cp -rf build ./dist && rm dist/.gitignore
