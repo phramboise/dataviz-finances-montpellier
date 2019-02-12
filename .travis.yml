@@ -9,14 +9,18 @@ before_script: npm run build-demo
 
 # Ajoute les artéfacts au déploiement
 on_success:
-- rm build/.gitignore
+- mkdir deploy
+- cp index.html ./dist
+- cp -rf build ./dist && rm dist/.gitignore
+- cp -rf public ./dist
+- cp -rf images ./dist
 
 deploy:
   skip_cleanup: true
   provider: pages
   github-token: $GH_TOKEN
   keep-history: false
-  local-dir: .
+  local-dir: dist
   on:
     branch: master
 
