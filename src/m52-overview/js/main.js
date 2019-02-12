@@ -301,11 +301,7 @@ const store = createStore(
 
 
 const natureToChapitreFIP = Promise.all([
-    'planDeCompte-2013.xml',
-    'planDeCompte-2014.xml',
-    'planDeCompte-2015.xml',
-    'planDeCompte-2016.xml',
-    'planDeCompte-2017.xml'
+    'M14-M14_COM_SUP3500-2017.xml'
 ].map(f => fetch(`${SOURCE_FINANCE_DIR}plansDeCompte/${f}`).then(r => r.text())
     .then( str => {
         return (new DOMParser()).parseFromString(str, "text/xml");
@@ -314,7 +310,7 @@ const natureToChapitreFIP = Promise.all([
 .then(makeNatureToChapitreFI)
 
 
-fetch(`${SOURCE_FINANCE_DIR}CA/CA2016BPAL.xml`).then(resp => resp.text())
+fetch(`${SOURCE_FINANCE_DIR}CA/CA 2017.xml`).then(resp => resp.text())
 .then(str => {
     return (new DOMParser()).parseFromString(str, "text/xml");
 })

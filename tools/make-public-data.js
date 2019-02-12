@@ -13,11 +13,7 @@ const SOURCE_FINANCE_DIR = './data/finances';
 
 
 const natureToChapitreFIP = Promise.all([
-    'planDeCompte-2013.xml',
-    'planDeCompte-2014.xml',
-    'planDeCompte-2015.xml',
-    'planDeCompte-2016.xml',
-    'planDeCompte-2017.xml'
+    'M14-M14_COM_SUP3500-2017.xml',
 ].map(f => {
     return readFile(join(SOURCE_FINANCE_DIR, 'plansDeCompte', f), {encoding: 'utf-8'})
     .then( str => {
@@ -38,11 +34,7 @@ mkdir(BUILD_FINANCE_DIR)
 })
 .then( () => {
     return Promise.all([
-        'CA2013BPAL.xml',
-        'CA2014BPAL.xml',
-        'CA2015BPAL.xml',
-        'CA2016BPAL.xml',
-        'CA2017BPAL.xml'
+        'CA 2017.xml'
     ].map(f => {
         return readFile(join(SOURCE_FINANCE_DIR, 'CA', f), {encoding: 'utf-8'})
         .then( str => {

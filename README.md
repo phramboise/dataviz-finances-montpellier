@@ -1,4 +1,4 @@
-# Dataviz finances Gironde [![Build Status](https://travis-ci.org/datalocale/dataviz-finances-gironde.svg?branch=master)](https://travis-ci.org/datalocale/dataviz-finances-gironde)
+# Dataviz finances Montreuil [![Build Status](https://travis-ci.com/dtc-innovation/dataviz-finances-montreuil.svg?branch=master)](https://travis-ci.com/dtc-innovation/dataviz-finances-montreuil)
 
 ## Contribuer
 
@@ -19,7 +19,7 @@ Minima:
 
 ## Installer le projet
 
-L'installation de [`node@>=6`][nodejs] est nécessaire avant de continuer.
+L'installation de [`node@>=10`][nodejs] est nécessaire avant de continuer.
 
 Il faut (_forker_ et) _cloner_ ce dépôt pour procéder à l'installation des dépendances du projet :
 
@@ -94,28 +94,21 @@ Il existe 3 environnements :
 
 Les artéfacts de build sont rendus créés dans le dossier `./build`.
 
-### Convertir l'image de fond de la page d'accueil
-
-Cette action requiert [ImageMagick][] et est à effectuer à chaque fois que l'image `images/Map-v1.jpg` est mise à jour.
-
-```bash
-$ convert images/Map-v1.jpg -interlace Plane -resize 1300 -strip images/map-optimised.jpg
-```
 ## Présentation de l'outil
 
 L’outil créé est une application 100% front-end chargée à partir de fichiers statiques HTML, CSS, JS, images, etc. Cette application utilise la bibliothèque React.js.
-Le code source de référence est actuellement sur github à l’adresse suivante : 
+Le code source de référence est actuellement sur github à l’adresse suivante :
 https://github.com/datalocale/dataviz-finances-gironde/
 
 
 ## mise à jour
 
-Les actions nécessaires à la mise à jour des contenus sont de plusieurs nature : 
+Les actions nécessaires à la mise à jour des contenus sont de plusieurs nature :
 
 * mise à jour des labels finances
 * mise à jour des données budgétaires
 * mise à jour des règles d'agrégats
-  
+
 ### mise à jour des labels finances
 
 Actuellement les labels des articles de la norme comptable M52 sont stockés dans un fichier csv. Ce fichier est mis à disposition via l'outil google spreadsheet afin d'en faciliter l'édition collaborative.
@@ -158,7 +151,7 @@ Cette association est encodée en JavaScript dans les deux fichier suivants :
 https://github.com/datalocale/dataviz-finances-gironde/blob/master/src/shared/js/finance/m52ToAggregated.js
 https://github.com/datalocale/dataviz-finances-gironde/blob/master/src/shared/js/finance/hierarchicalAggregated.js
 
-Par ailleurs, il a été découvert début octobre 2017 que dans de rares cas, un montant associé à une même ligne M52 (fonction/article) se découpe dans 2 agrégats différents. Pour résoudre ce cas, un fichier de “correction” a été ajouté. Il peut être trouvé ici : https://github.com/datalocale/dataviz-finances-gironde/blob/master/data/finances/corrections-agregation.csv 
+Par ailleurs, il a été découvert début octobre 2017 que dans de rares cas, un montant associé à une même ligne M52 (fonction/article) se découpe dans 2 agrégats différents. Pour résoudre ce cas, un fichier de “correction” a été ajouté. Il peut être trouvé ici : https://github.com/datalocale/dataviz-finances-gironde/blob/master/data/finances/corrections-agregation.csv
 
 Dans ce fichier CSV, chaque ligne correspond à l’assignation d’une ligne M52 à un agrégat pour un exercice donné
 
@@ -178,8 +171,7 @@ L’outil contient des pages dites “focus” qui permettent au Département de
 [MIT](LICENSE)
 
 [nodejs]: https://nodejs.org/
-[ImageMagick]: https://www.imagemagick.org/script/download.php
-[Travis CI]: https://travis-ci.org/datalocale/dataviz-finances-gironde
+[Travis CI]: https://travis-ci.com/dtc-innovation/dataviz-finances-montreuil
 [profil Travis CI]: https://travis-ci.org/profile
-[démo]: https://datalocale.github.io/dataviz-finances-gironde/public/
-[ci-settings]: https://travis-ci.org/datalocale/dataviz-finances-gironde/settings
+[démo]: https://dtc-innovation.github.io/dataviz-finances-montreuil/public/
+[ci-settings]: https://travis-ci.com/dtc-innovation/dataviz-finances-montreuil/settings
