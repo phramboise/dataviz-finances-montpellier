@@ -5,8 +5,9 @@
   "description": "...",
   "main": "index.js",
   "scripts": {
-    "watch": "npm-run-all --parallel watch:*",
-    "start": "serve --cors -p 3000",
+    "watch": "run-p watch:*",
+    "serve": "serve --cors -p 3000",
+    "start": "run-p serve watch:*",
     "test": "jest",
     "build-demo": "cross-env NODE_ENV=demo npm-run-all --serial build-demo:public build:m52overview",
     "build:m52overview": "npm-run-all build:m52overview:script",

@@ -33,21 +33,38 @@ Il faut (_forker_ et) _cloner_ ce dépôt pour procéder à l'installation des d
 npm install
 ```
 
-La commande suivante reconstruit les builds en continu, dès qu'un fichier source est modifié :
+### Faire fonctionner le projet sur son ordinateur
 
-```bash
-npm run watch
-```
-
-Enfin, les composants web sont visualisables dans un navigateur web :
+La commande suivante reconstruit les fichiers d'interface dès qu'un fichier source est modifié. Les composants web sont visualisables dans un navigateur web :
 
 ```bash
 npm start
 ```
 
-Deux adresses sont ensuite accessibles : [http://localhost:3000/]() et [http://localhost:3000/public/]().
+Deux adresses sont ensuite accessibles :
 
-## Intégration continue
+- [localhost:3000](http://localhost:3000/) : visualisation nature/fonction ;
+- [localhost:3000/public/](http://localhost:3000/public/) : l'exploration éditorialisée, à destination du grand public.
+
+### Anatomie des répertoires
+
+- `./build` : fichiers de données et de l'application web
+- `./data`
+    - `./data/finances/CA` : [comptes administratifs anonymisés][anonymisation] ([format XML `DocumentBudgetaire`][DocumentBudgetaire])
+    - `./data/finances/plansDeCompte` : [plans de compte](http://odm-budgetaire.org/composants/normes/2017/M14/M14_COM_SUP3500/) (format XML)
+    - `./data/texts` : éditorialisation des fonctions et natures (format CSV)
+- `./fonctions.html` : outil de visualisation des fonctions
+- `./images` : ressources iconographiques
+- `./index.html` : squelette de la visualisation nature/fonction
+- `./public/index.html` : squelette de l'exploration éditorialisée
+- `./src`
+    - `./src/m52-overview` : composants pour la visualisation nature/fonction
+    - `./src/public` : composants de l'exploration éditorialisée
+    - `./src/shared` : composants partagés
+- `./tests` : assurance qualité de calculs critiques
+- `./tools` : outils en ligne de commande pour transformer des documents source en données optimisées
+
+### Intégration continue
 
 L'intégration continue est automatise les éléments suivants :
 
@@ -56,7 +73,7 @@ L'intégration continue est automatise les éléments suivants :
 
 Le suivi des _builds_ est assuré par [Travis CI][].
 
-### Installation
+#### Actionner le projet
 
 En se rendant sur [Travis CI][] :
 
@@ -66,7 +83,16 @@ En se rendant sur [Travis CI][] :
 
 Reste ensuite à [configurer l'outil](#configurer-travis-ci).
 
-### Configurer Travis CI
+
+#### Générer un token GitHub
+
+Un _Personal access token_ est nécessaire pour que l'automate d'intégration continue puisse publier la [démo][].
+
+🔓 [Générer un nouveau _token_](https://github.com/settings/tokens/new?description=datalocale.github.io/dataviz-finances-gironde&scopes=public_repo)
+
+Le token créé est à renseigner dans la [configuration Travis CI](#configurer-travis-ci).
+
+#### Configurer TravisCI
 
 Deux variables d'environnement doivent être configurées dans l'[onglet Settings][ci-settings] :
 
@@ -76,24 +102,14 @@ Deux variables d'environnement doivent être configurées dans l'[onglet Setting
 
 ![](docs/ci-settings.png)
 
-### Générer un token
-
-Un _Personal access token_ est nécessaire pour que l'automate d'intégration continue puisse publier la [démo][].
-
-🔓 [Générer un nouveau _token_](https://github.com/settings/tokens/new?description=datalocale.github.io/dataviz-finances-gironde&scopes=public_repo)
-
-Le token créé est à renseigner dans la [configuration Travis CI](#configurer-travis-ci).
-
 ## Déploiement
 
 **Remarque** : les étapes de la section `Installer le projet` doivent avoir été suivies au préalable.
 
 Il existe 2 environnements :
 
-* **démo autonome**` : npm run build-demo:public` (dans le cadre du déploiement continu)
+* **démo autonome** : `npm run build-demo:public` (dans le cadre du déploiement continu)
 * **développement** : `npm run watch`
-
-Les artéfacts de build sont créés dans le dossier `./build`.
 
 ## Mise à jour des données financières
 
@@ -169,3 +185,5 @@ L’outil contient des pages dites “focus” qui permettent au Département de
 [profil Travis CI]: https://travis-ci.org/profile
 [démo]: https://dtc-innovation.github.io/dataviz-finances-montreuil/public/
 [ci-settings]: https://travis-ci.com/dtc-innovation/dataviz-finances-montreuil/settings
+[DocumentBudgetaire]: https://github.com/DavidBruant/colors-of-the-finances/blob/master/docs/format-fichier.md
+[anonymisation]: https://dtc-innovation.github.io/anonymisation-document-budgetaire/
