@@ -6,11 +6,17 @@ Au vu du scope du projet et de sa spécificité franco-française, il est décid
 
 Le code et les commentaires sont à écrire **en anglais**.
 
+## Présentation de l'outil
+
+L’outil créé est une application 100% front-end chargée à partir de fichiers statiques HTML, CSS, JS, images, etc. Cette application utilise la bibliothèque React.js.
+
+Le code source de référence est actuellement sur github à l’adresse suivante :
+[github.com/dtc-innovation/dataviz-finances-montreuil](https://github.com/dtc-innovation/dataviz-finances-montreuil).
+
 ## Compatibilité navigateur
 
 Minima:
 
-* IE11
 * Edge
 * Firefox
 * Chrome
@@ -65,9 +71,8 @@ Reste ensuite à [configurer l'outil](#configurer-travis-ci).
 Deux variables d'environnement doivent être configurées dans l'[onglet Settings][ci-settings] :
 
 | Name | Value | Display value in build logs |
-| ---- | ----- | --------------------------- | |
+| ---- | ----- | --------------------------- |
 | `GH_TOKEN` | _voir [Générer un token](#générer-un-token)_ | **Off** |
-| `DEPLOY_TARGET_BRANCH` | gh-pages | _On_ |
 
 ![](docs/ci-settings.png)
 
@@ -83,25 +88,14 @@ Le token créé est à renseigner dans la [configuration Travis CI](#configurer-
 
 **Remarque** : les étapes de la section `Installer le projet` doivent avoir été suivies au préalable.
 
-Il existe 3 environnements :
+Il existe 2 environnements :
 
-* gironde.fr où il faut créer manuellement dans le CMS un "media dataviz" et un contenu de type "Code HTML5" où on peut mettre le contenu de `build/gironde-fr-integration.html`. Le fichier JavaScript `dataviz-finance-gironde-fr-bundle.script` est à ajouter indépendamment.
-    * `npm run build-preprod` pour la preprod (media id `1938`)
-    * `npm run build-production` pour la preprod (media id `2459`)
-* démo sur gh-pages (`npm run build-demo:public` mais cette commande est seulement faite par Travis)
-* dévelopement (`npm run watch`)
+* **démo autonome**` : npm run build-demo:public` (dans le cadre du déploiement continu)
+* **développement** : `npm run watch`
 
+Les artéfacts de build sont créés dans le dossier `./build`.
 
-Les artéfacts de build sont rendus créés dans le dossier `./build`.
-
-## Présentation de l'outil
-
-L’outil créé est une application 100% front-end chargée à partir de fichiers statiques HTML, CSS, JS, images, etc. Cette application utilise la bibliothèque React.js.
-Le code source de référence est actuellement sur github à l’adresse suivante :
-https://github.com/datalocale/dataviz-finances-gironde/
-
-
-## mise à jour
+## Mise à jour des données financières
 
 Les actions nécessaires à la mise à jour des contenus sont de plusieurs nature :
 
@@ -109,14 +103,14 @@ Les actions nécessaires à la mise à jour des contenus sont de plusieurs natur
 * mise à jour des données budgétaires
 * mise à jour des règles d'agrégats
 
-### mise à jour des labels finances
+### Les labels finances
 
 Actuellement les labels des articles de la norme comptable M52 sont stockés dans un fichier csv. Ce fichier est mis à disposition via l'outil google spreadsheet afin d'en faciliter l'édition collaborative.
 En complément un fichier contient des textes conjoncturels permettant d'expliciter l'évolution d'une recette ou d'une dépense significative sur la période couverte par l'outil. Ce fichier est géré de la même manière que le fichier de définition.
 
 https://docs.google.com/spreadsheets/d/1RQ6YAhFlFZaamvl6HpUxH_4MaG7Yg8l45pdTey14tOU/edit#gid=1852965930
 
-### mise à jour des données budgétaires
+### Les données budgétaires
 
 Pour mettre à jour l'exercice budgétaire rendu visible dans la page d'accueil les étapes suivantes sont actuellement nécessaires
 
@@ -132,7 +126,7 @@ https://github.com/datalocale/dataviz-finances-seinesaintdenis/blob/master/src/p
 
 Il faut le modifier si l'emplacement de l'environnement de démo est modifié.
 
-### mise à jour des données d'agrégats
+### Les données d'agrégats
 
 La dataviz finances est basé sur plusieurs éléments contribuant à son interopérabilité et à sa réutilisabilité :
 
@@ -162,7 +156,7 @@ https://davidbruant.github.io/formule-doc-budg/
 
 Avec quelques évolutions, il pourrait permettre d'enregistrer les formules saisies directement dans le code de l'application.
 
-## éditorial
+## Les données éditoriales
 
 L’outil contient des pages dites “focus” qui permettent au Département de créer du contenu plus éditorialisé pour mettre en valeur ses actions et parler un peu moins de finance et un peu plus de l’action qui en découle.
 

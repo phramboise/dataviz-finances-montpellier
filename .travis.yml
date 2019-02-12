@@ -11,7 +11,7 @@ before_script: npm run build-demo
 before_deploy:
 - mkdir ./dist
 - cp index.html ./dist
-- cp -rf build ./dist && rm ./dist/.gitignore
+- cp -rf build ./dist && rm ./dist/build/.gitignore
 - cp -rf public ./dist
 - cp -rf images ./dist
 
