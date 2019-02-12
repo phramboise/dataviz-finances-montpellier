@@ -9,9 +9,9 @@ before_script: npm run build-demo
 
 # Ajoute les artéfacts au déploiement
 before_deploy:
-- mkdir deploy
+- mkdir ./dist
 - cp index.html ./dist
-- cp -rf build ./dist && rm dist/.gitignore
+- cp -rf build ./dist && rm ./dist/.gitignore
 - cp -rf public ./dist
 - cp -rf images ./dist
 
