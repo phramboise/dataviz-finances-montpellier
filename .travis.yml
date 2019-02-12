@@ -2,6 +2,7 @@
 
 language: node_js
 node_js: 'node'
+cache: npm
 
 # Travis Lifecycle
 before_script: npm run build-demo
