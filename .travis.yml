@@ -12,6 +12,7 @@ before_deploy:
 - mkdir ./dist
 - cp index.html ./dist
 - cp -rf build ./dist && rm ./dist/build/.gitignore
+- cp -rf data ./dist
 - cp -rf public ./dist
 - cp -rf images ./dist
 
