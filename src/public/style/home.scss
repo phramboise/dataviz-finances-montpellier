@@ -11,7 +11,7 @@ $background-height: 2470px;
     flex-direction: column;
     align-items: center;
     width: 100%;
-    
+
     & > *{
         width: 100%;
         padding: 0 0.5em;
@@ -21,7 +21,7 @@ $background-height: 2470px;
             max-width: $column-max-width;
         }
     }
-    
+
     & > section{
         display: flex;
         flex-direction: column;
@@ -29,7 +29,6 @@ $background-height: 2470px;
 
     .appetizers-container{
         @media screen and (min-width: $home-layout-breakpoint) {
-            background-image: url($home-illustration-url);
             background-color:#BEBC05;
             min-height: $background-height;
             // px because IE11

@@ -49,8 +49,7 @@
               "transform-inline-environment-variables",
               {
                 "include": [
-                  "NODE_ENV",
-                  "GIRONDE_FR_DRUPAL_MEDIA_ID"
+                  "NODE_ENV"
                 ]
               }
             ]

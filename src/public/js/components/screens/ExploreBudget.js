@@ -272,7 +272,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
                 items: [
                     {
                         text:
-                            "Comptes administratifs du Département de la Gironde au format XML TOTEM",
+                            "Comptes administratifs au format XML TOTEM",
                         url:
                             "https://www.datalocale.fr/dataset/comptes-administratifs-budget-principal-donnees-budgetaires-du-departement-de-la-gironde1"
                     }

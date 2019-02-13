@@ -21,40 +21,31 @@ export const AGENTS_PICTO = 'AGENTS_PICTO';
 export const CARBURANT_PICTO = 'CARBURANT_PICTO';
 export const ELECTRICITE_PICTO = 'ELECTRICITE_PICTO';
 
-export const CARTE_PRESENCE_HTML = "CARTE_PRESENCE_HTML";
-
 const env = process.env.NODE_ENV;
 
 export const urls = {
     // finance data
     [COMPTES_ADMINISTRATIFS]: {
         "production": undefined,
-        "demo": `/../build/finances/doc-budgs.json`,
+        "demo": `../build/finances/doc-budgs.json`,
         "development": `../build/finances/doc-budgs.json`,
     }[env],
     [CORRECTIONS_AGGREGATED]: {
         "production": undefined,
-        "demo": `/../data/finances/corrections-agregation.csv`,
+        "demo": `../data/finances/corrections-agregation.csv`,
         "development": `/data/finances/corrections-agregation.csv`
     }[env],
 
     // texts
     [AGGREGATED_ATEMPORAL]: {
         "production": undefined,
-        "demo": `/../data/texts/aggregated-atemporal.csv`,
+        "demo": `../data/texts/aggregated-atemporal.csv`,
         "development": `../data/texts/aggregated-atemporal.csv`
     }[env],
     [AGGREGATED_TEMPORAL]: {
         "production": undefined,
         "demo":  `/../data/texts/aggregated-temporal.csv`,
         "development": `../data/texts/aggregated-temporal.csv`
-    }[env],
-
-    // HTML Carte présence
-    [CARTE_PRESENCE_HTML]: {
-        "production": undefined,
-        "demo": `/../public/carte-presence.html`,
-        "development": `../public/carte-presence.html`
     }[env],
 
     // pictos

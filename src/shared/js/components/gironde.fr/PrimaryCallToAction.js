@@ -1,7 +1,7 @@
 import React from 'react';
 
 /*
-    This component uses conventions from the gironde.fr website
+    This component uses conventions from the production website
 */
 
 export default function({text = 'En savoir plus', href, className, children}){

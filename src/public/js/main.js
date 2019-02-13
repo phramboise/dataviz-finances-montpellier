@@ -44,25 +44,25 @@ const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
 /*
     Dirty (temporary) hacks to fix the gironde.fr pages so the content displays properly
 */
-if(process.env.NODE_ENV === 'production'){
-    const main = document.body.querySelector('main');
-    const columnsEl = main.querySelector('.columns');
-    const rowEl = main.querySelector('.row');
-
-    const elementsToMove = main.querySelectorAll('.columns > :nth-child(-n+3)');
-
-    Array.from(elementsToMove).forEach(e => {
-        if(e.querySelector('h1')){
-            // remove server-generated h1
-            e.remove();
-        }
-        else{
-            main.insertBefore(e, rowEl);
-        }
-    });
-
-    main.insertBefore(CONTAINER_ELEMENT, rowEl);
-}
+// if(process.env.NODE_ENV === 'production'){
+//     const main = document.body.querySelector('main');
+//     const columnsEl = main.querySelector('.columns');
+//     const rowEl = main.querySelector('.row');
+//
+//     const elementsToMove = main.querySelectorAll('.columns > :nth-child(-n+3)');
+//
+//     Array.from(elementsToMove).forEach(e => {
+//         if(e.querySelector('h1')){
+//             // remove server-generated h1
+//             e.remove();
+//         }
+//         else{
+//             main.insertBefore(e, rowEl);
+//         }
+//     });
+//
+//     main.insertBefore(CONTAINER_ELEMENT, rowEl);
+// }
 
 // Breadcrumb
 const BREADCRUMB_CONTAINER = process.env.NODE_ENV === "production" ?

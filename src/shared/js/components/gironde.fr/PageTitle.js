@@ -2,7 +2,7 @@ import React from 'react';
 
 /*
     This component should be used only one per page
-    It uses conventions from the gironde.fr website
+    It uses conventions from the production website
 */
 
 export default function({text}){
