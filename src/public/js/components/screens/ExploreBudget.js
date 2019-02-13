@@ -28,7 +28,7 @@ import PrimaryCallToAction from "../../../../shared/js/components/gironde.fr/Pri
 import Markdown from "../../../../shared/js/components/Markdown";
 import MoneyAmount from "../../../../shared/js/components/MoneyAmount";
 
-import { urls, ANIMATION_VIDEO } from "../../constants/resources";
+import { urls } from "../../constants/resources";
 
 import M52ByFonction from "../M52ByFonction";
 import BudgetConstructionAnimation from "../BudgetConstructionAnimation";
@@ -47,8 +47,7 @@ export function TotalBudget({
         ri,
         df,
         di,
-        byFonction,
-        animationVideo
+        byFonction
     },
     constructionAmounts,
     screenWidth
@@ -251,13 +250,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
             ),
             React.createElement(
                 BudgetConstructionAnimation,
-                Object.assign(
-                    {
-                        videoURL:
-                            screenWidth <= 1000 ? animationVideo : undefined
-                    },
-                    constructionAmounts
-                )
+                constructionAmounts
             )
         ),
         React.createElement(
@@ -380,8 +373,7 @@ export default connect(
                     "M52-DI-7": `#!/finance-details/M52-DI-7`,
                     "M52-DI-8": `#!/finance-details/M52-DI-8`,
                     "M52-DI-9": `#!/finance-details/M52-DI-9`
-                },
-                animationVideo: urls[ANIMATION_VIDEO]
+                }
             },
             screenWidth
         };
