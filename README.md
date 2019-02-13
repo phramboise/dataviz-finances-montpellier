@@ -182,7 +182,7 @@ L’outil contient des pages dites “focus” qui permettent au Département de
 
 [nodejs]: https://nodejs.org/
 [Travis CI]: https://travis-ci.com/dtc-innovation/dataviz-finances-montreuil
-[profil Travis CI]: https://travis-ci.org/profile
+[profil Travis CI]: https://travis-ci.com/profile
 [démo]: https://dtc-innovation.github.io/dataviz-finances-montreuil/public/
 [ci-settings]: https://travis-ci.com/dtc-innovation/dataviz-finances-montreuil/settings
 [DocumentBudgetaire]: https://github.com/DavidBruant/colors-of-the-finances/blob/master/docs/format-fichier.md
