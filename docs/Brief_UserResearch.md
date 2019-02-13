@@ -4,30 +4,31 @@
 
 **☝️Qui est engagé dans ce projet ? Et quelles sont les personnes associées aux étapes de validation ?**
 
-thomas : développeur, facilitateur projet
-david : développeur, facilitateur projet
-sofia : UX Designer / Researcher
-mélanie : développeuse
-oliver stern : conseiller municipal en charge des projets numériques
-wilfred Delcourt : directeur des finances
+- thomas : développeur, facilitateur projet
+- david : développeur, facilitateur projet
+- sofia : UX Designer / Researcher
+- mélanie : développeuse
+- oliver stern : conseiller municipal en charge des projets numériques
+- wilfred Delcourt : directeur des finances
 
 
 **🤔 Quel problème tente-t-on de résoudre ? Pourquoi ? Quel est le bénéfice pour les utilisateurs ?**
 Transparence des données publiques
-Objectifs :
-    rendre les comptes lisibles et intelligible
-    donner des clés de compréhension
+
+**Objectifs :**
+- rendre les comptes lisibles et intelligible
+- donner des clés de compréhension
 
 > Donner à comprendre des choses qui sont difficiles.
-    la part de la personne vs la part du service publique
-    territoire, collectivité(s) et état
-    fonctionnement (qui vote, comment c'est voté, responsabilité)
+- la part de la personne vs la part du service publique
+- territoire, collectivité(s) et état
+- fonctionnement (qui vote, comment c'est voté, responsabilité)
 
-> Bénéfice ?
->   Rapport de confiance
->   Est ce que la ville fait son travail ? (service rendu ?)
->   Impact de la dette sur les habitants ?
->   Impact des dépenses publiques sur les habitants et leur territoire
+**Bénéfice ?**
+- Rapport de confiance
+- Est ce que la ville fait son travail ? (service rendu ?)
+- Impact de la dette sur les habitants ?
+- Impact des dépenses publiques sur les habitants et leur territoire
 
 
 **👨‍👩‍👧‍👦 Qui sont les utilisateurs ? et leur contexte d’usage ?**
