@@ -257,7 +257,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
             "section",
             { className: "m52" },
             React.createElement(SecundaryTitle, {
-                text: "Les comptes par fonction (norme M52)"
+                text: "Les comptes par fonction (norme M14)"
             }),
             m52Instruction
                 ? React.createElement(M52ByFonction, {
@@ -267,17 +267,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
                       screenWidth
                   })
                 : undefined,
-            React.createElement(DownloadSection, {
-                title: `Données brutes sur datalocale.fr`,
-                items: [
-                    {
-                        text:
-                            "Comptes administratifs au format XML TOTEM",
-                        url:
-                            "https://www.datalocale.fr/dataset/comptes-administratifs-budget-principal-donnees-budgetaires-du-departement-de-la-gironde1"
-                    }
-                ]
-            })
+            React.createElement(DownloadSection)
         )
     );
 }

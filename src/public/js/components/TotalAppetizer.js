@@ -17,7 +17,7 @@ export default function ({total, year, exploreUrl}) {
     let afterComma;
 
     if(total){
-        toDisplay = (total/Math.pow(10, 9)).toFixed(1);
+        toDisplay = (total/Math.pow(10, 6)).toFixed(1);
         beforeAndComma = toDisplay.match(/^(\d+)\./)[1];
         afterComma = toDisplay.match(/\.(\d+)$/)[1];
     }
@@ -28,12 +28,12 @@ export default function ({total, year, exploreUrl}) {
                 React.createElement('span', {className: 'after-comma'}, ', '+afterComma)
             ) : '',
             React.createElement('div', {className: 'text'},
-                `Milliard${total/Math.pow(10, 9) >= 2 ? 's' : ''} d'euros de dépenses en ${year}`
+                `Million${total/Math.pow(10, 6) >= 2 ? 's' : ''} d'euros de dépenses en ${year}`
             )
         ),
         React.createElement('hr', {}),
         React.createElement(Markdown, {},
-            `Le Département a dépensé ${toDisplay.replace('.', ',')} milliard${total/Math.pow(10, 9) >= 2 ? 's' : ''} d’euros pour les Girondines et les Girondins en ${year}. Ce budget est composé de dépenses de fonctionnement, nécessaires aux missions et gestion des services de la collectivité, et de dépenses d’investissement dédiées à des programmes structurants ou stratégiques pour le territoire.`
+            `La Ville a dépensé ${toDisplay.replace('.', ',')} million${total/Math.pow(10, 6) >= 2 ? 's' : ''} d’euros en ${year}. Ce budget est composé de dépenses de fonctionnement, nécessaires aux missions et gestion des services de la collectivité, et de dépenses d’investissement dédiées à des programmes structurants ou stratégiques pour le territoire.`
         ),
         React.createElement(PrimaryCallToAction, { href: exploreUrl, text: 'Explorer le budget'})
     );

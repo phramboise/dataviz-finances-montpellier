@@ -13,7 +13,7 @@ import {LigneBudgetRecord, DocumentBudgetaire} from '../../shared/js/finance/Doc
 import csvStringToCorrections from '../../shared/js/finance/csvStringToCorrections.js';
 import {childToParent, elementById} from '../../shared/js/finance/flatHierarchicalById.js';
 
-import Breadcrumb from '../../shared/js/components/gironde.fr/Breadcrumb';
+import Breadcrumb from '../../shared/js/components/Breadcrumb';
 import Home from './components/screens/Home';
 import FinanceElement from './components/screens/FinanceElement';
 import FocusSolidarity from './components/screens/FocusSolidarity';
@@ -65,21 +65,11 @@ const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
 // }
 
 // Breadcrumb
-const BREADCRUMB_CONTAINER = process.env.NODE_ENV === "production" ?
-    document.body.querySelector('.breadcrumb').parentNode :
-    document.body.querySelector('nav');
+const BREADCRUMB_CONTAINER = document.body.querySelector('.breadcrumb-container');
 
 const DEFAULT_BREADCRUMB = List([
     {
-        text: 'Accueil',
-        url: '/'
-    },
-    {
-        text: 'Le Département',
-        url: '/le-departement'
-    },
-    {
-        text: `Un budget au service des solidarités humaine et territoriale`,
+        text: 'Explorer les comptes',
         url: '#'
     }
 ]);
@@ -103,7 +93,7 @@ const store = createStore(
         currentYear: 2017,
         explorationYear: 2017,
         financeDetailId: undefined,
-        textsById: ImmutableMap([[HOME, {label: 'Acceuil'}]]),
+        textsById: ImmutableMap([[HOME, {label: 'Accueil'}]]),
         screenWidth: window.innerWidth
     })
 );
