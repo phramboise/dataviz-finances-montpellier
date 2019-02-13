@@ -47,7 +47,7 @@ Grand public
 
 **🔲 Quel est le scope ? Le budget ? Et les contraintes ?**
 
-"Visualisation des comptes administratifs de la ville de Montreuil" dans un budget maximal de 19800€ hors taxe.
+"Visualisation des comptes administratifs de la ville de Montreuil" dans un budget maximal de 19800€ hors taxe. Bon de commande `BC2019/19-D1000-001111` en date du 4 février 2019.
 
 
 **🚀 Quel est l’environnement technique du projet ?**
