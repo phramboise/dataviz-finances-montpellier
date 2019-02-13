@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 import Markdown from '../../../../shared/js/components/Markdown';
 import PageTitle from '../../../../shared/js/components/gironde.fr/PageTitle';
+import DownloadSection from "../../../../shared/js/components/gironde.fr/DownloadSection";
 
 import TotalAppetizer from '../TotalAppetizer';
 import Appetizer from '../Appetizer';
@@ -61,7 +62,9 @@ export function Home({
                     moreUrl: presence
                 })
             )
-        )
+        ),
+
+        React.createElement(DownloadSection)
     );
 }
 

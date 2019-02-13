@@ -267,8 +267,9 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
                       screenWidth
                   })
                 : undefined,
-            React.createElement(DownloadSection)
-        )
+        ),
+
+        React.createElement(DownloadSection)
     );
 }
 

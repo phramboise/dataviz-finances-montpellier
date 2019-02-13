@@ -10,6 +10,7 @@ import SecundaryTitle from '../../../../shared/js/components/gironde.fr/Secundar
 import PrimaryCallToAction from '../../../../shared/js/components/gironde.fr/PrimaryCallToAction';
 import Markdown from '../../../../shared/js/components/Markdown';
 import {makeAmountString} from '../../../../shared/js/components/MoneyAmount';
+import DownloadSection from "../../../../shared/js/components/gironde.fr/DownloadSection";
 
 import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
 
@@ -151,7 +152,9 @@ export function FocusSol({
                 ],
                 moreUrl: '#!/finance-details/DF-6-1-3'
             })
-        )
+        ),
+
+        React.createElement(DownloadSection)
     );
 }
 

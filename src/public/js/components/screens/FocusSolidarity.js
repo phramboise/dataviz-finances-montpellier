@@ -14,6 +14,7 @@ import Markdown from '../../../../shared/js/components/Markdown';
 import {m52ToAggregated, hierarchicalAggregated} from '../../../../shared/js/finance/memoized';
 import {flattenTree} from '../../../../shared/js/finance/visitHierarchical';
 import {EXPENDITURES} from '../../../../shared/js/finance/constants';
+import DownloadSection from "../../../../shared/js/components/gironde.fr/DownloadSection";
 
 
 import {urls, INSERTION_PICTO, ENFANCE_PICTO, HANDICAPES_PICTO, PERSONNES_AGEES_PICTO} from '../../constants/resources';
@@ -235,7 +236,9 @@ https://www.gironde.fr/enfance-et-famille/protection-de-lenfance.`,
                 ],
                 moreUrl: '#!/finance-details/DF-2-4'
             })
-        )
+        ),
+
+        React.createElement(DownloadSection)
     );
 
 }
