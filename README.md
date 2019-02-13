@@ -6,6 +6,14 @@ Au vu du scope du projet et de sa spécificité franco-française, il est décid
 
 Le code et les commentaires sont à écrire **en anglais**.
 
+## Documents de travail
+
+- [**Brief**](docs/Brief_UserResearch.md)
+- [Documentation](docs) (comptes rendus, entretiens, etc.)
+- [Glossaire](docs/Glossaire.md)
+- [Plan d'itérations](https://github.com/dtc-innovation/dataviz-finances-montreuil/projects) (vue priorisée)
+- [Actions à mener](https://github.com/dtc-innovation/dataviz-finances-montreuil/issues) (vue non-priorisée)
+
 ## Présentation de l'outil
 
 L’outil créé est une application 100% front-end chargée à partir de fichiers statiques HTML, CSS, JS, images, etc. Cette application utilise la bibliothèque React.js.
