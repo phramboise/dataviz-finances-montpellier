@@ -2,7 +2,7 @@
 
 ## Brief
 
-*☝️Qui est engagé dans ce projet ? Et quelles sont les personnes associées aux étapes de validation ?*
+**☝️Qui est engagé dans ce projet ? Et quelles sont les personnes associées aux étapes de validation ?**
 
 /${persone} : ${role}/
 
