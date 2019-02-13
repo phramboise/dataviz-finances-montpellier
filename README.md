@@ -9,6 +9,8 @@ Le code et les commentaires sont à écrire **en anglais**.
 ## Documents de travail
 
 - [**Brief**](docs/Brief_UserResearch.md)
+- [Dépenses](docs/le-temps-qui-passe.csv) (temps passé par chacun·e d'entre nous)
+- [Journal de bord](docs/Journal.md) (chacun·e le remplit à son rythme)
 - [Documentation](docs) (comptes rendus, entretiens, etc.)
 - [Glossaire](docs/Glossaire.md)
 - [Plan d'itérations](https://github.com/dtc-innovation/dataviz-finances-montreuil/projects) (vue priorisée)
