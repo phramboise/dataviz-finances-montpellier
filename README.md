@@ -23,6 +23,12 @@ L’outil créé est une application 100% front-end chargée à partir de fichie
 Le code source de référence est actuellement sur github à l’adresse suivante :
 [github.com/dtc-innovation/dataviz-finances-montreuil](https://github.com/dtc-innovation/dataviz-finances-montreuil).
 
+L'outil est composé comme suit :
+
+- 📊 [**Visualisation grand public**][outil-exploration] : la visualisation telle qu'elle sera visible par le grand public ;
+- 📋 [**Fonctions d'agrégation**][outil-agregations] : visualisation de l'état de partition des fonctions d'agrégation
+- 🔢 [**Test des formules**][outil-formules] : formules d'agrégation interactives
+
 ## Compatibilité navigateur
 
 Minima:
@@ -197,3 +203,7 @@ L’outil contient des pages dites “focus” qui permettent au Département de
 [ci-settings]: https://travis-ci.com/dtc-innovation/dataviz-finances-montreuil/settings
 [DocumentBudgetaire]: https://github.com/DavidBruant/colors-of-the-finances/blob/master/docs/format-fichier.md
 [anonymisation]: https://dtc-innovation.github.io/anonymisation-document-budgetaire/
+
+[outil-exploration]: https://dtc-innovation.github.io/dataviz-finances-montreuil/public/
+[outil-agregations]: https://dtc-innovation.github.io/dataviz-finances-montreuil/
+[outil-formules]: https://dtc-innovation.github.io/dataviz-finances-montreuil/fonctions.html
