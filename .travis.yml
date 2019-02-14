@@ -11,6 +11,7 @@ before_script: npm run build-demo
 before_deploy:
 - mkdir ./dist
 - cp *.html ./dist
+- cp robots.txt ./dist
 - cp -rf build ./dist && rm ./dist/build/.gitignore
 - cp -rf data ./dist
 - cp -rf public ./dist
