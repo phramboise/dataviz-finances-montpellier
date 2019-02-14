@@ -148,7 +148,6 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
             '';
 
     const isLeaf = !(thisYearPartition && thisYearPartition.size >= 2);
-
     return React.createElement('article', {className: 'finance-element'},
         React.createElement(PageTitle, {text: RDFI ?
             `${RDFIText} - ${label} en ${year}` :
@@ -187,8 +186,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
             })
         ),
 
-        isLeaf && m52Rows ? React.createElement('section', { className: 'raw-data'},
-            React.createElement(SecundaryTitle, {text: `Consultez ces données en détail à la norme comptable M52 pour l'année ${year}`}),
+        m52Rows ? React.createElement('section', { className: 'raw-data'},
+            React.createElement(SecundaryTitle, {text: `Consultez ces données en détail à la norme comptable M14 pour l'année ${year}`}),
             React.createElement('table', {},
                 React.createElement('thead', {},
                     React.createElement('tr', {},
@@ -371,8 +370,7 @@ export default connect(
 
             return yearElement && yearElement.total;
         });
-
-        const m52Rows = element && (!element.children || element.children.size === 0) ?
+        const m52Rows = element && (element.children || element.children.size !== 0) ?
             (isM52Element ?
                  element.elements :
                  element.elements.first()['M52Rows']

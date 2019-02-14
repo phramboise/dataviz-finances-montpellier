@@ -233,7 +233,6 @@ function mapDispatchToProps(dispatch){
             });
         },
         onM52NodeSelected(node){
-            console.log('onM52NodeSelected', node)
             dispatch({
                 type: 'M52_INSTRUCTION_USER_NODE_SELECTED',
                 node
@@ -252,7 +251,6 @@ function mapDispatchToProps(dispatch){
             });
         },
         onAggregatedDFViewChange(dfView){
-            console.log('onAggregatedDFViewChange', dfView);
             dispatch({
                 type: 'DF_VIEW_CHANGE',
                 dfView
