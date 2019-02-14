@@ -8,15 +8,21 @@
 - david : développeur, facilitateur projet
 - sofia : UX Designer / Researcher
 - mélanie : développeuse
-- oliver stern : conseiller municipal en charge des projets numériques
-- wilfred Delcourt : directeur des finances
+- oliver stern : conseiller municipal, co-pilote
+- wilfried Delcourt : directeur des finances
+- julien boquien : responsable service budget
+- véronique tartié-lombard : directrice générale adjointe
+- laurent jachetta : directeur accueil et proximité (mission open data)
+- thibaud mathys : chargé de mission open data
+- denis vemclefs : directeur de la communication et de la culture
+- christian levesque : directeur de la DS2IN (direction des systèmes d'information et de l'innovation numérique)
 
 
 **🤔 Quel problème tente-t-on de résoudre ? Pourquoi ? Quel est le bénéfice pour les utilisateurs ?**
 Transparence des données publiques
 
 **Objectifs :**
-- rendre les comptes lisibles et intelligible
+- rendre les comptes lisibles et intelligibles
 - donner des clés de compréhension
 
 > Donner à comprendre des choses qui sont difficiles.
