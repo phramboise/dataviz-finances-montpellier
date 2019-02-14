@@ -9,4 +9,5 @@ Plus particulièrement, en terme de granularité, un musicien par exemple aimera
 <li>Comment fonctionne l’impôt ? Comment et où est-il récolté, réparti et redistribué à l’échelle du territoire ? </li>
 <li>Comment fonctionne le découpage administratif du territoire : agglomération vs. ville ; département vs. région. Qui est responsable de quoi ? Qui est gestionnaire de quoi ? </li>
 
+
 <br/> Enfin, si la démarche de transparence des finances publiques semble être bien accueillie par la plupart des interviewés, d’autres se sont montrés moins confiants : “Je ne crois pas que tous les comptes seront publiés…Il faut faire attention parce que l’honnêteté, peut devenir une arme pour mieux cacher ce qu’on ne veut pas montrer.”
