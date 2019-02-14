@@ -1,4 +1,4 @@
-## Synthèse des interviews
+## Synthèse des interviews (en cours)
 De manière générale, les personnes interviewés ont envie de savoir comment sont répartis les budgets - avec plus ou moins de détails - en fonction de leurs activités et/ou préoccupations personnelles. Dans le cadre du panel en cours, les sujets les plus remontés sont la santé, la culture, l’éducation, l’écologie et les aides sociales.  
   
 Plus particulièrement, en terme de granularité, un musicien par exemple aimerait connaitre la part du budget de la culture qui est consacrée à la musique (écoles, salles de concert, soutien à la création, etc.).  Dans un autre registre, une autre personne interviewée aimerait comprendre le coût du mobilier urbain : “j’ai appris qu’un banc public coûte 10 000€, qu’est-ce que représente cette somme (matériau, études, travail humain, …) ? Et surtout comment les prestataires sont-ils choisis ? Sont-ils publics ou privés ? Qui prend ces décisions ?”  
