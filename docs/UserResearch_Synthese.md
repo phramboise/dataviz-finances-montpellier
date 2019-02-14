@@ -13,7 +13,7 @@ Plus particulièrement, en terme de granularité, un musicien par exemple aimera
 Les interviewés aimeraient également en savoir davantage sur le fonctionnement de l’administration :
 <li>Comment le budget est-il voté ? Qui prends les décisions ? Comment et pourquoi ? Quelles sont les contraintes sur les montants des achats ? </li>
 <li>Comment fonctionne l’impôt ? Comment et où est-il récolté, réparti et redistribué à l’échelle du territoire ? </li>
-<li>Comment fonctionne le découpage administratif du territoire : agglomération vs. ville ; département vs. région. Qui est responsable de quoi ? Qui est gestionnaire de quoi ? </li>
+<li>Comment fonctionne le découpage administratif du territoire : agglomération vs. ville ; département vs. région. Qui est responsable de quoi ? Qui est gestionnaire de quoi ? </li>  
 
 --
 
