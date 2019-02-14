@@ -1,7 +1,6 @@
 ## Synthèse des interviews (en cours)
 
-**👨‍👩‍👧‍👦 7 interviewés - entre 20 et +50 ans
-la pluspart n'ont pas l'habitude de travailler avec des chiffres ou de lire des statistiques
+👨‍👩‍👧‍👦 7 interviewés - entre 20 et +50 ans - la plupart n'ont pas l'habitude de travailler avec des chiffres ou de lire des statistiques
 
 De manière générale, les personnes interviewés ont envie de savoir comment sont répartis les budgets - avec plus ou moins de détails - en fonction de leurs activités et/ou préoccupations personnelles. Dans le cadre du panel en cours, les sujets les plus remontés sont la santé, la culture, l’éducation, l’écologie et les aides sociales.  
   
