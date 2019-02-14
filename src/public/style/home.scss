@@ -27,33 +27,4 @@ $background-height: 2470px;
         flex-direction: column;
     }
 
-    .appetizers-container{
-        @media screen and (min-width: $home-layout-breakpoint) {
-            background-color:#BEBC05;
-            min-height: $background-height;
-            // px because IE11
-            margin-top: 150px;
-        }
-
-        background-position: center top;
-        background-repeat: no-repeat;
-        background-size: cover;
-
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-
-        width: 100%;
-        max-width: 100%;
-
-        .appetizers{
-            max-width: $column-max-width;
-            display: block;
-
-            @media screen and (min-width: $home-layout-breakpoint) {
-                display: flex;
-                flex-direction: column;
-            }
-        }
-    }
 }

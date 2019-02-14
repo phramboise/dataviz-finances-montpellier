@@ -11,3 +11,50 @@
 @import 'focus-solidarity';
 @import 'focus-investments';
 @import 'focus-presence';
+
+/** Temporaire **/
+@mixin placeholder ($text) {
+    min-height: 10em;
+    position: relative;
+
+    &::before {
+        content: $text;
+        background: #ccc;
+        border-radius: 5px;
+        color: #333;
+        left: 0;
+        padding: 4em 0 0 2em;
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+    }
+}
+
+
+.atemporal {
+    @include placeholder("Texte descriptif de la Fonction");
+}
+
+.temporal {
+    @include placeholder("Texte contextuel basé sur l'année du CA");
+}
+
+.markdown-rendered {
+    @include placeholder("Texte explicatif à écrire");
+}
+
+.btn {
+	display: inline-block;
+	color: white;
+	background: #903;
+	font-size: 1em;
+	font-weight: 500;
+	text-transform: uppercase;
+	padding: 10px 24px;
+	border-radius: 2px;
+	text-align: center;
+    text-decoration: none;
+	transition: all .3s ease-in;
+	box-shadow: 0 0 5px 0 rgba(0,0,0,0.3);
+}

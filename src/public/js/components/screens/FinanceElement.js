@@ -164,7 +164,7 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
 
         React.createElement('section', {},
             React.createElement(SecundaryTitle, {text: 'Évolution sur ces dernières années'}),
-            temporalText ? React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}) : undefined,
+            React.createElement('div', {className: 'temporal', dangerouslySetInnerHTML: {__html: temporalText}}),
             React.createElement(StackChart, {
                 WIDTH: screenWidth >= 800 + 80 ?
                     800 :
