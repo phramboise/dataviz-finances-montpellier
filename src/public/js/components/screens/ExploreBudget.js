@@ -38,6 +38,7 @@ const MAX_HEIGHT = 30;
 export function TotalBudget({
     currentYear,
     totalById,
+    totals,
     m52Instruction,
     labelsById,
     urls: {
@@ -52,18 +53,18 @@ export function TotalBudget({
     constructionAmounts,
     screenWidth
 }) {
-    const expenditures = totalById.get(EXPENDITURES);
-    const revenue = totalById.get(REVENUE);
+    const expenditures = totals.get(EXPENDITURES);
+    const revenue = totals.get(REVENUE);
 
     const max = Math.max(expenditures, revenue);
 
     const expHeight = MAX_HEIGHT * (expenditures / max) + "em";
     const revHeight = MAX_HEIGHT * (revenue / max) + "em";
 
-    const rfHeight = 100 * (totalById.get(RF) / revenue) + "%";
-    const riHeight = 100 * (totalById.get(RI) / revenue) + "%";
-    const diHeight = 100 * (totalById.get(DI) / expenditures) + "%";
-    const dfHeight = 100 * (totalById.get(DF) / expenditures) + "%";
+    const rfHeight = 100 * (totals.get(RF) / revenue) + "%";
+    const riHeight = 100 * (totals.get(RI) / revenue) + "%";
+    const diHeight = 100 * (totals.get(DI) / expenditures) + "%";
+    const dfHeight = 100 * (totals.get(DF) / expenditures) + "%";
 
     return React.createElement(
         "article",
@@ -129,7 +130,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
                                     "Recettes de fonctionnement"
                                 ),
                                 React.createElement(MoneyAmount, {
-                                    amount: totalById.get(RF)
+                                    amount: totals.get(RF)
                                 })
                             ),
                             React.createElement(
@@ -145,7 +146,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
                                     "Recettes d'investissement"
                                 ),
                                 React.createElement(MoneyAmount, {
-                                    amount: totalById.get(RI)
+                                    amount: totals.get(RI)
                                 })
                             )
                         ),
@@ -192,7 +193,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
                                     "Dépenses de fonctionnement"
                                 ),
                                 React.createElement(MoneyAmount, {
-                                    amount: totalById.get(DF)
+                                    amount: totals.get(DF)
                                 })
                             ),
                             React.createElement(
@@ -208,7 +209,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
                                     "Dépenses d'investissement"
                                 ),
                                 React.createElement(MoneyAmount, {
-                                    amount: totalById.get(DI)
+                                    amount: totals.get(DI)
                                 })
                             )
                         ),
@@ -296,9 +297,22 @@ export default connect(
             });
         }
 
+        let totals = new ImmutableMap();
+        if (m52Instruction) {
+            totals = new ImmutableMap({
+                [REVENUE]: sum(m52Instruction.rows.filter(r => r.CodRD === 'R').map(r => r.MtReal).toArray()),
+                [EXPENDITURES]: sum(m52Instruction.rows.filter(r => r.CodRD === 'D').map(r => r.MtReal).toArray()),
+                [DF]: sum(m52Instruction.rows.filter(r => r.CodRD === 'D' && r.FI === 'F').map(r => r.MtReal).toArray()),
+                [DI]: sum(m52Instruction.rows.filter(r => r.CodRD === 'D' && r.FI === 'I').map(r => r.MtReal).toArray()),
+                [RF]: sum(m52Instruction.rows.filter(r => r.CodRD === 'R' && r.FI === 'F').map(r => r.MtReal).toArray()),
+                [RI]: sum(m52Instruction.rows.filter(r => r.CodRD === 'R' && r.FI === 'I').map(r => r.MtReal).toArray())
+            });
+        }
+
         return {
             currentYear,
             totalById,
+            totals,
             m52Instruction,
             labelsById: textsById.map(texts => texts.label),
             // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33

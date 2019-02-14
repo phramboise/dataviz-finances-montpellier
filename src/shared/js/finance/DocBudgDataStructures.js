@@ -13,7 +13,8 @@ const LigneBudgetKeys = {
     'CodRD': undefined,
     'MtReal': undefined,
     'Chapitre': undefined,
-    'FI': undefined
+    'FI': undefined,
+    'OpBudg': undefined
 }
 
 

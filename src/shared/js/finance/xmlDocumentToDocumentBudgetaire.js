@@ -13,15 +13,14 @@ export default function(doc, natureToChapitreFI){
 
     const lignes = Array.from(doc.getElementsByTagName('LigneBudget'))
     .filter(l => {
-        const isOR = l.getElementsByTagName('OpBudg')[0].getAttribute('V') === '0';
         const hasNon0Amount = Number(l.getElementsByTagName('MtReal')[0].getAttribute('V')) !== 0;
 
         const n = l.getElementsByTagName('Nature')[0].getAttribute('V');
         const f = l.getElementsByTagName('Fonction')[0].getAttribute('V');
 
-        return isOR && hasNon0Amount &&
+        return hasNon0Amount/* &&
             !(n === '001' && f === '01') &&
-            !(n === '002' && f === '0202')
+            !(n === '002' && f === '0202')*/
     })
     .map(l => {
         const ret = {};
@@ -30,10 +29,11 @@ export default function(doc, natureToChapitreFI){
             ret[key] = l.getElementsByTagName(key)[0].getAttribute('V')
         })
 
+        ret['OpBudg'] = Number(l.getElementsByTagName('OpBudg')[0].getAttribute('V'));
         ret['MtReal'] = Number(ret['MtReal']);
-        
+
         Object.assign(
-            ret, 
+            ret,
             natureToChapitreFI(exer, ret['CodRD'], ret['Nature'])
         )
 
