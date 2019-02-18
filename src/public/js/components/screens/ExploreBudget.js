@@ -302,10 +302,10 @@ export default connect(
             totals = new ImmutableMap({
                 [REVENUE]: sum(m52Instruction.rows.filter(r => r.CodRD === 'R').map(r => r.MtReal).toArray()),
                 [EXPENDITURES]: sum(m52Instruction.rows.filter(r => r.CodRD === 'D').map(r => r.MtReal).toArray()),
-                [DF]: sum(m52Instruction.rows.filter(r => r.CodRD === 'D' && r.FI === 'F').map(r => r.MtReal).toArray()),
-                [DI]: sum(m52Instruction.rows.filter(r => r.CodRD === 'D' && r.FI === 'I').map(r => r.MtReal).toArray()),
-                [RF]: sum(m52Instruction.rows.filter(r => r.CodRD === 'R' && r.FI === 'F').map(r => r.MtReal).toArray()),
-                [RI]: sum(m52Instruction.rows.filter(r => r.CodRD === 'R' && r.FI === 'I').map(r => r.MtReal).toArray())
+                [DF]: sum(m52Instruction.rows.filter(r => r.CodRD === 'D' && r.FI === 'F').toArray().map(r => r.MtReal)),
+                [DI]: sum(m52Instruction.rows.filter(r => r.CodRD === 'D' && r.FI === 'I').toArray().map(r => r.MtReal)),
+                [RF]: sum(m52Instruction.rows.filter(r => r.CodRD === 'R' && r.FI === 'F').toArray().map(r => r.MtReal)),
+                [RI]: sum(m52Instruction.rows.filter(r => r.CodRD === 'R' && r.FI === 'I').toArray().map(r => r.MtReal))
             });
         }
 

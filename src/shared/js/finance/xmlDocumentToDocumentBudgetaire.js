@@ -19,9 +19,17 @@ export default function(doc, natureToChapitreFI){
         const n = l.getElementsByTagName('Nature')[0].getAttribute('V');
         const f = l.getElementsByTagName('Fonction')[0].getAttribute('V');
 
-        return isReal && hasNon0Amount/* &&
+
+        return isReal &&    // on exclut les dépenses/recettes d'ordre
+            // on exclut des montants nuls
+            hasNon0Amount &&
+            // on exclut les reports N-1 des recettes d'investissement (RI)
+            // on exclut les reports N-1 des dépenses d'investissement (DI)
             !(n === '001' && f === '01') &&
-            !(n === '002' && f === '0202')*/
+            // on exclut les reports N-1 des recettes de fonctionnement (RF)
+            // on exclut les reports N-1 des dépenses de fonctionnement (DF)
+            !(n === '002' && f === '01')
+
     })
     .map(l => {
         const ret = {};

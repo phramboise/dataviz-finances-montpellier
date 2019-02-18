@@ -266,6 +266,12 @@ export function makeElementById(hierAgg, hierM52 = {}){
     return elementById;
 }
 
+/**
+ *
+ * @param  {hierarchicalM52} tree [description]
+ * @param  {WeakMap}         wm  Remonte le child au parent
+ * @return {[type]}      [description]
+ */
 function fillChildToParent(tree, wm){
     visit(tree, e => {
         if(e.children){
@@ -319,10 +325,14 @@ export default connect(
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
 
         const childToParent = new WeakMap();
-        if(m52Instruction){
-            if(hierM52)
-                fillChildToParent(hierM52, childToParent);
 
+        if(m52Instruction){
+            if(hierM52) {
+                fillChildToParent(hierM52, childToParent);
+            }
+
+            // je ne sais plus si on a besoin du hiérarchique pour le breadcrumb Agrégé
+            // peut-être que la ligne suivante devrait être dans un bloc "else"
             fillChildToParent(hierAgg, childToParent);
         }
 
@@ -331,6 +341,8 @@ export default connect(
         const elementById = (m52Instruction && makeElementById(hierAgg, hierM52)) || new ImmutableMap();
         const element = elementById.get(displayedContentId);
 
+        // c'est la hiérarchie qui permet de créer le breadcrumb
+        // si hierM52 est descendant, la contextList est ascendante
         const contextList = makeContextList(element, childToParent);
 
         const elementByIdByYear = docBudgByYear.map(m52i => {
