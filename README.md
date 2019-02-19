@@ -15,7 +15,7 @@ Le code et les commentaires sont à écrire **en anglais**.
 - 🔤 [Glossaire](docs/Glossaire.md)
 - 🔢 [**Plan d'itérations**](https://github.com/dtc-innovation/dataviz-finances-montreuil/projects) (vue priorisée)
 - 🗄 [Actions à mener](https://github.com/dtc-innovation/dataviz-finances-montreuil/issues) (vue non-priorisée)
-- 🎨 [**Maquettes**] https://www.figma.com/file/NKgSOd1pwalNQPx2LTTy5sTx/Dataviz-Montreuil
+- 🎨 **Maquettes** https://www.figma.com/file/NKgSOd1pwalNQPx2LTTy5sTx/Dataviz-Montreuil)
 
 ## Présentation de l'outil
 
