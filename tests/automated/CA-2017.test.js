@@ -5,7 +5,7 @@ import {join} from 'path'
 
 import * as matchers from 'jest-immutable-matchers';
 
-import { DocumentBudgetaire, LigneBudgetRecord } from '../../src/shared/js/finance/DocBudgDataStructures';
+import { DocumentBudgetaire, LigneBudgetRecord } from 'document-budgetaire/Records.js';
 import hierarchicalM52 from '../../src/shared/js/finance/hierarchicalM52';
 
 import { EXPENDITURES, REVENUE, DF, RF, RI, DI } from '../../src/shared/js/finance/constants';

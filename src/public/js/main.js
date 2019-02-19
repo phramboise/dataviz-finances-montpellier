@@ -9,7 +9,7 @@ import page from 'page';
 import {urls, COMPTES_ADMINISTRATIFS, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL, CORRECTIONS_AGGREGATED} from './constants/resources';
 import reducer from './reducer';
 
-import {LigneBudgetRecord, DocumentBudgetaire} from '../../shared/js/finance/DocBudgDataStructures.js';
+import {LigneBudgetRecord, DocumentBudgetaire} from 'document-budgetaire/Records.js';
 import csvStringToCorrections from '../../shared/js/finance/csvStringToCorrections.js';
 import {childToParent, elementById} from '../../shared/js/finance/flatHierarchicalById.js';
 

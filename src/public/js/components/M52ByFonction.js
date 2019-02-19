@@ -52,6 +52,10 @@ export default class M52ByFonction extends React.Component {
 
         const outerRadius = Math.min(screenWidth/2 - 30, 240);
 
+        if (!m52Instruction) {
+            return null;
+        }
+
         return React.createElement('div', { className: 'm52-by-fonction' },
             React.createElement(M52Viz, {
                 onSliceSelected: e => {

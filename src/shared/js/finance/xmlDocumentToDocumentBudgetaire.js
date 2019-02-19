@@ -2,7 +2,7 @@ import {Set as ImmutableSet} from 'immutable';
 
 import {sum} from 'd3-array';
 
-import {makeLigneBudgetId, LigneBudgetRecord,  DocumentBudgetaire} from './DocBudgDataStructures';
+import {makeLigneBudgetId, LigneBudgetRecord,  DocumentBudgetaire} from 'document-budgetaire/Records.js';
 
 export default function(doc, natureToChapitreFI){
     const BlocBudget = doc.getElementsByTagName('BlocBudget')[0];

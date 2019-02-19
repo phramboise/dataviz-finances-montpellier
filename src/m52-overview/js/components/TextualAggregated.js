@@ -3,7 +3,7 @@ import {format} from 'currency-formatter';
 import {sum} from 'd3-array';
 
 import {hierarchicalAggregated} from '../../../shared/js/finance/memoized';
-import {makeLigneBudgetId} from '../../../shared/js/finance/DocBudgDataStructures';
+import {makeLigneBudgetId} from 'document-budgetaire/Records.js';
 import {flattenTree} from '../../../shared/js/finance/visitHierarchical';
 
 function makeUnusedM52RowsSet(aggregatedInstruction, rows){
@@ -30,7 +30,7 @@ function makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, rows){
 
     rows.forEach(m52row => {
         const usingAggRows = new Set();
-        
+
         aggregatedInstruction.forEach(aggRow => {
             if(aggRow['M52Rows'].has(m52row)){
                 usingAggRows.add(aggRow);
@@ -38,7 +38,7 @@ function makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, rows){
         });
 
         if(usingAggRows.size >= 2){
-            if(usingAggRows.size === 2 && 
+            if(usingAggRows.size === 2 &&
                 actionsSocialesParPrestationsRows.has(m52row) &&
                 actionsSocialesParPubliqueRows.has(m52row)
             ){
@@ -86,7 +86,7 @@ function makeDF12Diffs(aggregatedInstruction){
         const total = sum(elements.map(r => r['MtReal']))
 
         const corresponding = onlyDF2.find(r => makeLigneBudgetId(r) === id);
-        
+
         if(Math.abs(corresponding['MtReal'] - total) <= 0.01){
             elements.forEach(e => {
                 onlyDF1 = onlyDF1.remove(e)
@@ -118,20 +118,20 @@ export default class TextualSelected extends React.PureComponent{
         const usedMoreThanOnceM52RowsSet = makeUsedMoreThanOnceM52RowsSet(aggregatedInstruction, m52Rows);
         const {onlyDF1, onlyDF2} = makeDF12Diffs(aggregatedInstruction);
 
-        return React.createElement('div', {}, 
-            React.createElement('div', {}, 
+        return React.createElement('div', {},
+            React.createElement('div', {},
                 React.createElement('h1', {}, "Tableau aggrégé"),
                 React.createElement('table', {className: 'aggregated'}, aggregatedInstruction.map(aggRow => (
                     React.createElement(
-                        'tr', 
+                        'tr',
                         {
                             key: aggRow['id'],
                             className: [
-                                aggRow['M52Rows'].size === 0 ? 'zero-m52' : '', 
+                                aggRow['M52Rows'].size === 0 ? 'zero-m52' : '',
                                 aggRow['Statut'] === 'TEMPORARY' ? 'temporary' : '',
                                 aggRow['Statut'] === 'AMOUNT_ISSUE' ? 'amount-issue' : ''
                             ].filter(c => c).join(' ')
-                        }, 
+                        },
                         React.createElement('td', {}, aggRow['id']),
                         React.createElement('td', {}, aggRow['Libellé']),
                         React.createElement('td', {className: 'money-amount'}, format(aggRow['Montant'], { code: 'EUR' })),
@@ -139,23 +139,23 @@ export default class TextualSelected extends React.PureComponent{
                     )
                 )))
             ),
-            React.createElement('div', {}, 
+            React.createElement('div', {},
                 React.createElement('h1', {}, "Lignes M52 utilisées dans aucune formule d'aggrégation ("+unusedM52Set.size+")"),
                 React.createElement('table', {}, unusedM52Set.map(m52 => {
                     const m52Id = makeLigneBudgetId(m52);
 
-                    return React.createElement('tr', {key: m52Id}, 
+                    return React.createElement('tr', {key: m52Id},
                         React.createElement('td', {}, m52Id),
                         React.createElement('td', {className: 'money-amount'}, format(m52["MtReal"], { code: 'EUR' }))
                     )
                 }))
             ),
-            React.createElement('div', {}, 
+            React.createElement('div', {},
                 React.createElement('h1', {}, "Lignes M52 utilisées dans au moins 2 formules d'aggrégation ("+usedMoreThanOnceM52RowsSet.size+")"),
                 React.createElement('ul', {}, Array.from(usedMoreThanOnceM52RowsSet).map(([m52Row, aggSet]) => {
                     const m52Id = makeLigneBudgetId(m52Row);
 
-                    return React.createElement('li', {key: m52Id}, 
+                    return React.createElement('li', {key: m52Id},
                         m52Id,
                         ` (${format(m52Row["MtReal"], { code: 'EUR' })}) `,
                         ' utilisé dans ',
@@ -163,28 +163,28 @@ export default class TextualSelected extends React.PureComponent{
                     )
                 }))
             ),
-            React.createElement('div', {}, 
+            React.createElement('div', {},
                 React.createElement('h1', {}, "Lignes M52 utilisées dans DF-1, mais pas dans DF-2 ("+onlyDF1.size+")"),
                 React.createElement('ul', {}, Array.from(onlyDF1).map(m52Row => {
                     const m52Id = makeLigneBudgetId(m52Row);
 
-                    return React.createElement('li', {key: m52Id}, 
+                    return React.createElement('li', {key: m52Id},
                         m52Id,
                         ` (${format(m52Row["MtReal"], { code: 'EUR' })}) `
                     )
                 }))
             ) ,
-            React.createElement('div', {}, 
+            React.createElement('div', {},
                 React.createElement('h1', {}, "Lignes M52 utilisées dans DF-2, mais pas dans DF-1 ("+onlyDF2.size+")"),
                 React.createElement('ul', {}, Array.from(onlyDF2).map(m52Row => {
                     const m52Id = makeLigneBudgetId(m52Row);
 
-                    return React.createElement('li', {key: m52Id}, 
+                    return React.createElement('li', {key: m52Id},
                         m52Id,
                         ` (${format(m52Row["MtReal"], { code: 'EUR' })}) `
                     )
                 }))
-            )        
+            )
         );
     }
 }

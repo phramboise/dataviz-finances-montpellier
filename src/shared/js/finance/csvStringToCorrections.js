@@ -1,14 +1,14 @@
 import {Set} from 'immutable';
 
 import {csvParse} from 'd3-dsv';
-import {SplitLigneBudgetRecord} from './DocBudgDataStructures.js';
+import {SplitLigneBudgetRecord} from 'document-budgetaire/Records.js';
 
 export function format(rows){
 
     rows.forEach(function(row){
         row["MtReal"] = Number(row["MtReal"]);
         row["Exer"] = Number(row["Exer"]);
-        
+
         Object.freeze(row);
     });
 

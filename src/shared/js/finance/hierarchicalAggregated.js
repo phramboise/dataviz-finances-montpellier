@@ -1,7 +1,7 @@
 import { Record, List, Set as ImmutableSet } from 'immutable';
 import { sum } from 'd3-array';
 
-import {makeLigneBudgetId} from './DocBudgDataStructures';
+import {makeLigneBudgetId} from 'document-budgetaire/Records.js';
 
 import { rules } from './m52ToAggregated';
 import { EXPENDITURES, REVENUE, DF, RF, RI, DI } from './constants';

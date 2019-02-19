@@ -3,7 +3,7 @@ import {OrderedSet} from 'immutable';
 import {format} from 'currency-formatter';
 
 import {M52_INSTRUCTION, AGGREGATED_INSTRUCTION} from '../../../shared/js/finance/constants';
-import {makeLigneBudgetId} from '../../../shared/js/finance/DocBudgDataStructures';
+import {makeLigneBudgetId} from 'document-budgetaire/Records.js';
 
 
 export default class TextualSelected extends React.PureComponent{
@@ -22,8 +22,8 @@ export default class TextualSelected extends React.PureComponent{
             React.createElement('h1', {}, type === M52_INSTRUCTION ? 'Morceau de la M52 sélectionnée' : 'Morceau de l\'agrégée selectionné'),
             React.createElement('h2', {}, node.id + ' ' + node.label),
             React.createElement('h3', {className: 'money-amount'}, format(node.total, { code: 'EUR' })),
-            React.createElement('table', {}, 
-                React.createElement('tbody', {}, 
+            React.createElement('table', {},
+                React.createElement('tbody', {},
 
                     m52Rows.map((m52, i) => {
                         const m52Id = makeLigneBudgetId(m52);
@@ -35,7 +35,7 @@ export default class TextualSelected extends React.PureComponent{
                     })
                 )
             )
-            
+
         );
     }
 }

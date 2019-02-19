@@ -7,7 +7,7 @@ import page from 'page';
 
 import { max } from 'd3-array';
 
-import {makeLigneBudgetId}  from '../../../../shared/js/finance/DocBudgDataStructures';
+import {makeLigneBudgetId}  from 'document-budgetaire/Records.js';
 import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 
