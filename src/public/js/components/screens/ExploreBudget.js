@@ -67,212 +67,112 @@ export function TotalBudget({
     const diHeight = 100 * (totals.get(DI) / expenditures) + "%";
     const dfHeight = 100 * (totals.get(DF) / expenditures) + "%";
 
-    return React.createElement(
-        "article",
-        { className: "explore-budget" },
-        React.createElement(PageTitle, {
-            text: `Exploration des comptes ${currentYear}`
-        }),
-        React.createElement(
-            "section",
-            {},
-            React.createElement(
-                Markdown,
-                {},
-                `Le contexte financier dans lequel s’est déroulée l’exécution de ce troisième budget de la mandature a été marqué par l’accentuation de la contribution des collectivités locales à la réduction des déficits publics et par une modification des compétences résultant de la mise en œuvre des transferts de compétences avec la Région et Bordeaux Métropole issus des lois MAPTAM de 2014 et NOTRe de 2015.
+    return <article className="explore-budget">
+        <PageTitle text={`Exploration des comptes ${currentYear}`} />
 
-Dans un contexte national où les contraintes financières se sont durcies, l’année 2017 confirme le dynamisme des dépenses de solidarité obligatoires et incompressibles et la difficulté d’accentuer encore la maitrise des dépenses de gestion courante.
+        <section>
+            <Markdown>
+Le contexte financier dans lequel s’est déroulée l’exécution de ce troisième
+budget de la mandature a été marqué par l’accentuation de la contribution des
+collectivités locales à la réduction des déficits publics et par une modification
+des compétences résultant de la mise en œuvre des transferts de compétences avec
+la Région et Bordeaux Métropole issus des lois MAPTAM de 2014 et NOTRe de 2015.
 
-Le Département voit également ses recettes de fonctionnement évoluer plus favorablement que prévu grâce aux droits de mutation recette conjoncturelle mais non pérenne liée au fort dynamisme de l’immobilier et à l’attraction du département.
+Dans un contexte national où les contraintes financières se sont durcies, l’année
+2017 confirme le dynamisme des dépenses de solidarité obligatoires et incompressibles et la difficulté d’accentuer encore la maitrise des dépenses de gestion courante.
+
+Le Département voit également ses recettes de fonctionnement évoluer plus
+favorablement que prévu grâce aux droits de mutation recette conjoncturelle
+mais non pérenne liée au fort dynamisme de l’immobilier et à l’attraction du
+département.
 
 Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent par :
 
 -	Une épargne brute qui s’améliore fortement
--	Une réduction importante du besoin de financement par l’emprunt`
-            )
-        ),
+-	Une réduction importante du besoin de financement par l’emprunt</Markdown>
+        </section>
 
-        React.createElement(
-            "section",
-            {},
-            React.createElement(SecundaryTitle, {
-                text: "Les grandes masses budgétaires du compte administratif"
-            }),
-            React.createElement(
-                "div",
-                { className: "viz" },
-                React.createElement(
-                    "div",
-                    { className: "revenue" },
-                    React.createElement(
-                        "a",
-                        { href: revURL },
-                        React.createElement("h1", {}, "Recettes")
-                    ),
-                    React.createElement(
-                        "div",
-                        {},
-                        React.createElement(
-                            "div",
-                            {
-                                className: "areas",
-                                style: { height: revHeight }
-                            },
-                            React.createElement(
-                                "a",
-                                {
-                                    className: "rf",
-                                    href: rf,
-                                    style: { height: rfHeight }
-                                },
-                                React.createElement(
-                                    "h2",
-                                    {},
-                                    "Recettes de fonctionnement"
-                                ),
-                                React.createElement(MoneyAmount, {
-                                    amount: totals.get(RF)
-                                })
-                            ),
-                            React.createElement(
-                                "a",
-                                {
-                                    className: "ri",
-                                    href: ri,
-                                    style: { height: riHeight }
-                                },
-                                React.createElement(
-                                    "h2",
-                                    {},
-                                    "Recettes d'investissement"
-                                ),
-                                React.createElement(MoneyAmount, {
-                                    amount: totals.get(RI)
-                                })
-                            )
-                        ),
-                        React.createElement(
-                            "div",
-                            { className: "texts" },
-                            React.createElement(MoneyAmount, {
-                                amount: revenue
-                            }),
-                            React.createElement(PrimaryCallToAction, {
-                                text: `Les recettes`,
-                                href: revURL
-                            })
-                        )
-                    )
-                ),
-                React.createElement(
-                    "div",
-                    { className: "expenditures" },
-                    React.createElement(
-                        "a",
-                        { href: expURL },
-                        React.createElement("h1", {}, "Dépenses")
-                    ),
-                    React.createElement(
-                        "div",
-                        {},
-                        React.createElement(
-                            "div",
-                            {
-                                className: "areas",
-                                style: { height: expHeight }
-                            },
-                            React.createElement(
-                                "a",
-                                {
-                                    className: "df",
-                                    href: df,
-                                    style: { height: dfHeight }
-                                },
-                                React.createElement(
-                                    "h2",
-                                    {},
-                                    "Dépenses de fonctionnement"
-                                ),
-                                React.createElement(MoneyAmount, {
-                                    amount: totals.get(DF)
-                                })
-                            ),
-                            React.createElement(
-                                "a",
-                                {
-                                    className: "di",
-                                    href: di,
-                                    style: { height: diHeight }
-                                },
-                                React.createElement(
-                                    "h2",
-                                    {},
-                                    "Dépenses d'investissement"
-                                ),
-                                React.createElement(MoneyAmount, {
-                                    amount: totals.get(DI)
-                                })
-                            )
-                        ),
-                        React.createElement(
-                            "div",
-                            { className: "texts" },
-                            React.createElement(MoneyAmount, {
-                                amount: expenditures
-                            }),
-                            React.createElement(PrimaryCallToAction, {
-                                text: `Les dépenses`,
-                                href: expURL
-                            })
-                        )
-                    )
-                )
-            ),
-            React.createElement(
-                Markdown,
-                {},
-                `Les chiffres étant issus du compte administratif, la différence entre le montant des recettes et le montant des dépenses représente l'excédent de l'exercice.`
-            )
-        ),
-        React.createElement(
-            "section",
-            {},
-            React.createElement(SecundaryTitle, {
-                text: `Comprendre la construction d'un budget`
-            }),
-            React.createElement(
-                Markdown,
-                {},
-                `Le budget prévoit la répartition des recettes et des dépenses sur un exercice. Il est composé de la section de fonctionnement et d’investissement. Contrairement à l’Etat, les Départements, ont l’obligation d’adopter un budget à l’équilibre. Toutefois, le compte administratif peut présenter sur l'exercice un résultat excédentaire ou déficitaire.`
-            ),
-            React.createElement(
-                Markdown,
-                {},
-                `Dans un contexte particulièrement contraint, la préservation de nos équilibres financiers constitue un défi stimulant. Alors comment s’établit notre budget ?`
-            ),
-            React.createElement(
-                BudgetConstructionAnimation,
-                constructionAmounts
-            )
-        ),
-        React.createElement(
-            "section",
-            { className: "m52" },
-            React.createElement(SecundaryTitle, {
-                text: "Les comptes par fonction (norme M14)"
-            }),
-            m52Instruction
-                ? React.createElement(M52ByFonction, {
-                      m52Instruction,
-                      urlByFonction: byFonction,
-                      labelsById,
-                      screenWidth
-                  })
-                : undefined,
-        ),
+        <section>
+            <SecundaryTitle text="Les grandes masses budgétaires du compte administratif" />
+            <div className="viz">
+                <div className="revenue">
+                    <a href={revURL}>
+                        <h1>Recettes</h1>
+                    </a>
+                    <div>
+                        <div className="areas" style={{ height: revHeight }}>
+                            <a className="rf" href='#' style={{ height: rfHeight }}>
+                                <h2>Recettes de fonctionnement</h2>
+                                <MoneyAmount amount={totals.get(RF)} />
+                            </a>
 
-        React.createElement(DownloadSection)
-    );
+                            <a className="ri" href='#' style={{ height: riHeight }}>
+                                <h2>Recettes d'investissement</h2>
+                                <MoneyAmount amount={totals.get(RI)} />
+                            </a>
+                        </div>
+                        <div className="texts">
+                            <MoneyAmount amount={revenue} />
+                            <PrimaryCallToAction text="Les recettes" href='#' />
+                        </div>
+                    </div>
+                </div>
+                <div className="expenditures">
+                    <a href={expURL}>
+                        <h1>Dépenses</h1>
+                    </a>
+                    <div>
+                        <div className="areas" style={{ height: expHeight }}>
+                            <a className="df" href='#' style={{ height: dfHeight }}>
+                                <h2>Dépenses de fonctionnement</h2>
+                                <MoneyAmount amount={totals.get(DF)} />
+                            </a>
+                            <a className="di" href='#' style={{ height: diHeight }}>
+                                <h2>Dépenses d'investissement</h2>
+                                <MoneyAmount amount={totals.get(DI)} />
+                            </a>
+                        </div>
+                        <div className="texts">
+                            <MoneyAmount amount={expenditures} />
+                            <PrimaryCallToAction text="Les dépenses" href='#' />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <Markdown>
+Les chiffres étant issus du compte administratif, la différence entre
+le montant des recettes et le montant des dépenses représente l'excédent
+de l'exercice.
+            </Markdown>
+        </section>
+
+        <section>
+            <SecundaryTitle text="Comprendre la construction d'un budget" />
+            <Markdown>
+Le budget prévoit la répartition des recettes et des dépenses sur un
+exercice. Il est composé de la section de fonctionnement et d’investissement.
+Contrairement à l’Etat, les Départements, ont l’obligation d’adopter un budget
+à l’équilibre. Toutefois, le compte administratif peut présenter sur l'exercice
+un résultat excédentaire ou déficitaire.</Markdown>
+
+            <Markdown>
+Dans un contexte particulièrement contraint, la préservation de nos
+équilibres financiers constitue un défi stimulant. Alors comment s’établit
+notre budget ?</Markdown>
+
+            <BudgetConstructionAnimation {...constructionAmounts} />
+        </section>
+
+        <section className="m52">
+            <SecundaryTitle text="Les comptes par fonction (norme M14)" />
+            <M52ByFonction  m52Instruction={m52Instruction}
+                            urlByFonction={byFonction}
+                            labelsById={labelsById}
+                            screenWidth={screenWidth} />
+        </section>
+
+        <DownloadSection />
+    </article>;
 }
 
 export default connect(
