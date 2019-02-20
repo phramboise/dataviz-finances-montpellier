@@ -65,6 +65,7 @@ export default function({
             />
             <RDFISelector rdfi={rdfi} onRDFIChange={onRDFIChange} />
             <M52HierarchyViz    M52Hierarchical={M52Hierarchical}
+                                M52HighlightedNodes={M52HighlightedNodes}
                                 selectedNode={selection && selection.type === M52_INSTRUCTION ? selection.node : undefined}
                                 width={450}
                                 height={450}
