@@ -6,15 +6,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect, Provider } from 'react-redux';
 
-import {hierarchicalM52, hierarchicalAggregated, m52ToAggregated} from '../../shared/js/finance/memoized';
+import {hierarchicalM52} from '../../shared/js/finance/memoized';
 import xmlDocumentToDocumentBudgetaire from '../../shared/js/finance/xmlDocumentToDocumentBudgetaire';
 import makeNatureToChapitreFI from '../../shared/js/finance/makeNatureToChapitreFI.js';
-import csvStringToCorrections from '../../shared/js/finance/csvStringToCorrections.js';
 import visitHierarchical from '../../shared/js/finance/visitHierarchical.js';
-import {urls, CORRECTIONS_AGGREGATED} from '../../public/js/constants/resources';
-import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW, M52_INSTRUCTION, AGGREGATED_INSTRUCTION, EXPENDITURES, REVENUE} from '../../shared/js/finance/constants';
+import {urls} from '../../public/js/constants/resources';
+import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW, M52_INSTRUCTION, EXPENDITURES, REVENUE} from '../../shared/js/finance/constants';
 import {
-    DOCUMENT_BUDGETAIRE_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
+    DOCUMENT_BUDGETAIRE_RECEIVED,
 } from '../../public/js/constants/actions';
 
 import TopLevel from './components/TopLevel.js';
@@ -25,10 +24,6 @@ function reducer(state, action){
     const {type} = action;
 
     switch(type){
-        case CORRECTION_AGGREGATION_RECEIVED: {
-            const {corrections} = action;
-            return state.set('corrections', corrections);
-        }
         case DOCUMENT_BUDGETAIRE_RECEIVED:
             return state.set('documentBudgetaire', action.docBudg);
         case 'M52_INSTRUCTION_USER_NODE_OVERED':
@@ -36,15 +31,6 @@ function reducer(state, action){
                 .set('over', action.node ?
                     new InstructionNodeRecord({
                         type: M52_INSTRUCTION,
-                        node: action.node
-                    }) :
-                    undefined
-                );
-        case 'AGGREGATED_INSTRUCTION_USER_NODE_OVERED':
-            return state
-                .set('over', action.node ?
-                    new InstructionNodeRecord({
-                        type: AGGREGATED_INSTRUCTION,
                         node: action.node
                     }) :
                     undefined
@@ -57,19 +43,6 @@ function reducer(state, action){
                 .set('selection', node && node !== alreadySelectedNode ?
                     new InstructionNodeRecord({
                         type: M52_INSTRUCTION,
-                        node
-                    }) :
-                    undefined
-                );
-        }
-        case 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED': {
-            const { node } = action;
-            const {node: alreadySelectedNode} = state.set('selection') || {};
-
-            return state
-                .set('selection', node && node !== alreadySelectedNode ?
-                    new InstructionNodeRecord({
-                        type: AGGREGATED_INSTRUCTION,
                         node
                     }) :
                     undefined
@@ -125,19 +98,6 @@ function findSelectedNodeAncestors(tree, selectedNode){
     return ret;
 }
 
-function findSelectedAggregatedNodesByM52Rows(aggregatedNode, m52Rows){
-    let result = [];
-
-    visitHierarchical(aggregatedNode, n => {
-        const elements = Array.from(n.elements);
-        if(m52Rows.some(row => elements.some(el => el["M52Rows"].has(row)))){
-            result.push(n);
-        }
-    });
-
-    return new ImmutableSet(result);
-}
-
 function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
     let result = [];
 
@@ -153,7 +113,6 @@ function findSelectedM52NodesByM52Rows(M52Node, m52Rows){
 
 function mapStateToProps(state){
     const documentBudgetaire = state.get('documentBudgetaire');
-    const corrections = state.get('corrections');
     const rdfi = state.get('RDFI');
     const view = state.get('DF_VIEW');
     const over = state.get('over');
@@ -169,51 +128,18 @@ function mapStateToProps(state){
     const mainHighlightNode = overedNode || selectedNode;
     const mainHighlightType = overType || selectedType;
 
-    const aggregatedInstruction = m52ToAggregated(documentBudgetaire, corrections);
     const M52Hierarchical = hierarchicalM52(documentBudgetaire, rdfi);
 
-    const aggregatedHierarchical = hierarchicalAggregated(aggregatedInstruction);
-
-    const rdNode = [...aggregatedHierarchical.children].find(c => c.id === expOrRev);
-    let rdfiNode = [...rdNode.children].find(c => c.id === rdfi);
-
-    if(rdfi === 'DF'){
-        switch(view){
-            case PAR_PUBLIC_VIEW:
-                // per public is DF-2, so remove DF-1
-                rdfiNode = rdfiNode.removeIn(['children', 0]);
-                break;
-            case PAR_PRESTATION_VIEW:
-                // per prestation is DF-1, so remove DF-2
-                rdfiNode = rdfiNode.removeIn(['children', 1]);
-                break;
-            default:
-                throw new Error('Misunderstood view ('+view+')');
-        }
-    }
-
     let M52HighlightedNodes;
-    let aggregatedHighlightedNodes;
 
     if(mainHighlightType === M52_INSTRUCTION){
         M52HighlightedNodes = findSelectedNodeAncestors(M52Hierarchical, mainHighlightNode);
-        aggregatedHighlightedNodes = findSelectedAggregatedNodesByM52Rows(rdfiNode, Array.from(mainHighlightNode.elements))
-    }
-    else{
-        if(mainHighlightType === AGGREGATED_INSTRUCTION){
-            aggregatedHighlightedNodes = findSelectedNodeAncestors(rdfiNode, mainHighlightNode);
-            let m52Rows = new ImmutableSet();
-            mainHighlightNode.elements.forEach(e => m52Rows = m52Rows.union(e["M52Rows"]));
-
-            M52HighlightedNodes = findSelectedM52NodesByM52Rows(M52Hierarchical, m52Rows);
-        }
     }
 
     return {
         rdfi, dfView: view,
-        documentBudgetaire, aggregatedInstruction,
+        documentBudgetaire,
         M52Hierarchical, M52HighlightedNodes,
-        aggregatedHierarchical: rdfiNode, aggregatedHighlightedNodes,
         over, selection
     };
 }
@@ -226,21 +152,9 @@ function mapDispatchToProps(dispatch){
                 node
             });
         },
-        onAggregatedNodeOvered(node){
-            dispatch({
-                type: 'AGGREGATED_INSTRUCTION_USER_NODE_OVERED',
-                node
-            });
-        },
         onM52NodeSelected(node){
             dispatch({
                 type: 'M52_INSTRUCTION_USER_NODE_SELECTED',
-                node
-            });
-        },
-        onAggregatedNodeSelected(node){
-            dispatch({
-                type: 'AGGREGATED_INSTRUCTION_USER_NODE_SELECTED',
                 node
             });
         },
@@ -250,12 +164,6 @@ function mapDispatchToProps(dispatch){
                 rdfi
             });
         },
-        onAggregatedDFViewChange(dfView){
-            dispatch({
-                type: 'DF_VIEW_CHANGE',
-                dfView
-            });
-        },
         onNewM52CSVFile(content){
             const doc = (new DOMParser()).parseFromString(content, "text/xml");
             natureToChapitreFIP.then(natureToChapitreFI => {
@@ -263,7 +171,7 @@ function mapDispatchToProps(dispatch){
                     type: DOCUMENT_BUDGETAIRE_RECEIVED,
                     docBudg: xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
                 });
-            })
+            }).catch(console.error);
 
         }
     };
@@ -282,7 +190,6 @@ const InstructionNodeRecord = Record({
 
 const StoreRecord = Record({
     documentBudgetaire: undefined,
-    corrections: undefined,
     selection: undefined,
     over: undefined,
     RDFI: undefined,
@@ -322,16 +229,8 @@ fetch(`${SOURCE_FINANCE_DIR}CA/CA 2017.xml`).then(resp => resp.text())
         type: 'DOCUMENT_BUDGETAIRE_RECEIVED',
         docBudg,
     });
-});
-
-fetch(urls[CORRECTIONS_AGGREGATED]).then(resp => resp.text())
-.then(csvStringToCorrections)
-.then(corrections => {
-    store.dispatch({
-        type: CORRECTION_AGGREGATION_RECEIVED,
-        corrections
-    });
-});
+})
+.catch(console.error);
 
 ReactDOM.render(
     React.createElement(
