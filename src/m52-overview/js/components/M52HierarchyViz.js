@@ -1,5 +1,4 @@
 import React from 'react';
-import {tree as d3tree, hierarchy as d3hierarchy} from 'd3-hierarchy';
 
 import MoneyAmount from '../../../shared/js/components/MoneyAmount.js';
 
