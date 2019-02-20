@@ -4,7 +4,7 @@ import {arc as d3arc, pie as d3pie} from 'd3-shape';
 import {flattenTree} from '../finance/visitHierarchical.js';
 
 export default class SunburstSlice extends React.Component{
-    
+
     shouldComponentUpdate(nextProps){
         if(['radius', 'donutWidth', 'startAngle', 'endAngle', 'selectedNode']
             .some(k => this.props[k] !== nextProps[k]))
@@ -20,9 +20,9 @@ export default class SunburstSlice extends React.Component{
         else{
             if(!this.props.highlightedNodes || !nextProps.highlightedNodes)
                 return true;
-            
+
             const nodes = flattenTree(node);
-            
+
             // update the component if there is a difference in this.props.highlightedNodes VS nextProps.highlightedNodes
             // in regard to the node being drawn
             return nodes.some(n => this.props.highlightedNodes.has(n) !== nextProps.highlightedNodes.has(n));
@@ -39,7 +39,7 @@ export default class SunburstSlice extends React.Component{
         const {label, id} = node;
 
         const children = node.children ? Array.from(node.children.values()) : [];
-        
+
         const pie = d3pie()
             .startAngle(startAngle)
             .endAngle(endAngle);
@@ -47,7 +47,7 @@ export default class SunburstSlice extends React.Component{
             .innerRadius(radius - donutWidth)
             .outerRadius(radius)
             .padAngle(padAngle);
-        
+
         const childrenArcDescs = pie(children.map(c => c.total));
         const parentArcDesc = { startAngle, endAngle };
 
@@ -55,8 +55,8 @@ export default class SunburstSlice extends React.Component{
         const selected = selectedNode === node;
 
         return React.createElement(
-            'g', 
-            { 
+            'g',
+            {
                 className: [
                     'slice',
                     highlighted ? 'highlighted' : undefined,
@@ -64,7 +64,7 @@ export default class SunburstSlice extends React.Component{
                 ].filter(s => s).join(' ')
             },
             React.createElement(
-                'g', 
+                'g',
                 {
                     className: ['piece', id].filter(s => s).join(' '),
                     onMouseOver: onSliceOvered ? () => {
@@ -88,21 +88,20 @@ export default class SunburstSlice extends React.Component{
             ),
             children.map((child, i) => {
                 const arcDesc = childrenArcDescs[i];
-        
-                return React.createElement( 
+                return React.createElement(
                     SunburstSlice, // yep recursive call
                     {
-                        key: child.name,
-                        node: child, 
-                        radius: radius + donutWidth, 
-                        donutWidth, 
-                        startAngle: arcDesc.startAngle, 
+                        key: child.id,
+                        node: child,
+                        radius: radius + donutWidth,
+                        donutWidth,
+                        startAngle: arcDesc.startAngle,
                         endAngle: arcDesc.endAngle,
-                        highlightedNodes, selectedNode, 
+                        highlightedNodes, selectedNode,
                         onSliceOvered, onSliceSelected
                     }
                 );
-            })  
+            })
         );
     }
 }

@@ -54,17 +54,21 @@
             width: 100%;
         }
 
-        .top-level>*:nth-child(2) {
+        .top-level>section {
             display: flex;
-            flex-direction: row;
+            align-items: flex-start;
+            flex-flow: row nowrap;
+            margin: 1em 0;
             width: 100%;
         }
 
-        .top-level>*:nth-child(2)>* {
-            flex: 2;
+        .top-level>section>* {
+        }
+        .top-level>section>h1 {
+            flex: 0 1 100%;
         }
 
-        .top-level>*:nth-child(2)>*:nth-child(2) {
+        .top-level>section>*:nth-child(2) {
             flex: 1;
         }
 
@@ -88,6 +92,12 @@
             text-align: right
         }
 
+        .money-amount {
+            font-family: monospace;
+            font-variant-numeric: oldstyle-nums;
+            white-space: nowrap;
+        }
+
         /*
                 Textual aggregated
             */
@@ -108,6 +118,30 @@
         h1 {
             text-align: center;
         }
+
+        /*
+                Tree
+         */
+        .tree {
+            flex: 0 1 33%;
+        }
+        .tree ul > li {
+            padding-left: 20px;
+        }
+            .tree [data-level="0"] > [data-label] {
+                font-size: 1.25em;
+                font-weight: bold;
+            }
+            .tree [data-level="1"] > [data-label] {
+                font-weight: bold;
+            }
+            .tree .money-amount {
+                margin-left: 10px;
+            }
+
+            .tree ul:empty {
+                display: none;
+            }
 
         /*
                 Sunburst

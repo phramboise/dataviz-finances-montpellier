@@ -10,6 +10,11 @@ export default class TextualSelected extends React.PureComponent{
 
     render(){
         const {selection} = this.props;
+
+        if (!selection) {
+            return null;
+        }
+
         const {type, node} = selection;
 
         const m52Rows = type === M52_INSTRUCTION ?
