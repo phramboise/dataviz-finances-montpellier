@@ -149,7 +149,7 @@ Pour mettre à jour l'exercice budgétaire rendu visible dans la page d'accueil 
 
 
 1. Mettre le fichier xml du nouveau CA dans data/finances/CA
-2. Mettre le bon plan de compte dans data/finances/planDeComptes. On trouve typiquement ces fichiers dans le dossier en ligne : http://odm-budgetaire.org/composants/normes/. Il serait facile de faire un outil qui va chercher le bon fichier et le met dans le bon dossier tout seul genre npm run plan-de-compte
+2. Lancer la commande `npm run dl:plans-de-compte` pour ajouter automatiquement le bon plan de compte dans `data/finances/planDeComptes`[^plan-de-compte].
 3. Modifier le tableau lignes 40-44 du fichier tools/make-public-data.js pour qu'il liste seulement les CA souhaités dans la dataviz. Le code pourrait lister tous les fichiers du dossier et tous les inclure, comme ça, pas besoin de les lister dans le code
 4. Modifier le tableau lignes 15-19 du fichier tools/make-public-data.js pour qu'il liste seulement les fichiers de plans de compte souhaités. Le code pourrait lister tous les fichiers du dossier et tous les inclure, comme ça, pas besoin de les lister dans le code
 5. Modifier les lignes 103 et 104 du fichier src/public/js/main.js pour mettre l'année la plus récente. Quand les données des CA arrivent côté client, on pourrait mettre à jour currentYear, explorationYear en trouvant l'année la plus récente qui existe dans les données. Comme ça, plus besoin de toucher à ce code
@@ -208,3 +208,6 @@ L’outil contient des pages dites “focus” qui permettent au Département de
 [outil-exploration]: https://dtc-innovation.github.io/dataviz-finances-montreuil/public/
 [outil-agregations]: https://dtc-innovation.github.io/dataviz-finances-montreuil/
 [outil-formules]: https://dtc-innovation.github.io/dataviz-finances-montreuil/fonctions.html
+
+
+[^plans-de-compte]: La référence officielle des plans de compte se trouve en ligne sur http://odm-budgetaire.org/composants/normes/.
