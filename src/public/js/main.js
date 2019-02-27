@@ -30,7 +30,7 @@ import {
 } from './constants/actions';
 
 
-import {fonctionLabels} from '../../../build/finances/m52-strings.json';
+import {fonctionLabels} from '../../../build/finances/finance-strings.json';
 
 
 /**

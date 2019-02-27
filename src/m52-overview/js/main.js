@@ -6,7 +6,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect, Provider } from 'react-redux';
 
-import {hierarchicalM52} from '../../shared/js/finance/memoized';
+import {hierarchicalByFunction} from '../../shared/js/finance/memoized';
 import xmlDocumentToDocumentBudgetaire from '../../shared/js/finance/xmlDocumentToDocumentBudgetaire';
 import makeNatureToChapitreFI from '../../shared/js/finance/makeNatureToChapitreFI.js';
 import visitHierarchical from '../../shared/js/finance/visitHierarchical.js';
@@ -128,7 +128,7 @@ function mapStateToProps(state){
     const mainHighlightNode = overedNode || selectedNode;
     const mainHighlightType = overType || selectedType;
 
-    const M52Hierarchical = hierarchicalM52(documentBudgetaire, rdfi);
+    const M52Hierarchical = hierarchicalByFunction(documentBudgetaire, rdfi);
 
     let M52HighlightedNodes;
 

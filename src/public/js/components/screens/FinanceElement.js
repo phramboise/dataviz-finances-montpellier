@@ -8,12 +8,12 @@ import page from 'page';
 import { max } from 'd3-array';
 
 import {makeLigneBudgetId}  from 'document-budgetaire/Records.js';
-import {m52ToAggregated, hierarchicalAggregated, hierarchicalM52}  from '../../../../shared/js/finance/memoized';
+import {m52ToAggregated, hierarchicalAggregated, hierarchicalByFunction}  from '../../../../shared/js/finance/memoized';
 import {default as visit, flattenTree} from '../../../../shared/js/finance/visitHierarchical.js';
 
 import { DF, DI } from '../../../../shared/js/finance/constants';
 
-import {fonctionLabels, natureLabels} from '../../../../../build/finances/m52-strings.json';
+import {fonctionLabels, natureLabels} from '../../../../../build/finances/finance-strings.json';
 
 import StackChart from '../../../../shared/js/components/StackChart';
 import {makeAmountString, default as MoneyAmount} from '../../../../shared/js/components/MoneyAmount';
@@ -268,7 +268,7 @@ export function makeElementById(hierAgg, hierM52 = {}){
 
 /**
  *
- * @param  {hierarchicalM52} tree [description]
+ * @param  {hierarchicalByFunction} tree [description]
  * @param  {WeakMap}         wm  Remonte le child au parent
  * @return {[type]}      [description]
  */
@@ -320,7 +320,7 @@ export default connect(
         }
 
         const m52Instruction = docBudgByYear.get(explorationYear);
-        const hierM52 = m52Instruction && RDFI && hierarchicalM52(m52Instruction, RDFI);
+        const hierM52 = m52Instruction && RDFI && hierarchicalByFunction(m52Instruction, RDFI);
         const aggregated = m52Instruction && corrections && m52ToAggregated(m52Instruction, corrections);
         const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
 
@@ -348,7 +348,7 @@ export default connect(
         const elementByIdByYear = docBudgByYear.map(m52i => {
             return makeElementById(
                 hierarchicalAggregated(m52ToAggregated(m52i, corrections)),
-                RDFI ? hierarchicalM52(m52i, RDFI): undefined
+                RDFI ? hierarchicalByFunction(m52i, RDFI): undefined
             );
         });
 

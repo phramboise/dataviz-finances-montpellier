@@ -15,7 +15,7 @@ import {
 } from "../../../../shared/js/finance/constants";
 
 import {
-    hierarchicalM52,
+    hierarchicalByFunction,
     m52ToAggregated,
     hierarchicalAggregated
 } from "../../../../shared/js/finance/memoized";
@@ -203,10 +203,10 @@ export default connect(
             totals = new ImmutableMap({
                 [REVENUE]: sum(m52Instruction.rows.filter(r => r.CodRD === 'R').map(r => r.MtReal).toArray()),
                 [EXPENDITURES]: sum(m52Instruction.rows.filter(r => r.CodRD === 'D').map(r => r.MtReal).toArray()),
-                [DF]: hierarchicalM52(m52Instruction, DF).total,
-                [DI]: hierarchicalM52(m52Instruction, DI).total,
-                [RF]: hierarchicalM52(m52Instruction, RF).total,
-                [RI]: hierarchicalM52(m52Instruction, RI).total
+                [DF]: hierarchicalByFunction(m52Instruction, DF).total,
+                [DI]: hierarchicalByFunction(m52Instruction, DI).total,
+                [RF]: hierarchicalByFunction(m52Instruction, RF).total,
+                [RI]: hierarchicalByFunction(m52Instruction, RI).total
             });
         }
 
