@@ -41,29 +41,6 @@ import {fonctionLabels} from '../../../build/finances/m52-strings.json';
 const REACT_CONTAINER_SELECTOR = '.finance-dataviz-container';
 const CONTAINER_ELEMENT = document.querySelector(REACT_CONTAINER_SELECTOR);
 
-/*
-    Dirty (temporary) hacks to fix the gironde.fr pages so the content displays properly
-*/
-// if(process.env.NODE_ENV === 'production'){
-//     const main = document.body.querySelector('main');
-//     const columnsEl = main.querySelector('.columns');
-//     const rowEl = main.querySelector('.row');
-//
-//     const elementsToMove = main.querySelectorAll('.columns > :nth-child(-n+3)');
-//
-//     Array.from(elementsToMove).forEach(e => {
-//         if(e.querySelector('h1')){
-//             // remove server-generated h1
-//             e.remove();
-//         }
-//         else{
-//             main.insertBefore(e, rowEl);
-//         }
-//     });
-//
-//     main.insertBefore(CONTAINER_ELEMENT, rowEl);
-// }
-
 // Breadcrumb
 const BREADCRUMB_CONTAINER = document.body.querySelector('.breadcrumb-container');
 
@@ -296,17 +273,11 @@ page(`/focus/${PRESENCE}`, () => {
     );
 });
 
-page.redirect(location.pathname, '#!/')
-page.redirect(location.pathname+'/', '#!/')
+page('*', (ctx) => {
+    console.error('Page introuvable %o', ctx);
+});
 
 page.base(location.pathname);
+page.strict(true);
 
 page({ hashbang: true });
-window.addEventListener('hashchange', () => {
-    scrollTo(0, 0);
-    page.redirect(location.hash);
-});
-window.addEventListener('popstate', () => {
-    scrollTo(0, 0);
-    page.redirect(location.hash);
-});
