@@ -63,6 +63,7 @@ export default class SunburstSlice extends React.Component{
                     selected ? 'selected' : undefined
                 ].filter(s => s).join(' ')
             },
+            React.createElement('title', {}, label),
             React.createElement(
                 'g',
                 {
