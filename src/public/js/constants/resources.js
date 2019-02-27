@@ -7,30 +7,18 @@ export const M52_FONCTION_TEMPORAL = "M52_FONCTION_TEMPORAL";
 
 export const CORRECTIONS_AGGREGATED = "CORRECTIONS_AGGREGATED";
 
-const env = process.env.NODE_ENV;
+const {BASE_URL} = process.env;
+
+if (!BASE_URL) {
+    throw new TypeError('Please define a BASE_URL env variable. The README will tell you more.');
+}
 
 export const assets = {
     // finance data
-    [COMPTES_ADMINISTRATIFS]: {
-        "production": undefined,
-        "demo": `../build/finances/doc-budgs.json`,
-        "development": `../build/finances/doc-budgs.json`,
-    }[env],
-    [CORRECTIONS_AGGREGATED]: {
-        "production": undefined,
-        "demo": `../data/finances/corrections-agregation.csv`,
-        "development": `/data/finances/corrections-agregation.csv`
-    }[env],
+    [COMPTES_ADMINISTRATIFS]: `${BASE_URL}/build/finances/doc-budgs.json`,
+    [CORRECTIONS_AGGREGATED]: `${BASE_URL}/data/finances/corrections-agregation.csv`,
 
     // texts
-    [AGGREGATED_ATEMPORAL]: {
-        "production": undefined,
-        "demo": `../data/texts/aggregated-atemporal.csv`,
-        "development": `../data/texts/aggregated-atemporal.csv`
-    }[env],
-    [AGGREGATED_TEMPORAL]: {
-        "production": undefined,
-        "demo":  `/../data/texts/aggregated-temporal.csv`,
-        "development": `../data/texts/aggregated-temporal.csv`
-    }[env]
+    [AGGREGATED_ATEMPORAL]: `${BASE_URL}/data/texts/aggregated-atemporal.csv`,
+    [AGGREGATED_TEMPORAL]: `${BASE_URL}/data/texts/aggregated-temporal.csv`,
 }
