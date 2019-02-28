@@ -75,7 +75,7 @@ Deux adresses sont ensuite accessibles :
 - `./index.html` : squelette de la visualisation nature/fonction
 - `./public/index.html` : squelette de l'exploration éditorialisée
 - `./src`
-    - `./src/m52-overview` : composants pour la visualisation nature/fonction
+    - `./src/finance-overview` : composants pour la visualisation nature/fonction
     - `./src/public` : composants de l'exploration éditorialisée
     - `./src/shared` : composants partagés
 - `./tests` : assurance qualité de calculs critiques
