@@ -6,7 +6,7 @@ import page from 'page';
 import M52Viz from '../../../shared/js/components/M52Viz';
 import LegendList from '../../../shared/js/components/LegendList';
 
-import {hierarchicalM52} from '../../../shared/js/finance/memoized';
+import {hierarchicalByFunction} from '../../../shared/js/finance/memoized';
 import {DF, DI} from '../../../shared/js/finance/constants';
 
 const STATE_DF = {rdfi: DF};
@@ -48,7 +48,7 @@ export default class M52ByFonction extends React.Component {
         const { m52Instruction, urlByFonction, labelsById, screenWidth } = this.props;
         const {rdfi} = this.state;
 
-        const m52Hierarchical = m52Instruction ? stripAllButFirstLevel(hierarchicalM52(m52Instruction, rdfi)) : undefined;
+        const m52Hierarchical = m52Instruction ? stripAllButFirstLevel(hierarchicalByFunction(m52Instruction, rdfi)) : undefined;
 
         const outerRadius = Math.min(screenWidth/2 - 30, 240);
 

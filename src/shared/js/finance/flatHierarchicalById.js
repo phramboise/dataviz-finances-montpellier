@@ -3,7 +3,7 @@ import visit from './visitHierarchical';
 import {levels} from './hierarchicalAggregated';
 import {rules} from './m52ToAggregated';
 
-import {fonctionLabels} from '../../../../build/finances/m52-strings.json';
+import {fonctionLabels} from '../../../../build/finances/finance-strings.json';
  
 export const childToParent = new Map();
 export const elementById = new Map();

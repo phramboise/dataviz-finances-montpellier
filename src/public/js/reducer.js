@@ -1,6 +1,6 @@
 import { Record } from 'immutable';
 import { markdown as md } from '../../shared/js/components/Markdown';
-import { hierarchicalM52, hierarchicalAggregated, m52ToAggregated } from '../../shared/js/finance/memoized';
+import { hierarchicalByFunction, hierarchicalAggregated, m52ToAggregated } from '../../shared/js/finance/memoized';
 
 import {
     FINANCE_DETAIL_ID_CHANGE, DOCUMENTS_BUDGETAIRES_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
@@ -30,11 +30,11 @@ export default function reducer(state, action) {
                 docBudgs.forEach(db => {
                     const aggregated = m52ToAggregated(db, corrections);
                     const hierAgg = hierarchicalAggregated(aggregated);
-                    const hierarchicalM52DF = hierarchicalM52(db, DF);
-                    const hierarchicalM52DI = hierarchicalM52(db, DI);
-                    
+                    const hierarchicalByFunctionDF = hierarchicalByFunction(db, DF);
+                    const hierarchicalByFunctionDI = hierarchicalByFunction(db, DI);
+
                     // to prevent minifier optimizations
-                    console.log('memz', hierarchicalM52DI, hierarchicalM52DF, hierAgg);
+                    console.log('memz', hierarchicalByFunctionDI, hierarchicalByFunctionDF, hierAgg);
                 })
             }
 

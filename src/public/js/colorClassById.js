@@ -3,7 +3,7 @@ import visit from '../../shared/js/finance/visitHierarchical';
 import {DF, DI, RF, RI} from '../../shared/js/finance/constants';
 import {levels} from '../../shared/js/finance/hierarchicalAggregated';
 
-import {fonctionLabels} from '../../../build/finances/m52-strings.json';
+import {fonctionLabels} from '../../../build/finances/finance-strings.json';
 
 const colorClasses = Array(10).fill().map((e, i) => `area-color-${i+1}`);
 
