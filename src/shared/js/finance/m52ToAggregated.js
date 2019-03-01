@@ -371,7 +371,7 @@ export const rules = Object.freeze({
                 art.startsWith('657') &&
                 fonction !== '51' &&
                 !(fonction === '58' && art === '6574');
-        } 
+        }
     },
     'DF-1-7-1': {
         label: "Autres divers enfants",
@@ -408,7 +408,7 @@ export const rules = Object.freeze({
                 !(art === '6568' && fonction === '52') &&
                 !(art === '6526' && fonction === '51') &&
                 !(art === '6513' && fonction === '52') &&
-                !(art === '6336') && 
+                !(art === '6336') &&
                 !(art === '6218') &&
                 !(art === '6245' && fonction === '568') &&
                 !(art === '6245' && fonction === '52') &&
@@ -428,7 +428,7 @@ export const rules = Object.freeze({
             const nature = m52Row['Nature'];
 
             return isDF(m52Row) &&
-                ( 
+                (
                     fonction === '53' &&
                     nature === "65113"
                 ) ||
@@ -574,7 +574,7 @@ export const rules = Object.freeze({
             const art = m52Row['Nature'];
             const fonction = m52Row['Fonction']
             const f1 = fonction.slice(0, 1);
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 (
                     [
                         "65731", "65732", "65733", "65734", "65735",
@@ -611,7 +611,7 @@ export const rules = Object.freeze({
             const f1 = fonction.slice(0, 1);
             const f2 = fonction.slice(0, 2);
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 (
                     (
                         f1 !== '4' && f1 !== '5' && f1 !== '8' &&
@@ -635,7 +635,7 @@ export const rules = Object.freeze({
             const f = m52Row['Fonction'];
             const f2 = f.slice(0, 2);
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 (
                     (
                         chap === '012' ||
@@ -649,15 +649,15 @@ export const rules = Object.freeze({
                     !((art === '64126' || art === '64121') && f2 === '50') &&
                     !(
                         // These lines should be added only for 2017 and later
-                        exer < 2017 && 
+                        exer < 2017 &&
                         (
                             (art === '6451' && f === '50') ||
                             (art === '6453' && f === '50') ||
                             (art === '6454' && f === '50')
                         )
                     )
-                ) 
-                
+                )
+
         }
     },
     'DF-5': {
@@ -689,7 +689,7 @@ export const rules = Object.freeze({
             const f1 = fonction.slice(0, 1);
             const art = m52Row['Nature'];
 
-            return isDF(m52Row) && 
+            return isDF(m52Row) &&
                 (
                     (
                         art.startsWith('61') &&
@@ -775,7 +775,7 @@ export const rules = Object.freeze({
                 (
                     (art.startsWith('73') &&
                     !['73913', '73914', '73926', '739261', '739262'].includes(art)
-                ) ||
+                    ) ||
                 ['654', '6541', '6542', '6581', '65821', '65888', '65661'].includes(art)
                 ) &&
                 !(['4', '5', '8'].includes(f1));
@@ -789,9 +789,9 @@ export const rules = Object.freeze({
 
             return isDF(m52Row) &&
                 (
-                  f2 === '91' &&
+                    f2 === '91' &&
                 ['6561', '6568'].includes(art)
-              ) ||
+                ) ||
               ['65542'].includes(m52Row['Nature']);
         }
     },
@@ -889,7 +889,7 @@ export const rules = Object.freeze({
                     !article.startsWith('204')
                 ) ||
                 (
-                    fonction === '21' && 
+                    fonction === '21' &&
                     (
                         ['2031', '21838'].includes(article)
                     )
@@ -901,11 +901,11 @@ export const rules = Object.freeze({
         filter(m52Row){
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
-            
+
             return isDI(m52Row) &&
                 (
                     (
-                        fonction === '621' && 
+                        fonction === '621' &&
                         (
                             article.startsWith('20') ||
                             article.startsWith('21') ||
@@ -938,7 +938,7 @@ export const rules = Object.freeze({
                             article === '1324'
                         ) &&
                         !['221', '621', '738', '50'].includes(fonction)
-                    ) || 
+                    ) ||
                     (
                         (
                             article === '2111' ||
@@ -953,7 +953,7 @@ export const rules = Object.freeze({
                 ) &&
                 !( article === '21313' && fonction === '40' ) &&
                 !( article === '1322' && fonction === '821' ) &&
-                !( article === '23151' && fonction === '52' ) && 
+                !( article === '23151' && fonction === '52' ) &&
                 !( article === '2188' && fonction === '41' ) &&
                 !(
                     (
@@ -991,16 +991,16 @@ export const rules = Object.freeze({
             const article = m52Row['Nature'];
             const fonction = m52Row['Fonction'];
 
-            return isDI(m52Row) && 
+            return isDI(m52Row) &&
             (
-                article === '1675' || 
+                article === '1675' ||
                 (
                     (
                         fonction === '50' &&
                         (
-                          article.startsWith('20') ||
-                          article.startsWith('21') ||
-                          article.startsWith('23')
+                            article.startsWith('20') ||
+                            article.startsWith('21') ||
+                            article.startsWith('23')
                         ) &&
                         !article.startsWith('204')
                     )
@@ -1065,7 +1065,7 @@ export const rules = Object.freeze({
                 !(article === '1321' && ['621', '18'].includes(fonction)) &&
                 !(article === '204182' && fonction === '68') &&
                 !(article === '2761' && fonction === '01') &&
-                !(article === '2748' && fonction === '01'); 
+                !(article === '2748' && fonction === '01');
         }
     },
     'DI-2-5': {
@@ -1181,11 +1181,11 @@ export default function convert(docBudg, corrections = []){
 
     return ImmutableSet(
         Object.keys(rules)
-        .map(id => makeAggregatedInstructionRowRecord(
-            id,
-            docBudg.rows,
-            yearCorrections.filter(c => c['splitFor'] === id),
-            docBudg['Exer']
-        ))
+            .map(id => makeAggregatedInstructionRowRecord(
+                id,
+                docBudg.rows,
+                yearCorrections.filter(c => c['splitFor'] === id),
+                docBudg['Exer']
+            ))
     )
 }

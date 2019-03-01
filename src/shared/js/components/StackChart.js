@@ -9,17 +9,17 @@ import D3Axis from './D3Axis';
 /*
     This component displays a stackchart and a legend if there is a legend.
     Colors are attributed by this component via the use of `area-color-${i+1}` classes
-    
-    It is the caller's responsibility to make sure ys (from ysByX) are sorted in a order 
+
+    It is the caller's responsibility to make sure ys (from ysByX) are sorted in a order
     that is consistent with the legendItems order
 */
-export default function ({ 
+export default function ({
     // data
-    xs, ysByX, 
+    xs, ysByX,
     // aestetics
     portrait = false,
-    WIDTH = 800, HEIGHT = 430, 
-    Y_AXIS_MARGIN = 80, HEIGHT_PADDING = 40, 
+    WIDTH = 800, HEIGHT = 430,
+    Y_AXIS_MARGIN = 80, HEIGHT_PADDING = 40,
     BRICK_SPACING = 6, MIN_BRICK_HEIGHT = 4,
     PORTRAIT_COLUMN_WIDTH = 70,
     // legend
@@ -40,7 +40,7 @@ export default function ({
             [Y_AXIS_MARGIN+columnAndMarginWidth/2, WIDTH-columnAndMarginWidth/2]
         );
 
-    const maxAmount = max(ysByX.valueSeq().toJS().map(ys =>  sum(ys))); 
+    const maxAmount = max(ysByX.valueSeq().toJS().map(ys =>  sum(ys)));
 
     const yScale = scaleLinear()
         .domain([0, maxAmount])
@@ -58,26 +58,27 @@ export default function ({
 
     const ticks = yScale.ticks(5);
 
-    return React.createElement('div', { 
-        className: ['stackchart', portrait ? 'portrait' : ''].filter(e => e).join(' ') 
-    },
+    return React.createElement('div',
+        {
+            className: ['stackchart', portrait ? 'portrait' : ''].filter(e => e).join(' ')
+        },
         // useless <div> to defend the <svg> in Chrome when using flex: 1 on the legend
         React.createElement('div', {className: 'over-time'},
             React.createElement('svg', {width: WIDTH, height: HEIGHT},
                 // x axis
                 React.createElement(D3Axis, {
-                    className: 'x', 
+                    className: 'x',
                     tickData: xs.map(x => {
                         return {
                             transform: portrait ?
                                 `translate(0, ${xScale(x)})` :
                                 `translate(${xScale(x)}, ${HEIGHT-HEIGHT_PADDING})`,
-                            line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 }, 
+                            line: { x1 : 0, y1 : 0, x2 : 0, y2 : 0 },
                             text: {
-                                x: portrait ? 0 : -10, 
-                                y: 0, 
-                                dx: portrait ? '1em' : undefined, 
-                                dy: portrait ? undefined : '2em', 
+                                x: portrait ? 0 : -10,
+                                y: 0,
+                                dx: portrait ? '1em' : undefined,
+                                dy: portrait ? undefined : '2em',
                                 anchor: portrait ? 'left' : undefined,
                                 t: x
                             },
@@ -91,23 +92,23 @@ export default function ({
                 React.createElement(D3Axis, {className: 'y', tickData: ticks.map(tick => {
                     return {
                         transform: portrait ?
-                            `translate(${yScale(tick)}, 0)` :    
+                            `translate(${yScale(tick)}, 0)` :
                             `translate(0, ${yScale(tick)})`,
                         line: {
-                            x1 : 0, 
-                            y1 : 0, 
+                            x1 : 0,
+                            y1 : 0,
                             x2 : portrait ? 0 : WIDTH,
                             y2 : portrait ? HEIGHT : 0
-                        }, 
+                        },
                         text: {
-                            x: 0, 
-                            y: portrait ? 0 : -10, 
-                            dx: portrait ? 5 : 0, 
-                            dy: portrait ? 12 : 0, 
+                            x: 0,
+                            y: portrait ? 0 : -10,
+                            dx: portrait ? 5 : 0,
+                            dy: portrait ? 12 : 0,
                             anchor: portrait ? 'left' : 'right',
                             t: yValueDisplay(tick)
                         }
-                        
+
                     }
                 })}),
                 // content
@@ -138,24 +139,23 @@ export default function ({
                                 return {
                                     value: y,
                                     height,
-                                    y: i === 0 ? 
+                                    y: i === 0 ?
                                         baseY :
-                                        (portrait ? 
+                                        (portrait ?
                                             baseY + stackYs[i] :
                                             baseY - stackYs[i])
                                 }
                             });
 
-
                         const totalHeight = yValueScale(total);
 
                         const totalY = HEIGHT - HEIGHT_PADDING - totalHeight;
 
-                        return React.createElement('g', 
+                        return React.createElement('g',
                             {
-                                transform: portrait ? `translate(0, ${xScale(x) + 6 })` : `translate(${xScale(x)})`, 
-                                key: x                    
-                            }, 
+                                transform: portrait ? `translate(0, ${xScale(x) + 6 })` : `translate(${xScale(x)})`,
+                                key: x
+                            },
                             React.createElement('g', {},
 
                                 stack.map( ({value, height, y}, i) => {
@@ -164,51 +164,51 @@ export default function ({
                                         legendItems && legendItems[i].colorClassName;
 
                                     return React.createElement(
-                                        'g', 
+                                        'g',
                                         {
                                             transform: portrait ? `translate(${y})` : `translate(0, ${y})`,
                                             className: [
                                                 'brick',
                                                 onBrickClicked ? 'actionable' : '',
                                                 colorClass,
-                                            ].join(' '), 
+                                            ].join(' '),
                                             key: i,
                                             onClick: onBrickClicked ? () => {
                                                 onBrickClicked(
-                                                    x, 
+                                                    x,
                                                     legendItems ? legendItems[i].id : y
                                                 )
                                             } : undefined
-                                        }, 
+                                        },
                                         React.createElement('rect', {
                                             x: portrait ? 0 : -columnWidth/2,
                                             y: 0,
-                                            width: portrait ? height : columnWidth, 
-                                            height: portrait ? PORTRAIT_COLUMN_WIDTH - 12 : height, 
-                                            rx: 5, 
+                                            width: portrait ? height : columnWidth,
+                                            height: portrait ? PORTRAIT_COLUMN_WIDTH - 12 : height,
+                                            rx: 5,
                                             ry: 5
                                         }),
                                         (stack.length >= 2 && (
                                             (!portrait && height >= 30) ||
                                             (portrait && height >= 60)
                                         )) ? React.createElement('text', {
-                                            transform: portrait ?
-                                                `translate(2, 20)`:
-                                                `translate(-${columnWidth/2 - 10}, 20)`
-                                        }, yValueDisplay(value)) : undefined
+                                                transform: portrait ?
+                                                    `translate(2, 20)`:
+                                                    `translate(-${columnWidth/2 - 10}, 20)`
+                                            }, yValueDisplay(value)) : undefined
                                     )
                                 })
                             ),
                             React.createElement(
-                                'text', 
+                                'text',
                                 {
-                                    className: 'stackchart-title', 
-                                    x: portrait ? WIDTH - 90 : -columnWidth/2, 
-                                    y: portrait ? 0 : totalY, 
-                                    dy: portrait ? '-6' : '-1em', 
-                                    dx: '0em', 
+                                    className: 'stackchart-title',
+                                    x: portrait ? WIDTH - 90 : -columnWidth/2,
+                                    y: portrait ? 0 : totalY,
+                                    dy: portrait ? '-6' : '-1em',
+                                    dx: '0em',
                                     textAnchor: 'right'
-                                }, 
+                                },
                                 React.createElement('tspan', {}, yValueDisplay(total))
                             )
                         )
@@ -218,7 +218,7 @@ export default function ({
         ),
         legendItems ? React.createElement(LegendList, {
             items: legendItems.map((li, i) => (Object.assign(
-                {colorClassName: `area-color-${i+1}`}, 
+                {colorClassName: `area-color-${i+1}`},
                 li
             ))).reverse() // to have a order consistent with the stacks
         }) : undefined

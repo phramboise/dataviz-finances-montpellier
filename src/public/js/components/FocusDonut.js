@@ -12,13 +12,12 @@ interface DonutProps{
 
 */
 export default function({
-        donutWidth = 50, outerRadius = 200,
-        width = 2*outerRadius, height = 2*outerRadius,
-        padAngle = Math.PI/30,
-        proportion,
-        innerText
-    }){
-    
+    donutWidth = 50, outerRadius = 200,
+    width = 2*outerRadius, height = 2*outerRadius,
+    padAngle = Math.PI/30,
+    proportion,
+    innerText
+}){
     const pie = _pie()
         .startAngle(2*Math.PI)
         .endAngle(0)
@@ -32,7 +31,7 @@ export default function({
     return React.createElement('div', {className: 'focus-donut'},
         React.createElement('svg', {width, height},
             React.createElement(
-                'g', 
+                'g',
                 {transform: `translate(${width/2}, ${height/2})`},
                 arcDescs.map(ad => {
                     const d = arc(Object.assign(
@@ -48,7 +47,7 @@ export default function({
                     )
                 }),
                 proportion ? React.createElement('g', {},
-                    React.createElement('text', {className: 'percentage', textAnchor: 'middle', dy: "0.1em"}, 
+                    React.createElement('text', {className: 'percentage', textAnchor: 'middle', dy: "0.1em"},
                         React.createElement('tspan', {className: 'percent', textAnchor: 'middle'}, Math.round(100*proportion)),
                         React.createElement('tspan', {textAnchor: 'middle', style: {fontWeight: '100'}}, '%')
                     ),
@@ -60,5 +59,5 @@ export default function({
             )
         )
     );
-    
+
 }

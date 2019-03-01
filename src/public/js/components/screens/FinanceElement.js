@@ -116,11 +116,11 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
     }
 
     const legendItemIds = barchartPartitionByYear
-    .map(partition => partition.map(part => part.contentId).toSet())
-    .toSet().flatten().toArray()
-    .sort( (lid1, lid2) => {
-        return partitionIdsInOrder.indexOf(lid1) - partitionIdsInOrder.indexOf(lid2)
-    } );
+        .map(partition => partition.map(part => part.contentId).toSet())
+        .toSet().flatten().toArray()
+        .sort( (lid1, lid2) => {
+            return partitionIdsInOrder.indexOf(lid1) - partitionIdsInOrder.indexOf(lid2)
+        } );
 
     const legendItems = legendItemIds.map(id => {
         let found;
@@ -198,16 +198,16 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
                 ),
                 React.createElement('tbody', {},
                     m52Rows
-                    .sort((r1, r2) => r2['MtReal'] - r1['MtReal'])
-                    .map(row => {
-                        return React.createElement('tr', {title: makeLigneBudgetId(row)},
-                            React.createElement('td', {}, fonctionLabels[row['Fonction']]),
-                            React.createElement('td', {}, natureLabels[row['Nature']]),
-                            React.createElement('td', {},
-                                React.createElement(MoneyAmount, {amount: row['MtReal']})
+                        .sort((r1, r2) => r2['MtReal'] - r1['MtReal'])
+                        .map(row => {
+                            return React.createElement('tr', {title: makeLigneBudgetId(row)},
+                                React.createElement('td', {}, fonctionLabels[row['Fonction']]),
+                                React.createElement('td', {}, natureLabels[row['Nature']]),
+                                React.createElement('td', {},
+                                    React.createElement(MoneyAmount, {amount: row['MtReal']})
+                                )
                             )
-                        )
-                    })
+                        })
                 )
             )
         ) : undefined,
@@ -292,10 +292,10 @@ function makeContextList(element, childToParent){
     }
 
     contextList = contextList
-    // furtherest context first
-    .reverse()
-    // remove TOTAL
-    .slice(1);
+        // furtherest context first
+        .reverse()
+        // remove TOTAL
+        .slice(1);
 
     if(contextList.length > 4){
         const [c1, c2, c3] = contextList;
@@ -384,8 +384,8 @@ export default connect(
         });
         const m52Rows = element && (element.children || element.children.size !== 0) ?
             (isM52Element ?
-                 element.elements :
-                 element.elements.first()['M52Rows']
+                element.elements :
+                element.elements.first()['M52Rows']
             ) :
             undefined;
 
