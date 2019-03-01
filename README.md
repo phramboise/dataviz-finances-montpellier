@@ -125,8 +125,13 @@ Deux variables d'environnement doivent être configurées dans l'[onglet Setting
 
 Il existe 2 environnements :
 
-* **démo autonome** : `npm run build-demo:public` (dans le cadre du déploiement continu)
+* **démo autonome** : `npm run build-demo` (construite par l'intégration continue)
 * **développement** : `npm run watch`
+
+| Variable d'environnement  | Valeur par défaut | Utilité
+| ---                       | ---               | ---
+| `BASE_URL`   | `https://dtc-innovation.github.io/dataviz-finances-montreuil`  | Explicite où sont hébergées les données et _assets_ de l'application.
+| `NODE_ENV`   | `undefined`  | Optimise les artéfacts lorsque la valeur est `production`.
 
 ## Mise à jour des données financières
 
