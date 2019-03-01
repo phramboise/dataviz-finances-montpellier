@@ -52,7 +52,7 @@
         "babelify",
         {
           "presets": [
-            "@babel/env"
+            "env"
           ],
           "plugins": [
             [

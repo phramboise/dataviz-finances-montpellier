@@ -1,0 +1,17 @@
+{
+  "presets": ["env", "react"],
+  "plugins": [
+    [
+      "inline-svg",
+      {
+        "svgo": {
+          "plugins": [
+            {
+              "removeDoctype": true
+            }
+          ]
+        }
+      }
+    ]
+  ]
+}
