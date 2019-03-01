@@ -32,7 +32,7 @@ export default function reducer(state, action) {
                     const hierAgg = hierarchicalAggregated(aggregated);
                     const hierarchicalM52DF = hierarchicalM52(db, DF);
                     const hierarchicalM52DI = hierarchicalM52(db, DI);
-
+                    
                     // to prevent minifier optimizations
                     console.log('memz', hierarchicalM52DI, hierarchicalM52DF, hierAgg);
                 })
@@ -87,8 +87,6 @@ export default function reducer(state, action) {
             const {year} = action;
             return state.set('explorationYear', year);
         }
-        case '@@redux/INIT':
-            return state
         default:
             console.warn('Unhandled action type', type);
             return state;

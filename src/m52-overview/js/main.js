@@ -58,8 +58,6 @@ function reducer(state, action){
                 .set('DF_VIEW', action.dfView)
                 .set('over', undefined)
                 .set('selection', undefined);
-        case '@@redux/INIT':
-            return state
         default:
             console.warn('Unknown action type', type);
             return state;
