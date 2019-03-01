@@ -96,61 +96,61 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
         textArea, playButton;
 
     const animationStart = Promise.resolve()
-        .then(() => {
+    .then(() => {
         // RF
-            rfParent = container.querySelector('.brick.rf');
-            rfBricks = [DOTATION, FISCALITE_DIRECTE, FISCALITE_INDIRECTE, RECETTES_DIVERSES]
-                .map(id => rfParent.querySelector(RF_BRICK_SELECTOR[id]));
-            rfEmptier = rfParent.querySelector('.emptier');
-            rfDefs = container.querySelector('dl .rf');
+        rfParent = container.querySelector('.brick.rf');
+        rfBricks = [DOTATION, FISCALITE_DIRECTE, FISCALITE_INDIRECTE, RECETTES_DIVERSES]
+            .map(id => rfParent.querySelector(RF_BRICK_SELECTOR[id]));
+        rfEmptier = rfParent.querySelector('.emptier');
+        rfDefs = container.querySelector('dl .rf');
 
-            // DF
-            dfParent = container.querySelector('.brick.df');
-            dfBricks = [STRUCTURE, INTERVENTIONS, SOLIDARITE].map(id => dfParent.querySelector(DF_BRICK_SELECTOR[id]));
-            dfDefs = container.querySelector('dl .df');
+        // DF
+        dfParent = container.querySelector('.brick.df');
+        dfBricks = [STRUCTURE, INTERVENTIONS, SOLIDARITE].map(id => dfParent.querySelector(DF_BRICK_SELECTOR[id]));
+        dfDefs = container.querySelector('dl .df');
 
-            // RI
-            riParent = container.querySelector('.brick.ri');
-            epargneElement = riParent.querySelector('.epargne');
-            riBricks = [RI_PROPRES, EMPRUNT].map(id => riParent.querySelector(RI_BRICK_SELECTOR[id])).concat([epargneElement]);
-            riEmptier = riParent.querySelector('.emptier');
-            riDefs = container.querySelector('dl .ri');
+        // RI
+        riParent = container.querySelector('.brick.ri');
+        epargneElement = riParent.querySelector('.epargne');
+        riBricks = [RI_PROPRES, EMPRUNT].map(id => riParent.querySelector(RI_BRICK_SELECTOR[id])).concat([epargneElement]);
+        riEmptier = riParent.querySelector('.emptier');
+        riDefs = container.querySelector('dl .ri');
 
-            // DI
-            diParent = container.querySelector('.brick.di');
-            diBricks = [REMBOURSEMENT_DETTE, INFRASTRUCTURE, SUBVENTIONS]
-                .map(id => diParent.querySelector(DI_BRICK_SELECTOR[id]));
-            diDefs = container.querySelector('dl .di');
+        // DI
+        diParent = container.querySelector('.brick.di');
+        diBricks = [REMBOURSEMENT_DETTE, INFRASTRUCTURE, SUBVENTIONS]
+            .map(id => diParent.querySelector(DI_BRICK_SELECTOR[id]));
+        diDefs = container.querySelector('dl .di');
 
-            // play button
-            playButton = container.querySelector('.play');
+        // play button
+        playButton = container.querySelector('.play');
 
-            // reset styles
-            playButton.addEventListener('click', () => {
-                rfBricks.forEach(el => { el.style.height = 0; })
-                dfBricks.forEach(el => { el.style.height = 0; })
-                riBricks.forEach(el => { el.style.height = 0; })
-                diBricks.forEach(el => { el.style.height = 0; })
+        // reset styles
+        playButton.addEventListener('click', () => {
+            rfBricks.forEach(el => { el.style.height = 0; })
+            dfBricks.forEach(el => { el.style.height = 0; })
+            riBricks.forEach(el => { el.style.height = 0; })
+            diBricks.forEach(el => { el.style.height = 0; })
 
-                rfEmptier.style.height = 0;
-                riEmptier.style.height = 0;
+            rfEmptier.style.height = 0;
+            riEmptier.style.height = 0;
 
-                hidePlayButton(playButton)
-                    .then(() => startAnimation({READING_TIME, BRICK_APPEAR_DURATION, BETWEEN_BRICK_PAUSE_DURATION, BETWEEN_COLUMN_PAUSE_DURATION}))
-            })
-
-            // text area
-            textArea = container.querySelector('.text-area');
-
-            // initial run to get show final state initially
-            startAnimation({
-                READING_TIME: 0,
-                BRICK_APPEAR_DURATION: 0.02,
-                BETWEEN_BRICK_PAUSE_DURATION: 0,
-                BETWEEN_COLUMN_PAUSE_DURATION: 0
-            })
-
+            hidePlayButton(playButton)
+            .then(() => startAnimation({READING_TIME, BRICK_APPEAR_DURATION, BETWEEN_BRICK_PAUSE_DURATION, BETWEEN_COLUMN_PAUSE_DURATION}))
         })
+
+        // text area
+        textArea = container.querySelector('.text-area');
+
+        // initial run to get show final state initially
+        startAnimation({
+            READING_TIME: 0,
+            BRICK_APPEAR_DURATION: 0.02,
+            BETWEEN_BRICK_PAUSE_DURATION: 0,
+            BETWEEN_COLUMN_PAUSE_DURATION: 0
+        })
+
+    })
 
 
     function startAnimation({READING_TIME, BRICK_APPEAR_DURATION, BETWEEN_BRICK_PAUSE_DURATION, BETWEEN_COLUMN_PAUSE_DURATION}){
@@ -173,7 +173,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                     return new Promise(resolve => {
                         el.addEventListener('transitionend', resolve, { once: true });
                     })
-                        .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
                 })
             }, Promise.resolve());
         });
@@ -184,11 +184,11 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
             reading
         ]);
         reading = dfBricksStart
-            .then(() => {
-                textArea.textContent = `Ces recettes financent les allocations et prestations sociales ou de solidarité gérées
+        .then(() => {
+            textArea.textContent = `Ces recettes financent les allocations et prestations sociales ou de solidarité gérées
             par le Département, les services de secours (pompiers), les transports, les collèges, l’entretien des routes, les intérêts d’emprunts et permettent le fonctionnement de l’administration départementale (personnel, entretien bâtiments, charges courantes…)`
-            })
-            .then( delay(READING_TIME*SECOND) );
+        })
+        .then( delay(READING_TIME*SECOND) );
 
         const dfBricksDone = dfBricksStart.then(() => {
             rfEmptier.style.transitionDuration = `${BRICK_APPEAR_DURATION}s`;
@@ -218,7 +218,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                     return new Promise(resolve => {
                         el.addEventListener('transitionend', resolve, { once: true });
                     })
-                        .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
                 })
             }, Promise.resolve());
 
@@ -232,10 +232,10 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
         ]);
 
         reading = epargneBrickStart
-            .then(() => {
-                textArea.textContent = `La maitrise de ces dépenses de fonctionnement permet au Département de constituer une épargne`
-            })
-            .then( delay(READING_TIME*SECOND) );
+        .then(() => {
+            textArea.textContent = `La maitrise de ces dépenses de fonctionnement permet au Département de constituer une épargne`
+        })
+        .then( delay(READING_TIME*SECOND) );
 
 
         const epargneBrickDone = epargneBrickStart.then(() => {
@@ -280,7 +280,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                         }),
                         reading
                     ])
-                        .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
                 })
             }, Promise.resolve());
         });
@@ -292,10 +292,10 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
         ]);
 
         reading = diBricksStart
-            .then(() => {
-                textArea.textContent = `L’épargne ajoutée aux recettes d'investissement et à l’emprunt va permettre le financement des dépenses d’investissement structurantes nécessaires au développement du territoire girondin : collèges, routes bâtiments, subventions aux partenaires territoriaux (communes, bailleurs sociaux…)`
-            })
-            .then( delay(READING_TIME*SECOND) );
+        .then(() => {
+            textArea.textContent = `L’épargne ajoutée aux recettes d'investissement et à l’emprunt va permettre le financement des dépenses d’investissement structurantes nécessaires au développement du territoire girondin : collèges, routes bâtiments, subventions aux partenaires territoriaux (communes, bailleurs sociaux…)`
+        })
+        .then( delay(READING_TIME*SECOND) );
 
         const diBricksDone = diBricksStart.then(() => {
 
@@ -326,7 +326,7 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
                     return new Promise(resolve => {
                         el.addEventListener('transitionend', resolve, { once: true })
                     })
-                        .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
+                    .then(delay(BETWEEN_BRICK_PAUSE_DURATION*SECOND))
                 })
             }, Promise.resolve());
         });
@@ -336,19 +336,19 @@ function animate(container, {dfBrickHeights, riBrickHeights, diBrickHeights, rfB
             reading.then(() => {
                 textArea.textContent = `Chaque année le vote du compte administratif du Département valide les équilibres budgétaires issus du vote du budget. La qualité de la gestion financière permet de garantir l'exercice des missions et la capacité d'investir en faveur du développement du territoire girondin`
             })
-                .then( delay(READING_TIME*SECOND) )
-                .then(() => {
-                    textArea.textContent = '';
-                })
+            .then( delay(READING_TIME*SECOND) )
+            .then(() => {
+                textArea.textContent = '';
+            })
         ]);
 
 
         // Replay button
         const addReplayButton = animationEnd
-            .then(delay(BETWEEN_COLUMN_PAUSE_DURATION*SECOND))
-            .then(() => {
-                return displayPlayButton(playButton, BRICK_APPEAR_DURATION)
-            })
+        .then(delay(BETWEEN_COLUMN_PAUSE_DURATION*SECOND))
+        .then(() => {
+            return displayPlayButton(playButton, BRICK_APPEAR_DURATION)
+        })
 
         return addReplayButton;
     }

@@ -107,7 +107,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
                             </a>
 
                             <a className="ri" href='#' style={{ height: riHeight }}>
-                                <h2>Recettes d’investissement</h2>
+                                <h2>Recettes d'investissement</h2>
                                 <MoneyAmount amount={totals.get(RI)} />
                             </a>
                         </div>
@@ -128,7 +128,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
                                 <MoneyAmount amount={totals.get(DF)} />
                             </a>
                             <a className="di" href='#' style={{ height: diHeight }}>
-                                <h2>Dépenses d’investissement</h2>
+                                <h2>Dépenses d'investissement</h2>
                                 <MoneyAmount amount={totals.get(DI)} />
                             </a>
                         </div>
@@ -165,10 +165,10 @@ notre budget ?</Markdown>
 
         <section className="m52">
             <SecundaryTitle text="Les comptes par fonction (norme M14)" />
-            <M52ByFonction m52Instruction={m52Instruction}
-                urlByFonction={byFonction}
-                labelsById={labelsById}
-                screenWidth={screenWidth} />
+            <M52ByFonction  m52Instruction={m52Instruction}
+                            urlByFonction={byFonction}
+                            labelsById={labelsById}
+                            screenWidth={screenWidth} />
         </section>
 
         <DownloadSection />
@@ -219,37 +219,37 @@ export default connect(
             // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33
             constructionAmounts: m52Instruction
                 ? {
-                    DotationEtat: totalById.get("RF-5"),
-                    FiscalitéDirecte: totalById.get("RF-1"),
-                    FiscalitéIndirecte: sum(
-                        ["RF-2", "RF-3", "RF-4"].map(i => totalById.get(i))
-                    ),
-                    RecettesDiverses:
-                        totalById.get("RF") -
-                        sum(
-                            ["RF-1", "RF-2", "RF-3", "RF-4", "RF-5"].map(i =>
-                                totalById.get(i)
-                            )
-                        ),
+                      DotationEtat: totalById.get("RF-5"),
+                      FiscalitéDirecte: totalById.get("RF-1"),
+                      FiscalitéIndirecte: sum(
+                          ["RF-2", "RF-3", "RF-4"].map(i => totalById.get(i))
+                      ),
+                      RecettesDiverses:
+                          totalById.get("RF") -
+                          sum(
+                              ["RF-1", "RF-2", "RF-3", "RF-4", "RF-5"].map(i =>
+                                  totalById.get(i)
+                              )
+                          ),
 
-                    Solidarité: totalById.get("DF-1"),
-                    Interventions: totalById.get("DF-3"),
-                    DépensesStructure:
-                        totalById.get("DF") -
-                        sum(["DF-1", "DF-3"].map(i => totalById.get(i))),
+                      Solidarité: totalById.get("DF-1"),
+                      Interventions: totalById.get("DF-3"),
+                      DépensesStructure:
+                          totalById.get("DF") -
+                          sum(["DF-1", "DF-3"].map(i => totalById.get(i))),
 
-                    Emprunt: totalById.get("RI-EM"),
-                    RIPropre: totalById.get("RI") - totalById.get("RI-EM"),
+                      Emprunt: totalById.get("RI-EM"),
+                      RIPropre: totalById.get("RI") - totalById.get("RI-EM"),
 
-                    RemboursementEmprunt: totalById.get("DI-EM"),
-                    Routes: totalById.get("DI-1-2"),
-                    Colleges: totalById.get("DI-1-1"),
-                    Amenagement:
-                        totalById.get("DI-1-3") +
-                        totalById.get("DI-1-4") +
-                        totalById.get("DI-1-5"),
-                    Subventions: totalById.get("DI-2")
-                }
+                      RemboursementEmprunt: totalById.get("DI-EM"),
+                      Routes: totalById.get("DI-1-2"),
+                      Colleges: totalById.get("DI-1-1"),
+                      Amenagement:
+                          totalById.get("DI-1-3") +
+                          totalById.get("DI-1-4") +
+                          totalById.get("DI-1-5"),
+                      Subventions: totalById.get("DI-2")
+                  }
                 : undefined,
             assets: {
                 expenditures: "#!/finance-details/" + EXPENDITURES,

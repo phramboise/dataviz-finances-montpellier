@@ -14,8 +14,8 @@ interface SunburstProps<Element>{
     height: number
 }
 
-// This data structure contains computed fields, but it's ~fine because it's
-// only meant to be read once for viz
+// This data structure contains computed fields, but it's ~fine because it's 
+// only meant to be read once for viz  
 interface HierarchicalData<Element>{
     children: Map<category, Set<HierarchicalData<Element>>>
     id: string // unique id across the data structure
@@ -29,11 +29,12 @@ interface HierarchicalData<Element>{
 
 */
 export default function({
-    hierarchicalData, width, height,
-    highlightedNodes, selectedNode,
-    donutWidth, outerRadius, padAngle = 0,
-    onSliceOvered, onSliceSelected
-}){
+        hierarchicalData, width, height, 
+        highlightedNodes, selectedNode,
+        donutWidth, outerRadius, padAngle = 0,
+        onSliceOvered, onSliceSelected
+    }){
+
     width = width || 2*outerRadius + 30;
     height = height || 2*outerRadius + 30;
 
@@ -41,9 +42,9 @@ export default function({
     outerRadius = outerRadius || RADIUS;
 
     const children = Array.from(hierarchicalData.children.values());
-
+    
     const pie = d3pie();
-
+    
     const childrenArcDescs = pie(children.map(c => c.total));
 
     return React.createElement(
@@ -66,7 +67,7 @@ export default function({
         },
         React.createElement('svg', {width: width, height: height},
             React.createElement(
-                'g',
+                'g', 
                 {transform: 'translate('+width/2+','+height/2+')'},
                 children.map((child, i) => {
                     const arcDesc = childrenArcDescs[i];
@@ -75,9 +76,9 @@ export default function({
                         SunburstSlice,
                         {
                             key: child.name,
-                            node: child,
-                            radius: outerRadius,
-                            donutWidth,
+                            node: child, 
+                            radius: outerRadius, 
+                            donutWidth, 
                             startAngle: arcDesc.startAngle,
                             endAngle: arcDesc.endAngle,
                             padAngle,
@@ -87,7 +88,7 @@ export default function({
                             onSliceSelected
                         }
                     );
-                })
+                })              
             )
         )
     );

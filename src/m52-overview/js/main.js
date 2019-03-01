@@ -10,7 +10,8 @@ import {hierarchicalM52} from '../../shared/js/finance/memoized';
 import xmlDocumentToDocumentBudgetaire from '../../shared/js/finance/xmlDocumentToDocumentBudgetaire';
 import makeNatureToChapitreFI from '../../shared/js/finance/makeNatureToChapitreFI.js';
 import visitHierarchical from '../../shared/js/finance/visitHierarchical.js';
-import {PAR_PUBLIC_VIEW, M52_INSTRUCTION, EXPENDITURES, REVENUE} from '../../shared/js/finance/constants';
+import {assets} from '../../public/js/constants/resources';
+import {PAR_PUBLIC_VIEW, PAR_PRESTATION_VIEW, M52_INSTRUCTION, EXPENDITURES, REVENUE} from '../../shared/js/finance/constants';
 import {
     DOCUMENT_BUDGETAIRE_RECEIVED,
 } from '../../public/js/constants/actions';
@@ -179,8 +180,8 @@ function mapDispatchToProps(dispatch){
 }
 
 const BoundTopLevel = connect(
-    mapStateToProps,
-    mapDispatchToProps
+  mapStateToProps,
+  mapDispatchToProps
 )(TopLevel);
 
 
@@ -213,25 +214,25 @@ const natureToChapitreFIP = Promise.all([
         return (new DOMParser()).parseFromString(str, "text/xml");
     })
 ))
-    .then(makeNatureToChapitreFI)
+.then(makeNatureToChapitreFI)
 
 
 fetch(`${SOURCE_FINANCE_DIR}CA/CA 2017.xml`).then(resp => resp.text())
-    .then(str => {
-        return (new DOMParser()).parseFromString(str, "text/xml");
+.then(str => {
+    return (new DOMParser()).parseFromString(str, "text/xml");
+})
+.then(doc => {
+    return natureToChapitreFIP.then(natureToChapitreFI => {
+        return xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
     })
-    .then(doc => {
-        return natureToChapitreFIP.then(natureToChapitreFI => {
-            return xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
-        })
-    })
-    .then(docBudg => {
-        store.dispatch({
-            type: 'DOCUMENT_BUDGETAIRE_RECEIVED',
-            docBudg,
-        });
-    })
-    .catch(console.error);
+})
+.then(docBudg => {
+    store.dispatch({
+        type: 'DOCUMENT_BUDGETAIRE_RECEIVED',
+        docBudg,
+    });
+})
+.catch(console.error);
 
 ReactDOM.render(
     React.createElement(

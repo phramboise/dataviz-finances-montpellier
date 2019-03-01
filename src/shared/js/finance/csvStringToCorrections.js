@@ -25,7 +25,7 @@ export default function(csvString){
             c
         )
     }))
-        .map(c => new SplitLigneBudgetRecord(c));
+    .map(c => new SplitLigneBudgetRecord(c));
 
     return new Set(corrections);
 

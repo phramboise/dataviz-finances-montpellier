@@ -10,7 +10,7 @@ if(nativeWeakMap){
     memoize.Cache = WeakMap;
 }
 
-const ret = memoize(() => uuid());
+const ret = memoize(o => uuid());
 
 if(nativeWeakMap){
     memoize.Cache = Cache;

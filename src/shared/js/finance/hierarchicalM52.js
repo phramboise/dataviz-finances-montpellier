@@ -2,7 +2,7 @@ import { Map as ImmutableMap, Set as ImmutableSet } from 'immutable';
 
 // using require because importing doesn't seem to work with rollupify otherwise
 // path is relative to the main (which is terrible but works for now)
-import {fonctionLabels} from '../../../../build/finances/m52-strings.json';
+import {fonctionLabels} from '../../../../build/finances/m52-strings.json'; 
 
 const levelCategories = [
     r => {
@@ -25,15 +25,15 @@ const levelCategories = [
 
 /**
  * Transforms an M52 instruction to its hierarchical form so it can be represented visually with hierarchy
- *
+ * 
  * rows : ImmutableSet<Record<M52Entry>>
- * M52Entry keys are column names of
+ * M52Entry keys are column names of 
  * https://www.datalocale.fr/dataset/comptes-administratifs-du-departement-de-la-gironde/resource/c32d35f0-3998-40c9-babe-b70af4576baa
  */
 export default function({rows}, RDFI) {
     rows = rows
-        .filter(row => row['CodRD'] === RDFI[0] && row['FI'] === RDFI[1]);
-
+    .filter(row => row['CodRD'] === RDFI[0] && row['FI'] === RDFI[1]);
+    
     const root = {
         id: 'M52',
         label: "Instruction M52",
@@ -41,7 +41,7 @@ export default function({rows}, RDFI) {
     };
 
 
-    /* TreeNode : HierarchicalData<M52Entry>
+    /* TreeNode : HierarchicalData<M52Entry> 
     {
         id: '',
         label: 'str'
@@ -85,7 +85,7 @@ export default function({rows}, RDFI) {
                         children.set(category, categoryChild);
                     }
                     categoryChild.elements = categoryChild.elements.add(r);
-                }
+                }   
             }
         });
 

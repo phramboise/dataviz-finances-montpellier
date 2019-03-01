@@ -17,16 +17,17 @@ import {M52_INSTRUCTION} from '../../../shared/js/finance/constants';
 */
 
 export default function({
-    rdfi, dfView,
-    documentBudgetaire,
-    M52Hierarchical, M52HighlightedNodes,
-    M52ByNature, M52ByNatureHighlightedNodes,
-    selection,
-    onM52NodeOvered, onM52ByNatureNodeOvered,
-    onM52NodeSelected, onM52ByNatureNodeSelected,
-    onRDFIChange,
-    onNewM52CSVFile
-}){
+        rdfi, dfView,
+        documentBudgetaire,
+        M52Hierarchical, M52HighlightedNodes,
+        M52ByNature, M52ByNatureHighlightedNodes,
+        selection,
+        onM52NodeOvered, onM52ByNatureNodeOvered,
+        onM52NodeSelected, onM52ByNatureNodeSelected,
+        onRDFIChange,
+        onNewM52CSVFile
+    }){
+
     if (!documentBudgetaire) {
         return null;
     }
@@ -43,9 +44,8 @@ export default function({
 
     return <div className="top-level">
         <DepartmentFinanceHeader LibelleColl={documentBudgetaire.LibelleColl}
-            Exer={documentBudgetaire.Exer}
-            NatDec={documentBudgetaire.NatDec}
-        >
+                                 Exer={documentBudgetaire.Exer}
+                                 NatDec={documentBudgetaire.NatDec}>
             <label>
                 Fichier XML au format <code>&lt;DocumentBudgetaire&gt;</code>:
                 <input type="file" onChange={onChange} />
@@ -56,19 +56,19 @@ export default function({
 
         <section>
             <M52Viz M52Hierarchical={M52Hierarchical}
-                M52HighlightedNodes={M52HighlightedNodes}
-                selectedNode={selection && selection.type === M52_INSTRUCTION ? selection.node : undefined}
-                onSliceOvered={onM52NodeOvered}
-                onSliceSelected={onM52NodeSelected}
-                width={450}
-                height={450}
+                    M52HighlightedNodes={M52HighlightedNodes}
+                    selectedNode={selection && selection.type === M52_INSTRUCTION ? selection.node : undefined}
+                    onSliceOvered={onM52NodeOvered}
+                    onSliceSelected={onM52NodeSelected}
+                    width={450}
+                    height={450}
             />
             <RDFISelector rdfi={rdfi} onRDFIChange={onRDFIChange} />
-            <M52HierarchyViz M52Hierarchical={M52Hierarchical}
-                M52HighlightedNodes={M52HighlightedNodes}
-                selectedNode={selection && selection.type === M52_INSTRUCTION ? selection.node : undefined}
-                width={450}
-                height={450}
+            <M52HierarchyViz    M52Hierarchical={M52Hierarchical}
+                                M52HighlightedNodes={M52HighlightedNodes}
+                                selectedNode={selection && selection.type === M52_INSTRUCTION ? selection.node : undefined}
+                                width={450}
+                                height={450}
             />
 
         </section>
