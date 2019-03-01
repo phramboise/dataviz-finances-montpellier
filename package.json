@@ -24,7 +24,7 @@
     "prewatch:public:style": "npm run build:public:style",
     "watch:public:style": "node-sass --importer src/public/style/env-importer.js --watch src/public/style/main.scss build/public.css",
     "watch:public:script": "watchify src/public/js/main.js -o build/dataviz-finance-bundle.js -d -v",
-    "lint": "eslint --ignore-path .gitignore client/js",
+    "lint": "eslint --ignore-path .gitignore src/",
     "lint-fix": "npm run lint -- --fix"
   },
   "repository": {
@@ -101,23 +101,23 @@
     "xmldom": "^0.1.27"
   },
   "devDependencies": {
-    "babel-jest": "^18.0.0",
-    "babel-plugin-transform-inline-environment-variables": "^0.2.0",
+    "babel-jest": "^23.6.0",
     "babel-plugin-inline-svg": "^1.0.0",
+    "babel-plugin-transform-inline-environment-variables": "^0.2.0",
     "babel-preset-env": "^1.7.0",
     "babel-preset-react": "^6.24.1",
     "babelify": "^7.3.0",
     "browserify": "^13.1.1",
     "cross-env": "^3.2.4",
     "enzyme": "^2.9.1",
-    "eslint": "^3.14.0",
+    "eslint": "^5.14.1",
     "http-server": "^0.11.1",
-    "jest": "^23.6.0",
+    "jest": "^24.1.0",
     "jest-immutable-matchers": "^1.4.0",
     "minifyify": "^7.3.5",
     "node-sass": "^4.11.0",
     "npm-run-all": "^4.1.5",
     "react-test-renderer": "^15.6.2",
-    "watchify": "^3.11.0"
+    "watchify": "^3.11.1"
   }
 }
