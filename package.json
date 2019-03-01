@@ -47,27 +47,7 @@
   },
   "homepage": "https://github.com/dtc-innovation/dataviz-finances-montreuil",
   "browserify": {
-    "transform": [
-      [
-        "babelify",
-        {
-          "presets": [
-            "env"
-          ],
-          "plugins": [
-            [
-              "transform-inline-environment-variables",
-              {
-                "include": [
-                  "BASE_URL",
-                  "NODE_ENV"
-                ]
-              }
-            ]
-          ]
-        }
-      ]
-    ]
+    "transform": [ "babelify" ]
   },
   "esm": {
     "mode": "auto",
@@ -101,12 +81,12 @@
     "xmldom": "^0.1.27"
   },
   "devDependencies": {
-    "babel-jest": "^23.6.0",
+    "@babel/preset-env": "^7.3.4",
+    "@babel/preset-react": "^7.0.0",
+    "babel-jest": "^24.1.0",
     "babel-plugin-inline-svg": "^1.0.0",
     "babel-plugin-transform-inline-environment-variables": "^0.2.0",
-    "babel-preset-env": "^1.7.0",
-    "babel-preset-react": "^6.24.1",
-    "babelify": "^7.3.0",
+    "babelify": "^10.0.0",
     "browserify": "^13.1.1",
     "cross-env": "^3.2.4",
     "enzyme": "^2.9.1",
