@@ -1,10 +1,9 @@
 @import '../../shared/style/sunburst';
 @import 'top-level-vars';
+@import 'side-by-side';
+@import '../../shared/style/donut';
 
-$expenditures-color : #F6A84E;
-$revenue-color : $area-color-3;
-
-$RX-S: 40%; 
+$RX-S: 40%;
 $RX-L: 60%;
 
 $F0-color: $area-color-1;
@@ -22,157 +21,57 @@ $F9-color: $area-color-10;
 .explore-budget{
     width: 100%;
     padding: 0 0.5em;
-    
+
     @media screen and (min-width: $main-column-breakpoint) {
-        max-width: $column-max-width; 
+        max-width: $column-max-width;
         padding: 0 $column-padding;
     }
-    
+
 
     section{
         margin-bottom: 3em;
     }
 
-    .viz{
+    .side-by-side {
         display: flex;
-        flex-direction: column;
-        justify-content: space-around;
+        flex-flow: row wrap;
+        justify-content: space-between;
+        margin: 0;
+        width: 100%;
 
-        @media screen and (min-width: $explore-masses-breakpoint) {
-            flex-direction: row;
+        .markdown-rendered {
+            flex: 1 1 auto;
+            max-width: 50%;
         }
-        margin-bottom: 1em;
 
-        .revenue, .expenditures{
+        > figure {
+            flex: 1 1 auto;
+            max-width: 20%;
+            margin-right: 1.5em;
+        }
+
+        figurelegend {
+            margin-top: -1em;
+        }
+
+        .legend-list {
+            margin: 1.5em 0;
             width: 100%;
-            @media screen and (min-width: $explore-masses-breakpoint) {
-                width: 50%;
-            }
 
-            margin-bottom: 2em;
-
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-
-            & > div{
-                display: flex;
-                flex-direction: column-reverse;
-        
-                @media screen and (min-width: $explore-masses-breakpoint) {
-                    flex-direction: row;
-                    align-items: flex-end;
-                }
-
-                .areas{
-                    width: 100%;
-                    height: 100%;
-                    max-height: 60vh;
-        
-                    @media screen and (min-width: $explore-masses-breakpoint) {
-                        width: 50%;
-                    }
-
-                    display: flex;
-                    flex-direction: column;
-
-                    &> *{
-                        margin-top: 0.5em;
-                        min-height: 4em;
-                        border-radius: 0.5em;
-                    }
-
-                    h2, .money-amount{
-                        color: white;
-                        margin-left: 0.5em;
-                        padding: 0;
-                    }
-
-                    h2{
-                        font-size: 1em;
-                        margin-top: 0.5em;
-                        text-transform: uppercase;
-                        font-weight: bold;
-                    }
-
-                    .money-amount{
-                        font-size: 1em;
-                        text-transform: none;
-                        font-weight: normal;
-
-                        @media screen and (min-width: $explore-masses-breakpoint) {
-                            font-size: 0.9em;
-                        }
-                    }
-                    
-                }
-
-                .texts {
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-
-                    color: black;
-                    
-                    .money-amount{
-                        font-weight: bold;
-                        font-size: 2em; 
-                    }
-
-                    @media screen and (min-width: $explore-masses-breakpoint) {
-                        height: 100%;
-                        padding: 0 1em;
-
-                        .money-amount{
-                            font-size: 3em; 
-                        }
-                    }
-                }
+            > li {
+                display: inline-block;
+                margin-right: 1.5em;
             }
         }
+    }
 
-        h1{
-            font-size: 1.6em;
-            font-weight: bold;
-            text-align: left;
-            text-transform: uppercase;
-
-            @media screen and (min-width: $explore-masses-breakpoint) {
-                color: black;
-                text-decoration: none;
-
-                &:hover{
-                    color: black;
-                }
-            }
+    @each $name, $color in $rdfi {
+        .donut g.rdfi-#{$name} {
+            fill: #{$color};
         }
 
-        & > *{
-            text-decoration: none;
-        }
-
-        .rf{
-            background-color: $revenue-color;
-        }
-
-        .ri{
-            background-color: lighten($revenue-color, 20%);
-        }
-
-        .df{
-            background-color: $expenditures-color;
-        }
-
-        .di{
-            background-color: #F8C738;
-        }
-
-        .btn{
-            display: none;
-
-            @media screen and (min-width: $explore-masses-breakpoint) {
-                display: block;
-            }
+        .legend-list .color.rdfi-#{$name} {
+            background-color: #{$color};
         }
     }
 
@@ -272,7 +171,7 @@ $F9-color: $area-color-10;
         .M52-DI-9 path{
             fill: $F9-color;
         }
- 
+
         .legend-list .color{
             &.M52-DF-0,
             &.M52-DI-0{
@@ -314,6 +213,6 @@ $F9-color: $area-color-10;
             &.M52-DI-9{
                 background-color: $F9-color;
             }
-        } 
+        }
     }
 }

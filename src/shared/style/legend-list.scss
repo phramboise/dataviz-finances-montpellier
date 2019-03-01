@@ -5,15 +5,25 @@ ol.legend-list{
 
     font-size: 1em;
 
-    .color{
-        display: inline-block;
-        height: 1.3em;
-        width: 1.3em;
-
-        vertical-align: middle;
+    > li {
+        margin-bottom: .25em;
     }
-    
-    a{
+
+    .color{
+        border-radius: 3px;
+        display: inline-block;
+        height: 1em;
+        width: 1em;
+        margin-right: .3em;
+
+        vertical-align: sub;
+    }
+
+    a {
         text-decoration: underline;
+
+        &.disabled {
+            text-decoration: none;
+        }
     }
 }

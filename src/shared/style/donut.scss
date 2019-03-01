@@ -1,0 +1,17 @@
+figure.donut {
+    margin: 0;
+    position: relative;
+
+    .money-amount {
+        display: block;
+        font-weight: bold;
+    }
+
+    figurelegend {
+        position: absolute;
+        left: 0;
+        text-align: center;
+        top: 50%;
+        width: 100%;
+    }
+}

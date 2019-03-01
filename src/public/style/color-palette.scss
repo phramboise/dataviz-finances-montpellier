@@ -13,6 +13,12 @@ $discrete-grey: #AAA;
 
 $table-border-color: $discrete-grey;
 
+$rdfi: (
+    R: black,
+    D: black,
+    F: rgb(224, 224, 224),
+    I: rgb(196, 196, 196),
+);
 
 
 @mixin apply-color($color){

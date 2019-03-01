@@ -1,4 +1,4 @@
-import { Map as ImmutableMap } from "immutable";
+import { Map as ImmutableMap, List } from "immutable";
 
 import React from "react";
 import { connect } from "react-redux";
@@ -27,7 +27,10 @@ import DownloadSection from "../../../../shared/js/components/gironde.fr/Downloa
 import PrimaryCallToAction from "../../../../shared/js/components/gironde.fr/PrimaryCallToAction";
 
 import Markdown from "../../../../shared/js/components/Markdown";
-import MoneyAmount from "../../../../shared/js/components/MoneyAmount";
+import MoneyAmount, {SVGMoneyAmount} from "../../../../shared/js/components/MoneyAmount";
+
+import Donut from "../../../../shared/js/components/Donut.js";
+import LegendList from "../../../../shared/js/components/LegendList.js";
 
 import { assets } from "../../constants/resources";
 
@@ -57,15 +60,15 @@ export function TotalBudget({
     const expenditures = totals.get(EXPENDITURES);
     const revenue = totals.get(REVENUE);
 
-    const max = Math.max(expenditures, revenue);
+    const expenditureItems = new List([
+        { id: 'DF', colorClassName:'rdfi-F', text: 'Dépenses de fonctionnement', value: totals.get(DF) },
+        { id: 'DI', colorClassName:'rdfi-I', text: 'Dépenses d\'investissement', value: totals.get(DI) },
+    ]);
 
-    const expHeight = MAX_HEIGHT * (expenditures / max) + "em";
-    const revHeight = MAX_HEIGHT * (revenue / max) + "em";
-
-    const rfHeight = 100 * (totals.get(RF) / revenue) + "%";
-    const riHeight = 100 * (totals.get(RI) / revenue) + "%";
-    const diHeight = 100 * (totals.get(DI) / expenditures) + "%";
-    const dfHeight = 100 * (totals.get(DF) / expenditures) + "%";
+    const revenueItems = new List([
+        { id: 'RF', colorClassName:'rdfi-F', text: 'Recettes de fonctionnement', value: totals.get(RF) },
+        { id: 'RI', colorClassName:'rdfi-I', text: 'Recettes d\'investissement', value: totals.get(RI) },
+    ]);
 
     return <article className="explore-budget">
         <PageTitle text={`Exploration des comptes ${currentYear}`} />
@@ -92,58 +95,31 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
 -	Une réduction importante du besoin de financement par l’emprunt</Markdown>
         </section>
 
-        <section>
-            <SecundaryTitle text="Les grandes masses budgétaires du compte administratif" />
-            <div className="viz">
-                <div className="revenue">
-                    <a href={revURL}>
-                        <h1>Recettes</h1>
-                    </a>
-                    <div>
-                        <div className="areas" style={{ height: revHeight }}>
-                            <a className="rf" href='#' style={{ height: rfHeight }}>
-                                <h2>Recettes de fonctionnement</h2>
-                                <MoneyAmount amount={totals.get(RF)} />
-                            </a>
+        <section className="yearly-budget">
+            <h2>Le budget {currentYear}</h2>
 
-                            <a className="ri" href='#' style={{ height: riHeight }}>
-                                <h2>Recettes d'investissement</h2>
-                                <MoneyAmount amount={totals.get(RI)} />
-                            </a>
-                        </div>
-                        <div className="texts">
-                            <MoneyAmount amount={revenue} />
-                            <PrimaryCallToAction text="Les recettes" href='#' />
-                        </div>
-                    </div>
-                </div>
-                <div className="expenditures">
-                    <a href={expURL}>
-                        <h1>Dépenses</h1>
-                    </a>
-                    <div>
-                        <div className="areas" style={{ height: expHeight }}>
-                            <a className="df" href='#' style={{ height: dfHeight }}>
-                                <h2>Dépenses de fonctionnement</h2>
-                                <MoneyAmount amount={totals.get(DF)} />
-                            </a>
-                            <a className="di" href='#' style={{ height: diHeight }}>
-                                <h2>Dépenses d'investissement</h2>
-                                <MoneyAmount amount={totals.get(DI)} />
-                            </a>
-                        </div>
-                        <div className="texts">
-                            <MoneyAmount amount={expenditures} />
-                            <PrimaryCallToAction text="Les dépenses" href='#' />
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <Markdown>
-Les chiffres étant issus du compte administratif, la différence entre
-le montant des recettes et le montant des dépenses représente l’excédent
-de l’exercice.
-            </Markdown>
+            <figure className="side-by-side">
+                <Donut items={revenueItems} padAngle={0}>
+                    <MoneyAmount amount={revenue} as="tspan" />
+                    de recettes
+                </Donut>
+
+                <Donut items={expenditureItems} padAngle={0}>
+                    <MoneyAmount amount={expenditures} as="tspan" />
+                    de dépenses
+                </Donut>
+
+                <Markdown className="todo">
+                    Les chiffres étant issus du compte administratif, la différence entre
+                    le montant des recettes et le montant des dépenses représente l’excédent
+                    de l’exercice.
+                </Markdown>
+
+                <LegendList items={new List([
+                    { text: 'Fonctionnement', colorClassName: 'rdfi-F' },
+                    { text: 'Investissement', colorClassName: 'rdfi-I' },
+                ])} />
+            </figure>
         </section>
 
         <section>
