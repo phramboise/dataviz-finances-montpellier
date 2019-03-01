@@ -76,6 +76,7 @@
     }
   },
   "dependencies": {
+    "acorn": "^6.1.1",
     "currency-formatter": "^1.5.3",
     "d3-array": "^1.2.4",
     "d3-color": "^1.2.3",
