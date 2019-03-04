@@ -58,7 +58,7 @@ export default class BubbleChartNode extends React.Component {
                             data-for={`tooltip-${node.id}`}
                         >
                             <circle r={r}
-                                className={`rdfi-${data.rdfi[1]}`}
+                                className={`rdfi-${data.rdfi[0]} rdfi-${data.rdfi[1]}`}
                                 aria-label={data.label} />
                         </a>
                     </g>

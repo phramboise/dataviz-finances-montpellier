@@ -1,23 +1,33 @@
-$area-color-1 : #0E7FAB;
-$area-color-2 : #F8C738;
-$area-color-3 : #EC3500;
-$area-color-4 : #B8C30F;
-$area-color-5 : #9C26B0;
-$area-color-6 : #019587;
-$area-color-7 : #795549;
-$area-color-8 : #607C8A;
-$area-color-9 : #6739B6;
-$area-color-10 : #FF5521;
+$brand-color: #e62e46;
 
-$discrete-grey: #AAA;
+$brand-palette: (
+    #e62d46,
+    #e61478,
+    #00aad2,
+    #5aaf4b,
+    #462d87,
+    #fb4f14
+);
 
+$area-color-1 : $brand-color;
+$area-color-2 : #aebf8a;
+$area-color-3 : #ab76f2;
+$area-color-4 : #88cc1f;
+$area-color-5 : #da53fc;
+$area-color-6 : #cf8f69;
+$area-color-7 : #539ab3;
+$area-color-8 : #05cfc0;
+$area-color-9 : #c8b0d4;
+$area-color-10 : #eaaf16;
+
+$discrete-grey: #c8c8c8;
 $table-border-color: $discrete-grey;
 
 $rdfi: (
-    R: #8ae1f9,
-    D: #d5d0fa,
-    F: rgb(224, 224, 224),
-    I: rgb(150, 150, 150),
+    R: #556AB5,
+    D: #FB7800,
+    F: lighten($discrete-grey, 12%),
+    I: $discrete-grey,
 );
 
 
