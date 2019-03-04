@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { RF, RI, DF, DI } from "../finance/constants.js";
 import { hierarchicalByFunction } from "../finance/memoized.js";
 
 import MoneyAmount from "./MoneyAmount.js";
@@ -26,7 +25,7 @@ const mergeHierarchies = (...hierarchies) => {
         });
     });
 
-    return Array.from(levels.values());
+    return Array.from(levels.values()).sort((a, b) => b.total - a.total);
 };
 
 export default class BubbleChartCluster extends React.Component {
@@ -40,19 +39,31 @@ export default class BubbleChartCluster extends React.Component {
             I: true,
             activeElement: null
         }
+
+        this.toggle = this.toggle.bind(this);
+    }
+
+    toggle (...stateRDFI) {
+        stateRDFI.forEach(RDFI => {
+            const stateValue = this.state[RDFI];
+            this.setState({ [RDFI]: !stateValue });
+        });
     }
 
     render() {
         const {m52Instruction} = this.props;
         const {R, D, F, I} = this.state;
+        const RD = R ? 'R' : 'D';
+        const RDF = RD + 'F';
+        const RDI = RD + 'I';
 
         if (!m52Instruction) {
             return null;
         }
 
         const families = mergeHierarchies(
-            hierarchicalByFunction(m52Instruction, DF).children,
-            hierarchicalByFunction(m52Instruction, DI).children,
+            F ? hierarchicalByFunction(m52Instruction, RDF).children : [],
+            I ? hierarchicalByFunction(m52Instruction, RDI).children : [],
         );
 
         return (<div className="bubble-chart-cluster">
@@ -60,12 +71,12 @@ export default class BubbleChartCluster extends React.Component {
                 <ul>
                     <li>
                         <label>
-                            <input type="radio" name="rd" value="R" defaultChecked={R} /> recettes
+                            <input type="radio" name="rd" value="R" onClick={() => this.toggle('R', 'D')} defaultChecked={R} /> recettes
                         </label>
                     </li>
                     <li>
                         <label>
-                            <input type="radio" name="rd" value="D" defaultChecked={D} /> dépenses
+                            <input type="radio" name="rd" value="D" onClick={() => this.toggle('D', 'R')} defaultChecked={D} /> dépenses
                         </label>
                     </li>
                 </ul>
@@ -73,12 +84,12 @@ export default class BubbleChartCluster extends React.Component {
                 <ul>
                     <li>
                         <label>
-                            <input type="checkbox" name="fi" value="F" defaultChecked={F} /> fonctionnement
+                            <input type="checkbox" name="fi" value="F" onClick={() => this.toggle('F')} defaultChecked={F} /> fonctionnement
                         </label>
                     </li>
                     <li>
                         <label>
-                            <input type="checkbox" name="fi" value="I" defaultChecked={I} /> investissement
+                            <input type="checkbox" name="fi" value="I" onClick={() => this.toggle('I')} defaultChecked={I} /> investissement
                         </label>
                     </li>
                 </ul>
