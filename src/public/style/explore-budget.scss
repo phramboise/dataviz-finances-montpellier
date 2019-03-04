@@ -75,6 +75,37 @@ $F9-color: $area-color-10;
         }
     }
 
+    .bubble-chart-cluster {
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: space-between;
+
+        nav {
+            flex: 1 1 100%;
+        }
+
+        .bubble-chart {
+            margin: 1.5em auto;
+            width: 30%;
+
+            figurelegend {
+                display: block;
+                text-align: center;
+            }
+
+            .money-amount {
+                display: block;
+                font-weight: bold;
+            }
+        }
+
+        @each $name, $color in $rdfi {
+            .rdfi-#{$name} {
+                fill: #{$color};
+            }
+        }
+    }
+
 
     .m52-by-fonction{
         display: flex;

@@ -35,7 +35,7 @@ import LegendList from "../../../../shared/js/components/LegendList.js";
 import { assets } from "../../constants/resources";
 
 import M52ByFonction from "../M52ByFonction";
-import BudgetConstructionAnimation from "../BudgetConstructionAnimation";
+import BubbleChartCluster from "../../../../shared/js/components/BubbleChartCluster.js";
 
 const MAX_HEIGHT = 30;
 
@@ -123,20 +123,9 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
         </section>
 
         <section>
-            <SecundaryTitle text="Comprendre la construction d'un budget" />
-            <Markdown>
-Le budget prévoit la répartition des recettes et des dépenses sur un
-exercice. Il est composé de la section de fonctionnement et d’investissement.
-Contrairement à l’Etat, les Départements, ont l’obligation d’adopter un budget
-à l’équilibre. Toutefois, le compte administratif peut présenter sur l’exercice
-un résultat excédentaire ou déficitaire.</Markdown>
+            <h2>Explorer le budget</h2>
 
-            <Markdown>
-Dans un contexte particulièrement contraint, la préservation de nos
-équilibres financiers constitue un défi stimulant. Alors comment s’établit
-notre budget ?</Markdown>
-
-            <BudgetConstructionAnimation {...constructionAmounts} />
+            <BubbleChartCluster m52Instruction={m52Instruction} />
         </section>
 
         <section className="m52">
