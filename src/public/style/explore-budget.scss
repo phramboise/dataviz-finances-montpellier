@@ -84,13 +84,26 @@ $F9-color: $area-color-10;
             flex: 1 1 100%;
         }
 
+        .legend-list {
+            display: flex;
+            justify-content: space-between;
+
+            ul li {
+                display: inline;
+            }
+
+            &:nth-child(2) {
+                text-align: right;
+            }
+        }
+
         .bubble-chart {
-            margin: 1.5em auto;
+            margin: 1.5em 0;
             width: 30%;
 
             figurelegend {
                 display: block;
-                margin-bottom: -2em;
+                margin-bottom: -1em;
                 text-align: center;
             }
 
