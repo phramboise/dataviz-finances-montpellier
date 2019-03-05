@@ -14,7 +14,6 @@ import csvStringToCorrections from '../../shared/js/finance/csvStringToCorrectio
 import {childToParent, elementById} from '../../shared/js/finance/flatHierarchicalById.js';
 
 import Breadcrumb from '../../shared/js/components/Breadcrumb';
-import Home from './components/screens/Home';
 import FinanceElement from './components/screens/FinanceElement';
 import FocusSolidarity from './components/screens/FocusSolidarity';
 import FocusInvestments from './components/screens/FocusInvestments';
@@ -151,21 +150,7 @@ fetch(assets[AGGREGATED_TEMPORAL]).then(resp => resp.text())
  *
  */
 
-page('/', () => {
-    console.log('in route', '/')
-
-    ReactDOM.render(
-        React.createElement(
-            Provider,
-            { store },
-            React.createElement(Home)
-        ),
-        CONTAINER_ELEMENT
-    );
-
-    const breadcrumb = DEFAULT_BREADCRUMB;
-    ReactDOM.render( React.createElement(Breadcrumb, { items: breadcrumb }), BREADCRUMB_CONTAINER );
-});
+page('/', () => page.redirect('/explorer'));
 
 
 page('/explorer', () => {
