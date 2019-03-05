@@ -17,13 +17,28 @@
     min-height: 10em;
     position: relative;
 
-    &::before {
-        content: $text;
-        background: #ccc;
-        border-radius: 5px;
-        color: #333;
-        left: 0;
-        padding: 4em 0 0 2em;
+    &:before {
+        $line-height: .75em;
+        $bg-color: rgb(196, 196, 196);
+
+        content: "";
+        display: block;
+        background-color: white;
+        background-image: linear-gradient($bg-color $line-height, transparent 0),
+                          linear-gradient($bg-color $line-height, transparent 0),
+                          linear-gradient($bg-color $line-height, transparent 0),
+                          linear-gradient($bg-color $line-height, transparent 0),
+                          linear-gradient($bg-color $line-height, transparent 0),
+                          linear-gradient($bg-color $line-height, transparent 0),
+                          linear-gradient($bg-color $line-height, transparent 0);
+        background-position: 0 0,
+                             0 (($line-height + 0.5em) * 1),
+                             0 (($line-height + 0.5em) * 2),
+                             0 (($line-height + 0.5em) * 3),
+                             0 (($line-height + 0.5em) * 4),
+                             0 (($line-height + 0.5em) * 5),
+                             0 (($line-height + 0.5em) * 6),
+                             0 (($line-height + 0.5em) * 7);
         position: absolute;
         top: 0;
         height: 100%;
