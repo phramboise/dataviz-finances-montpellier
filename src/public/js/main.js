@@ -15,13 +15,10 @@ import {childToParent, elementById} from '../../shared/js/finance/flatHierarchic
 
 import Breadcrumb from '../../shared/js/components/Breadcrumb';
 import FinanceElement from './components/screens/FinanceElement';
-import FocusSolidarity from './components/screens/FocusSolidarity';
-import FocusInvestments from './components/screens/FocusInvestments';
-import FocusPresence from './components/screens/FocusPresence';
 
 import ExploreBudget from './components/screens/ExploreBudget';
 
-import { HOME, SOLIDARITES, INVEST, PRESENCE } from './constants/pages';
+import { HOME } from './constants/pages';
 import {
     DOCUMENTS_BUDGETAIRES_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
     ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
@@ -151,8 +148,6 @@ fetch(assets[AGGREGATED_TEMPORAL]).then(resp => resp.text())
  */
 
 page('/', () => page.redirect('/explorer'));
-
-
 page('/explorer', () => {
     console.log('in route', '/explorer');
 
@@ -214,48 +209,6 @@ page('/finance-details/:contentId', ({params: {contentId}}) => {
 
     ReactDOM.render( React.createElement(Breadcrumb, { items: breadcrumb }), BREADCRUMB_CONTAINER );
 
-});
-
-page(`/focus/${SOLIDARITES}`, () => {
-    console.log('in route', `/focus/${SOLIDARITES}`);
-    scrollTo(0, 0);
-
-    ReactDOM.render(
-        React.createElement(
-            Provider,
-            { store },
-            React.createElement(FocusSolidarity)
-        ),
-        CONTAINER_ELEMENT
-    );
-});
-
-page(`/focus/${INVEST}`, () => {
-    console.log('in route', `/focus/${INVEST}`);
-    scrollTo(0, 0);
-
-    ReactDOM.render(
-        React.createElement(
-            Provider,
-            { store },
-            React.createElement(FocusInvestments)
-        ),
-        CONTAINER_ELEMENT
-    );
-});
-
-page(`/focus/${PRESENCE}`, () => {
-    console.log('in route', `/focus/${PRESENCE}`);
-    scrollTo(0, 0);
-
-    ReactDOM.render(
-        React.createElement(
-            Provider,
-            { store },
-            React.createElement(FocusPresence)
-        ),
-        CONTAINER_ELEMENT
-    );
 });
 
 page('*', (ctx) => {
