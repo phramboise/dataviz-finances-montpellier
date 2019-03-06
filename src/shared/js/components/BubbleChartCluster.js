@@ -95,8 +95,7 @@ export default class BubbleChartCluster extends React.Component {
                 </ul>
             </nav>
 
-            {families.map((node) => (<BubbleChartNode key={node.id}
-                                                      node={node} />))}
+            {families.map((node) => (<BubbleChartNode key={`rd-CH${node.id}`} node={node} />))}
         </div>)
     }
 }
