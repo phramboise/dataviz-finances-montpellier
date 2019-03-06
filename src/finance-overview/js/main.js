@@ -206,7 +206,8 @@ const store = createStore(
 
 
 const natureToChapitreFIP = Promise.all([
-    'M14-M14_COM_SUP3500-2017.xml'
+    'plan-de-compte-M14-M14_COM_SUP3500-2016.xml',
+    'plan-de-compte-M14-M14_COM_SUP3500-2017.xml'
 ].map(f => fetch(`${SOURCE_FINANCE_DIR}plansDeCompte/${f}`).then(r => r.text())
     .then( str => {
         return (new DOMParser()).parseFromString(str, "text/xml");
