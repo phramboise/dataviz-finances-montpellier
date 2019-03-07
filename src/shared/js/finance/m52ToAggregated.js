@@ -775,7 +775,7 @@ export const rules = Object.freeze({
                 (
                     (art.startsWith('73') &&
                     !['73913', '73914', '73926', '739261', '739262'].includes(art)
-                ) ||
+                    ) ||
                 ['654', '6541', '6542', '6581', '65821', '65888', '65661'].includes(art)
                 ) &&
                 !(['4', '5', '8'].includes(f1));
@@ -789,9 +789,9 @@ export const rules = Object.freeze({
 
             return isDF(m52Row) &&
                 (
-                  f2 === '91' &&
+                    f2 === '91' &&
                 ['6561', '6568'].includes(art)
-              ) ||
+                ) ||
               ['65542'].includes(m52Row['Nature']);
         }
     },
@@ -998,7 +998,7 @@ export const rules = Object.freeze({
                     (
                         fonction === '50' &&
                         (
-                          article.startsWith('20') ||
+                            article.startsWith('20') ||
                           article.startsWith('21') ||
                           article.startsWith('23')
                         ) &&
@@ -1181,11 +1181,11 @@ export default function convert(docBudg, corrections = []){
 
     return ImmutableSet(
         Object.keys(rules)
-        .map(id => makeAggregatedInstructionRowRecord(
-            id,
-            docBudg.rows,
-            yearCorrections.filter(c => c['splitFor'] === id),
-            docBudg['Exer']
-        ))
+            .map(id => makeAggregatedInstructionRowRecord(
+                id,
+                docBudg.rows,
+                yearCorrections.filter(c => c['splitFor'] === id),
+                docBudg['Exer']
+            ))
     )
 }

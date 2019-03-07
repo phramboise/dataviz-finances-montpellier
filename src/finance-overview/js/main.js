@@ -180,8 +180,8 @@ function mapDispatchToProps(dispatch){
 }
 
 const BoundTopLevel = connect(
-  mapStateToProps,
-  mapDispatchToProps
+    mapStateToProps,
+    mapDispatchToProps
 )(TopLevel);
 
 
@@ -215,25 +215,25 @@ const natureToChapitreFIP = Promise.all([
         return (new DOMParser()).parseFromString(str, "text/xml");
     })
 ))
-.then(makeNatureToChapitreFI)
+    .then(makeNatureToChapitreFI)
 
 
 fetch(`${SOURCE_FINANCE_DIR}CA/CA 2017.xml`).then(resp => resp.text())
-.then(str => {
-    return (new DOMParser()).parseFromString(str, "text/xml");
-})
-.then(doc => {
-    return natureToChapitreFIP.then(natureToChapitreFI => {
-        return xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
+    .then(str => {
+        return (new DOMParser()).parseFromString(str, "text/xml");
     })
-})
-.then(docBudg => {
-    store.dispatch({
-        type: 'DOCUMENT_BUDGETAIRE_RECEIVED',
-        docBudg,
-    });
-})
-.catch(console.error);
+    .then(doc => {
+        return natureToChapitreFIP.then(natureToChapitreFI => {
+            return xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
+        })
+    })
+    .then(docBudg => {
+        store.dispatch({
+            type: 'DOCUMENT_BUDGETAIRE_RECEIVED',
+            docBudg,
+        });
+    })
+    .catch(console.error);
 
 ReactDOM.render(
     React.createElement(

@@ -20,8 +20,8 @@ const byEnv = {
 
 function makeFileContent(vars){
     return Object.keys(vars)
-    .map(varName => ['$', varName,' : ', vars[varName], ';'].join(''))
-    .join('\n');
+        .map(varName => ['$', varName,' : ', vars[varName], ';'].join(''))
+        .join('\n');
 }
 
 function makeVariableObject(env){

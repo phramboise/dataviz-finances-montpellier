@@ -16,7 +16,7 @@ export default function({
     rdfi, dfView,
     onSliceOvered, onSliceSelected, onAggregatedDFViewChange,
     width, height,
-    }){
+}){
 
     return React.createElement('div', {},
         React.createElement('h1', {}, 'Instruction agrégée'),

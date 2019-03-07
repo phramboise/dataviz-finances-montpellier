@@ -63,7 +63,7 @@ export default class BubbleChartCluster extends React.Component {
 
         const families = mergeHierarchies(
             F ? hierarchicalByFunction(m52Instruction, RDF).children : [],
-            I ? hierarchicalByFunction(m52Instruction, RDI).children : [],
+            I ? hierarchicalByFunction(m52Instruction, RDI).children : []
         );
 
         return (<div className="bubble-chart-cluster">

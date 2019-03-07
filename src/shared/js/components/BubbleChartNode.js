@@ -43,14 +43,14 @@ export default class BubbleChartNode extends React.Component {
 
             <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} xmlnsXlink="http://www.w3.org/1999/xlink">
                 {bubbles(nodes).descendants().filter(d => !d.children).map(({r, x, y, data}) => (
-                <g transform={`translate(${x}, ${y})`}>
-                    <a /*xlinkHref={`#!/finance-details/${data.id}`}*/ className="clickable" onClick={e => this.onClick(e, data.id)}>
-                        <circle r={r}
+                    <g transform={`translate(${x}, ${y})`}>
+                        <a /*xlinkHref={`#!/finance-details/${data.id}`}*/ className="clickable" onClick={e => this.onClick(e, data.id)}>
+                            <circle r={r}
                                 className={`rdfi-${data.rdfi[1]}`}
                                 aria-label={data.label} />
-                    </a>
-                    <text>{data.label}</text>
-                </g>
+                        </a>
+                        <text>{data.label}</text>
+                    </g>
                 ))}
             </svg>
         </figure>);

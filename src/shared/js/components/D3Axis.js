@@ -12,8 +12,8 @@ export default function D3Axis({
                 onClick(){
                     onSelectedAxisItem(id)
                 }}, 
-                React.createElement('line', {x1, y1, x2, y2}),
-                React.createElement('text', {x, y, dx, dy, textAnchor: anchor}, t)
+            React.createElement('line', {x1, y1, x2, y2}),
+            React.createElement('text', {x, y, dx, dy, textAnchor: anchor}, t)
             )
         })
     )

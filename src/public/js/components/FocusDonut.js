@@ -12,12 +12,12 @@ interface DonutProps{
 
 */
 export default function({
-        donutWidth = 50, outerRadius = 200,
-        width = 2*outerRadius, height = 2*outerRadius,
-        padAngle = Math.PI/30,
-        proportion,
-        innerText
-    }){
+    donutWidth = 50, outerRadius = 200,
+    width = 2*outerRadius, height = 2*outerRadius,
+    padAngle = Math.PI/30,
+    proportion,
+    innerText
+}){
     
     const pie = _pie()
         .startAngle(2*Math.PI)

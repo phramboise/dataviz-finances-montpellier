@@ -131,9 +131,9 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
         <section className="m52">
             <SecundaryTitle text="Les comptes par fonction (norme M14)" />
             <M52ByFonction  m52Instruction={m52Instruction}
-                            urlByFonction={byFonction}
-                            labelsById={labelsById}
-                            screenWidth={screenWidth} />
+                urlByFonction={byFonction}
+                labelsById={labelsById}
+                screenWidth={screenWidth} />
         </section>
 
         <DownloadSection />
@@ -184,12 +184,12 @@ export default connect(
             // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33
             constructionAmounts: m52Instruction
                 ? {
-                      DotationEtat: totalById.get("RF-5"),
-                      FiscalitéDirecte: totalById.get("RF-1"),
-                      FiscalitéIndirecte: sum(
-                          ["RF-2", "RF-3", "RF-4"].map(i => totalById.get(i))
-                      ),
-                      RecettesDiverses:
+                    DotationEtat: totalById.get("RF-5"),
+                    FiscalitéDirecte: totalById.get("RF-1"),
+                    FiscalitéIndirecte: sum(
+                        ["RF-2", "RF-3", "RF-4"].map(i => totalById.get(i))
+                    ),
+                    RecettesDiverses:
                           totalById.get("RF") -
                           sum(
                               ["RF-1", "RF-2", "RF-3", "RF-4", "RF-5"].map(i =>
@@ -197,24 +197,24 @@ export default connect(
                               )
                           ),
 
-                      Solidarité: totalById.get("DF-1"),
-                      Interventions: totalById.get("DF-3"),
-                      DépensesStructure:
+                    Solidarité: totalById.get("DF-1"),
+                    Interventions: totalById.get("DF-3"),
+                    DépensesStructure:
                           totalById.get("DF") -
                           sum(["DF-1", "DF-3"].map(i => totalById.get(i))),
 
-                      Emprunt: totalById.get("RI-EM"),
-                      RIPropre: totalById.get("RI") - totalById.get("RI-EM"),
+                    Emprunt: totalById.get("RI-EM"),
+                    RIPropre: totalById.get("RI") - totalById.get("RI-EM"),
 
-                      RemboursementEmprunt: totalById.get("DI-EM"),
-                      Routes: totalById.get("DI-1-2"),
-                      Colleges: totalById.get("DI-1-1"),
-                      Amenagement:
+                    RemboursementEmprunt: totalById.get("DI-EM"),
+                    Routes: totalById.get("DI-1-2"),
+                    Colleges: totalById.get("DI-1-1"),
+                    Amenagement:
                           totalById.get("DI-1-3") +
                           totalById.get("DI-1-4") +
                           totalById.get("DI-1-5"),
-                      Subventions: totalById.get("DI-2")
-                  }
+                    Subventions: totalById.get("DI-2")
+                }
                 : undefined,
             assets: {
                 expenditures: "#!/finance-details/" + EXPENDITURES,

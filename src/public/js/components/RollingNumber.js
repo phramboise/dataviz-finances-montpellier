@@ -36,9 +36,9 @@ export default class SektorComponent extends React.Component {
         return new Promise(resolve => {
             setTimeout(resolve, initialDelay);
         })
-        .then(() => {
-            return roll(this._el, amount, DELAY);
-        })
+            .then(() => {
+                return roll(this._el, amount, DELAY);
+            })
         
     }
 

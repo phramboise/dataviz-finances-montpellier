@@ -29,7 +29,7 @@ const levelCategories = [
  */
 export default function({rows}, RDFI) {
     rows = rows
-    .filter(row => row['CodRD'] === RDFI[0] && row['FI'] === RDFI[1]);
+        .filter(row => row['CodRD'] === RDFI[0] && row['FI'] === RDFI[1]);
 
     const root = {
         id: 'M14',

@@ -98,46 +98,46 @@ store.dispatch({
  *
  */
 fetch(assets[CORRECTIONS_AGGREGATED]).then(resp => resp.text())
-.then(csvStringToCorrections)
-.then(corrections => {
-    store.dispatch({
-        type: CORRECTION_AGGREGATION_RECEIVED,
-        corrections
+    .then(csvStringToCorrections)
+    .then(corrections => {
+        store.dispatch({
+            type: CORRECTION_AGGREGATION_RECEIVED,
+            corrections
+        });
     });
-});
 
 
 fetch(assets[COMPTES_ADMINISTRATIFS]).then(resp => resp.json())
-.then(docBudgs => {
-    docBudgs = docBudgs.map(db => {
-        db.rows = new ImmutableSet(db.rows.map(LigneBudgetRecord))
-        return DocumentBudgetaire(db)
-    })
+    .then(docBudgs => {
+        docBudgs = docBudgs.map(db => {
+            db.rows = new ImmutableSet(db.rows.map(LigneBudgetRecord))
+            return DocumentBudgetaire(db)
+        })
 
-    store.dispatch({
-        type: DOCUMENTS_BUDGETAIRES_RECEIVED,
-        docBudgs,
+        store.dispatch({
+            type: DOCUMENTS_BUDGETAIRES_RECEIVED,
+            docBudgs,
+        });
     });
-});
 
 
 fetch(assets[AGGREGATED_ATEMPORAL]).then(resp => resp.text())
-.then(csvParse)
-.then(textList => {
-    store.dispatch({
-        type: ATEMPORAL_TEXTS_RECEIVED,
-        textList
+    .then(csvParse)
+    .then(textList => {
+        store.dispatch({
+            type: ATEMPORAL_TEXTS_RECEIVED,
+            textList
+        });
     });
-});
 
 fetch(assets[AGGREGATED_TEMPORAL]).then(resp => resp.text())
-.then(csvParse)
-.then(textList => {
-    store.dispatch({
-        type: TEMPORAL_TEXTS_RECEIVED,
-        textList
+    .then(csvParse)
+    .then(textList => {
+        store.dispatch({
+            type: TEMPORAL_TEXTS_RECEIVED,
+            textList
+        });
     });
-});
 
 
 
