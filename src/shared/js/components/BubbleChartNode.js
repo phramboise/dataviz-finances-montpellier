@@ -2,6 +2,7 @@ import React from 'react';
 
 import {pack, hierarchy} from 'd3-hierarchy';
 import page from "page";
+import ReactTooltip from 'react-tooltip'
 
 import MoneyAmount from "./MoneyAmount.js";
 
@@ -34,6 +35,11 @@ export default class BubbleChartNode extends React.Component {
             .size([WIDTH, HEIGHT])
             .padding(30);
         const nodes = hierarchy({children}).sum(d => d.total);
+        const listMapNodes = new Map(bubbles(nodes)
+            .descendants()
+            .filter(d => !d.children)
+            .map((obj) => [obj.data.id, obj]))
+        const RD = listMapNodes.values().next().value.data.rdfi[0]
 
         return (<figure className="bubble-chart">
             <figurelegend>
@@ -42,17 +48,42 @@ export default class BubbleChartNode extends React.Component {
             </figurelegend>
 
             <svg viewBox={`0 0 ${WIDTH} ${HEIGHT}`} xmlnsXlink="http://www.w3.org/1999/xlink">
-                {bubbles(nodes).descendants().filter(d => !d.children).map(({r, x, y, data}) => (
-                    <g transform={`translate(${x}, ${y})`}>
-                        <a /*xlinkHref={`#!/finance-details/${data.id}`}*/ className="clickable" onClick={e => this.onClick(e, data.id)}>
+                {[...listMapNodes.values()].map(({r, x, y, data}) => (
+                    <g key={data.id} transform={`translate(${x}, ${y})`}>
+                        <a
+                            /*xlinkHref={`#!/finance-details/${data.id}`}*/
+                            className="clickable"
+                            onClick={e => this.onClick(e, data.id)}
+                            data-tip={data.id}
+                            data-for={`tooltip-${node.id}`}
+                        >
                             <circle r={r}
                                 className={`rdfi-${data.rdfi[1]}`}
                                 aria-label={data.label} />
                         </a>
-                        <text>{data.label}</text>
                     </g>
                 ))}
             </svg>
+            <ReactTooltip
+                className='react-tooltip'
+                key={`tooltip-${node.id}-${RD}`}
+                id={`tooltip-${node.id}`}
+                delayHide={500}
+                place='right'
+                clickable={true}
+                effect='solid'
+                getContent={(nodeId) => {
+                    if (!nodeId) return null;
+                    const data = listMapNodes.get(nodeId).data;
+                    return (<div>
+                        <p className='react-tooltip-type-aggregation'>
+                            {data.rdfi[0] === 'R'? 'Recette': 'Dépense'}
+                            {data.rdfi[1] === 'F'? ' de fonctionnement': ' d’investissement'}
+                        </p>
+                        <p>{data.label}<MoneyAmount amount={data.total} /></p>
+                        <p><a href={`#!/finance-details/${data.id}`}>Voir le détail</a></p>
+                    </div>);
+                }}/>
         </figure>);
     }
 }
