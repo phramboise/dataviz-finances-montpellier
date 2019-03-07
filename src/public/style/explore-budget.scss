@@ -65,17 +65,25 @@ $F9-color: $area-color-10;
         }
     }
 
-    @each $name, $color in $rdfi {
+    @each $name, $color in $rd {
         .donut g.rdfi-#{$name} {
             fill: #{$color};
 
-            &.rdfi-I {
-                fill: lighten($color, 20%);
+            @each $name, $luminosity in $fi {
+                &.rdfi-#{$name} {
+                    fill: lighten($color, $luminosity);
+                }
             }
         }
+    }
 
+    @each $name, $luminosity in $fi {
         .legend-list .color.rdfi-#{$name} {
-            background-color: #{$color};
+            background: linear-gradient(90deg,
+                lighten(map-get($rd, 'R'), $luminosity) 50%,
+                lighten(map-get($rd, 'D'), $luminosity) 50%
+            );
+            border-radius: 100%;
         }
     }
 
@@ -117,13 +125,16 @@ $F9-color: $area-color-10;
             }
         }
 
-        @each $name, $color in $rdfi {
+        @each $name, $color in $rd {
             .rdfi-#{$name} {
                 fill: #{$color};
 
-                &.rdfi-I {
-                    fill: lighten($color, 20%);
+                @each $name, $luminosity in $fi {
+                    &.rdfi-#{$name} {
+                        fill: lighten($color, $luminosity);
+                    }
                 }
+
             }
         }
     }

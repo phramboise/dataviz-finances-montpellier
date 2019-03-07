@@ -23,11 +23,16 @@ $area-color-10 : #eaaf16;
 $discrete-grey: #c8c8c8;
 $table-border-color: $discrete-grey;
 
-$rdfi: (
+$rd: (
     R: #556AB5,
     D: #FB7800,
     // F: lighten($discrete-grey, 12%),
     // I: $discrete-grey,
+);
+
+$fi: (
+    F: 0%,
+    I: 20%,
 );
 
 
