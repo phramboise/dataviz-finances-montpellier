@@ -87,6 +87,8 @@ export default function reducer(state, action) {
             const {year} = action;
             return state.set('explorationYear', year);
         }
+        case '@@redux/INIT':
+            return state
         default:
             console.warn('Unhandled action type', type);
             return state;
