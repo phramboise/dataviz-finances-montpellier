@@ -75,6 +75,7 @@ export default function({rows}, RDFI) {
 
                         categoryChild = {
                             id: `M52-${RDFI}-${category}`,
+                            rdfi: RDFI,
                             label,
                             elements: new ImmutableSet()
                         }
