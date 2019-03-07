@@ -68,6 +68,10 @@ $F9-color: $area-color-10;
     @each $name, $color in $rdfi {
         .donut g.rdfi-#{$name} {
             fill: #{$color};
+
+            &.rdfi-I {
+                fill: lighten($color, 20%);
+            }
         }
 
         .legend-list .color.rdfi-#{$name} {
@@ -116,6 +120,10 @@ $F9-color: $area-color-10;
         @each $name, $color in $rdfi {
             .rdfi-#{$name} {
                 fill: #{$color};
+
+                &.rdfi-I {
+                    fill: lighten($color, 20%);
+                }
             }
         }
     }
