@@ -9,33 +9,27 @@ $brand-palette: (
     #fb4f14
 );
 
-$area-color-1 : #8DE4D3;
-$area-color-2 : #1F9383;
-$area-color-3 : #02424A;
-$area-color-4 : #A2B8F0;
-$area-color-5 : #317CB2;
-$area-color-6 : #ABD533;
-$area-color-7 : #462D87;
-$area-color-8 : #00AAD2;
-$area-color-9 : #5AAF4B;
-$area-color-10 : #12982D;
-$area-color-11 : #62A5CB;
+$area-colors: (
+    ('R': #8DE4D3, 'D': #EE9FCF),
+    ('R': #1F9383, 'D': #6B4472),
+    ('R': #02424A, 'D': #E7AD79),
+    ('R': #A2B8F0, 'D': #F7393A),
+    ('R': #317CB2, 'D': #B34A01),
+    ('R': #ABD533, 'D': #95704D),
+    ('R': #462D87, 'D': #670501),
+    ('R': #00AAD2, 'D': #E2A302),
+    ('R': #5AAF4B, 'D': #FF6C7E),
+    ('R': #12982D, 'D': #FE6F3E),
+    ('R': #62A5CB, 'D': #FEC125),
+);
 
 $discrete-grey: #c8c8c8;
 $table-border-color: $discrete-grey;
 
-$rd: (
-    R: #556AB5,
-    D: #FB7800,
-    // F: lighten($discrete-grey, 12%),
-    // I: $discrete-grey,
+$rdfi: (
+    R: (F: #556AB5, I: #7D91D5),
+    D: (F: #FB7800, I: #FF932F),
 );
-
-$fi: (
-    F: 0%,
-    I: 20%,
-);
-
 
 @mixin apply-color($color){
     background-color: $color;
@@ -57,35 +51,22 @@ $fi: (
     }
 }
 
-.area-color-1{
-    @include apply-area-color($area-color-1);
-}
-.area-color-2{
-    @include apply-area-color($area-color-2);
-}
-.area-color-3{
-    @include apply-area-color($area-color-3);
-}
-.area-color-4{
-    @include apply-area-color($area-color-4);
-}
-.area-color-5{
-    @include apply-area-color($area-color-5);
-}
-.area-color-6{
-    @include apply-area-color($area-color-6);
-}
-.area-color-7{
-    @include apply-area-color($area-color-7);
-}
-.area-color-8{
-    @include apply-area-color($area-color-8);
-}
-.area-color-9{
-    @include apply-area-color($area-color-9);
-}
-.area-color-10{
-    @include apply-area-color($area-color-10);
+@for $i from 0 to length($area-colors) {
+    .area-color-#{$i}[class*="M52-DF"],
+    .area-color-#{$i}[class*="M52-DI"],
+    [class*="M52-DF"] .color.area-color-#{$i},
+    [class*="M52-DI"] .color.area-color-#{$i} {
+        $color: map-get(nth($area-colors, $i+1), 'D');
+        @include apply-area-color($color);
+    }
+
+    .area-color-#{$i}[class*="M52-RF"],
+    .area-color-#{$i}[class*="M52-RI"],
+    [class*="M52-RF"] .color.area-color-#{$i},
+    [class*="M52-RI"] .color.area-color-#{$i} {
+        $color: map-get(nth($area-colors, $i+1), 'R');
+        @include apply-area-color($color);
+    }
 }
 
 .discrete-grey{

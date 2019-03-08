@@ -99,13 +99,13 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
             <h2>Le budget {currentYear}</h2>
 
             <figure className="side-by-side">
-                <Donut items={revenueItems} padAngle={0}>
-                    <MoneyAmount amount={revenue} as="tspan" />
+                <Donut items={revenueItems} padAngle={0.015}>
+                    <MoneyAmount amount={revenue} />
                     de recettes
                 </Donut>
 
-                <Donut items={expenditureItems} padAngle={0}>
-                    <MoneyAmount amount={expenditures} as="tspan" />
+                <Donut items={expenditureItems} padAngle={0.015}>
+                    <MoneyAmount amount={expenditures} />
                     de dépenses
                 </Donut>
 

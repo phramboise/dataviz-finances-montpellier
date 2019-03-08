@@ -5,7 +5,7 @@ import {levels} from '../../shared/js/finance/hierarchicalAggregated';
 
 import {fonctionLabels} from '../../../build/finances/finance-strings.json';
 
-const colorClasses = Array(10).fill().map((e, i) => `area-color-${i+1}`);
+const colorClasses = Array(11).fill().map((e, i) => `area-color-${i+1}`);
 
 const colorClassById = new Map();
 
@@ -32,7 +32,7 @@ Object.keys(fonctionLabels).forEach(r => {
     [DF, DI, RF, RI].forEach(rdfi => {
         colorClassById.set(`M52-${rdfi}-${r}`, colorClasses[lastFigure]);
     })
-    
+
 })
 
 export default colorClassById;
