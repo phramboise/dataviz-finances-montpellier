@@ -1,0 +1,4 @@
+[[redirects]]
+  from = "/"
+  to = "/public/"
+  status = 301
