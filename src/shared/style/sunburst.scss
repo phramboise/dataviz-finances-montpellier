@@ -4,10 +4,6 @@
             fill: #d4c685;
         }
 
-        & > .piece path{
-            stroke: #AAA;
-        }
-
         & > .slice {
             path {
                 fill: #f7ef81;
@@ -17,7 +13,7 @@
                 path {
                     fill: #cfe795;
                 }
-            
+
                 & > .slice {
                     path {
                         fill: #a7d3a6;
@@ -26,7 +22,7 @@
                     & > .slice {
                         path {
                             fill: #add2c2;
-                        }   
+                        }
                     }
                 }
             }
@@ -58,8 +54,5 @@
                 stroke-width: 2px;
             }
         }
-    } 
+    }
 }
-
-
-

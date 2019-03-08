@@ -12,7 +12,7 @@ export default function({
         React.createElement(Sunburst, {
             hierarchicalData: M52Hierarchical,
             highlightedNodes: M52HighlightedNodes, selectedNode,
-            donutWidth, outerRadius, padAngle: 1*Math.PI/180,
+            donutWidth, outerRadius, padAngle: 0.01,
             onSliceOvered, onSliceSelected,
             width, height,
         })

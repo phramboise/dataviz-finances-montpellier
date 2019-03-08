@@ -64,7 +64,7 @@ export default class M52ByFonction extends React.Component {
                     }
                 },
                 M52Hierarchical: m52Hierarchical,
-                donutWidth: outerRadius*2/3,
+                donutWidth: outerRadius*1/3,
                 outerRadius
             }),
             React.createElement('div', {},
