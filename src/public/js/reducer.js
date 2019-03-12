@@ -5,7 +5,7 @@ import { hierarchicalByFunction, hierarchicalAggregated, m52ToAggregated } from 
 import {
     FINANCE_DETAIL_ID_CHANGE, DOCUMENTS_BUDGETAIRES_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
     ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
-    CHANGE_EXPLORATION_YEAR
+    CHANGE_EXPLORATION_YEAR, AGGREGATION_DESCRIPTION_RECEIVED
 } from './constants/actions';
 import { DF, DI } from './constants/pages';
 
@@ -86,6 +86,9 @@ export default function reducer(state, action) {
         case CHANGE_EXPLORATION_YEAR: {
             const {year} = action;
             return state.set('explorationYear', year);
+        }
+        case AGGREGATION_DESCRIPTION_RECEIVED: {
+            return state.set('aggregationDescription', action.aggregationDescription);
         }
         case '@@redux/INIT':
             return state

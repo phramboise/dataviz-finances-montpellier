@@ -3,10 +3,10 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 import { Record, Map as ImmutableMap, List, Set as ImmutableSet } from 'immutable';
-import { csvParse } from 'd3-dsv';
+import { csv } from 'd3-fetch';
 import page from 'page';
 
-import {assets, COMPTES_ADMINISTRATIFS, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL, CORRECTIONS_AGGREGATED} from './constants/resources';
+import {assets, COMPTES_ADMINISTRATIFS, AGGREGATED_ATEMPORAL, AGGREGATED_TEMPORAL, CORRECTIONS_AGGREGATED, MONTREUIL_NOMENCLATURE} from './constants/resources';
 import reducer from './reducer';
 
 import {LigneBudgetRecord, DocumentBudgetaire} from 'document-budgetaire/Records.js';
@@ -22,8 +22,10 @@ import { HOME } from './constants/pages';
 import {
     DOCUMENTS_BUDGETAIRES_RECEIVED, CORRECTION_AGGREGATION_RECEIVED,
     ATEMPORAL_TEXTS_RECEIVED, TEMPORAL_TEXTS_RECEIVED,
-    FINANCE_DETAIL_ID_CHANGE,
+    FINANCE_DETAIL_ID_CHANGE, AGGREGATION_DESCRIPTION_RECEIVED
 } from './constants/actions';
+
+import MontreuilNomenclatureToAggregationDescription from './MontreuilNomenclatureToAggregationDescription.js'
 
 
 import {fonctionLabels} from '../../../build/finances/finance-strings.json';
@@ -50,6 +52,7 @@ const DEFAULT_BREADCRUMB = List([
 
 const StoreRecord = Record({
     docBudgByYear: undefined,
+    aggregationDescription: undefined,
     corrections: undefined,
     currentYear: undefined,
     explorationYear: undefined,
@@ -63,6 +66,7 @@ const store = createStore(
     reducer,
     new StoreRecord({
         docBudgByYear: new ImmutableMap(),
+        aggregationDescription: undefined,
         currentYear: 2017,
         explorationYear: 2017,
         financeDetailId: undefined,
@@ -121,8 +125,7 @@ fetch(assets[COMPTES_ADMINISTRATIFS]).then(resp => resp.json())
     });
 
 
-fetch(assets[AGGREGATED_ATEMPORAL]).then(resp => resp.text())
-    .then(csvParse)
+csv(assets[AGGREGATED_ATEMPORAL])
     .then(textList => {
         store.dispatch({
             type: ATEMPORAL_TEXTS_RECEIVED,
@@ -130,12 +133,22 @@ fetch(assets[AGGREGATED_ATEMPORAL]).then(resp => resp.text())
         });
     });
 
-fetch(assets[AGGREGATED_TEMPORAL]).then(resp => resp.text())
-    .then(csvParse)
+csv(assets[AGGREGATED_TEMPORAL])
     .then(textList => {
         store.dispatch({
             type: TEMPORAL_TEXTS_RECEIVED,
             textList
+        });
+    });
+
+csv(assets[MONTREUIL_NOMENCLATURE])
+    .then(MontreuilNomenclatureToAggregationDescription)
+    .then(aggregationDescription => {
+        console.log('aggregationDescription', aggregationDescription.toJS())
+
+        store.dispatch({
+            type: AGGREGATION_DESCRIPTION_RECEIVED,
+            aggregationDescription
         });
     });
 
