@@ -39,7 +39,7 @@ export default class BubbleChartNode extends React.Component {
             .descendants()
             .filter(d => !d.children)
             .map((obj) => [obj.data.id, obj]))
-        const RD = listMapNodes.values().next().value.data.rdfi[0]
+        const RorD = listMapNodes.values().next().value.data.rdfi[0]
 
         return (<figure className="bubble-chart">
             <figurelegend>
@@ -66,7 +66,7 @@ export default class BubbleChartNode extends React.Component {
             </svg>
             <ReactTooltip
                 className='react-tooltip'
-                key={`tooltip-${node.id}-${RD}`}
+                key={`tooltip-${node.id}-${RorD}`}
                 id={`tooltip-${node.id}`}
                 delayHide={500}
                 place='right'

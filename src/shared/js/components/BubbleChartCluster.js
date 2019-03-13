@@ -33,8 +33,7 @@ export default class BubbleChartCluster extends React.Component {
         super(props);
 
         this.state = {
-            R: false,
-            D: true,
+            RorD: 'R',
             F: true,
             I: true,
             activeElement: null
@@ -46,24 +45,24 @@ export default class BubbleChartCluster extends React.Component {
     toggle (...stateRDFI) {
         stateRDFI.forEach(RDFI => {
             const stateValue = this.state[RDFI];
-            this.setState({ [RDFI]: !stateValue });
+            if (RDFI === 'RorD') {
+                this.setState({ [RDFI]: stateValue == 'R'? 'D': 'R'})
+            } else {
+                this.setState({ [RDFI]: !stateValue });
+            }
         });
     }
 
     render() {
         const {m52Instruction} = this.props;
-        const {R, D, F, I} = this.state;
-        const RD = R ? 'R' : 'D';
-        const RDF = RD + 'F';
-        const RDI = RD + 'I';
-
+        const {RorD, F, I} = this.state;
         if (!m52Instruction) {
             return null;
         }
 
         const families = mergeHierarchies(
-            F ? hierarchicalByFunction(m52Instruction, RDF).children : [],
-            I ? hierarchicalByFunction(m52Instruction, RDI).children : []
+            F ? hierarchicalByFunction(m52Instruction, RorD + 'F').children : [],
+            I ? hierarchicalByFunction(m52Instruction, RorD + 'I').children : []
         );
 
         return (<div className="bubble-chart-cluster">
@@ -71,12 +70,12 @@ export default class BubbleChartCluster extends React.Component {
                 <ul>
                     <li>
                         <label>
-                            <input type="radio" name="rd" value="R" onClick={() => this.toggle('R', 'D')} defaultChecked={R} /> recettes
+                            <input type="radio" name="rd" value="R" onClick={() => this.toggle('RorD')} defaultChecked={RorD} /> recettes
                         </label>
                     </li>
                     <li>
                         <label>
-                            <input type="radio" name="rd" value="D" onClick={() => this.toggle('D', 'R')} defaultChecked={D} /> dépenses
+                            <input type="radio" name="rd" value="D" onClick={() => this.toggle('RorD')} defaultChecked={RorD} /> dépenses
                         </label>
                     </li>
                 </ul>
