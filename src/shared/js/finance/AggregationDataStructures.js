@@ -1,4 +1,7 @@
-import { Record } from 'immutable';
+import { Record, Set as ImmutableSet } from 'immutable';
+import { sum } from 'd3-array';
+
+import memoize from 'fast-memoize'
 
 /*
 
@@ -53,8 +56,24 @@ export const AggregationDescription = Record(
 export const AggregatedDocumentBudgetaire = Record({
     id: undefined,
     label: undefined,
-    // in non-leaf nodes, total and elements are computed fields accumulating the children values
-    // This could be avoided by using a memoized function that takes a node and computes these
     elements: undefined,
     children: undefined
 })
+
+
+function rawAggregatedDocumentBudgetaireNodeElements(node){
+    if(!node.children)
+        return node.elements
+    else{
+        return (new ImmutableSet()).union(node.children.map(aggregatedDocumentBudgetaireNodeElements))
+    }
+}
+
+export const aggregatedDocumentBudgetaireNodeElements = memoize(rawAggregatedDocumentBudgetaireNodeElements)
+
+
+function rawAggregatedDocumentBudgetaireNodeTotal(node){
+    return sum(aggregatedDocumentBudgetaireNodeElements(node).toJS().map(aggregatedDocumentBudgetaireNodeTotal))
+}
+
+export const aggregatedDocumentBudgetaireNodeTotal = memoize(rawAggregatedDocumentBudgetaireNodeTotal)

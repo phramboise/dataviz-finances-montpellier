@@ -20,6 +20,9 @@ import {
     hierarchicalAggregated
 } from "../../../../shared/js/finance/memoized";
 import { flattenTree } from "../../../../shared/js/finance/visitHierarchical.js";
+import makeAggregateFunction from "../../../../shared/js/finance/makeAggregateFunction.js"
+import {aggregatedDocumentBudgetaireNodeTotal} from "../../../../shared/js/finance/AggregationDataStructures.js"
+
 
 import PageTitle from "../../../../shared/js/components/gironde.fr/PageTitle";
 import SecundaryTitle from "../../../../shared/js/components/gironde.fr/SecundaryTitle";
@@ -41,7 +44,6 @@ const MAX_HEIGHT = 30;
 
 export function TotalBudget({
     currentYear,
-    totalById,
     totals,
     m52Instruction,
     labelsById,
@@ -54,7 +56,6 @@ export function TotalBudget({
         di,
         byFonction
     },
-    constructionAmounts,
     screenWidth
 }) {
     const expenditures = totals.get(EXPENDITURES);
@@ -144,78 +145,38 @@ export default connect(
     state => {
         const {
             docBudgByYear,
-            corrections,
+            aggregationDescription,
             currentYear,
             textsById,
             screenWidth
         } = state;
-        const m52Instruction = docBudgByYear.get(currentYear);
-        const aggregated =
-            m52Instruction &&
-            corrections &&
-            m52ToAggregated(m52Instruction, corrections);
-        const hierAgg = m52Instruction && hierarchicalAggregated(aggregated);
 
-        let totalById = new ImmutableMap();
-        if (hierAgg) {
-            flattenTree(hierAgg).forEach(aggHierNode => {
-                totalById = totalById.set(aggHierNode.id, aggHierNode.total);
-            });
-        }
+        const documentBudgetaire = docBudgByYear.get(currentYear);
+        const aggregate = aggregationDescription && makeAggregateFunction(aggregationDescription)
+
+        const hierAgg = documentBudgetaire && aggregate && aggregate(documentBudgetaire);
+
+        console.log('hierAgg', hierAgg && hierAgg.toJS())
 
         let totals = new ImmutableMap();
-        if (m52Instruction) {
+        if (documentBudgetaire) {
             totals = new ImmutableMap({
-                [REVENUE]: sum(m52Instruction.rows.filter(r => r.CodRD === 'R').map(r => r.MtReal).toArray()),
-                [EXPENDITURES]: sum(m52Instruction.rows.filter(r => r.CodRD === 'D').map(r => r.MtReal).toArray()),
-                [DF]: hierarchicalByFunction(m52Instruction, DF).total,
-                [DI]: hierarchicalByFunction(m52Instruction, DI).total,
-                [RF]: hierarchicalByFunction(m52Instruction, RF).total,
-                [RI]: hierarchicalByFunction(m52Instruction, RI).total
+                [REVENUE]: sum(documentBudgetaire.rows.filter(r => r.CodRD === 'R').map(r => r.MtReal).toArray()),
+                [EXPENDITURES]: sum(documentBudgetaire.rows.filter(r => r.CodRD === 'D').map(r => r.MtReal).toArray()),
+                [DF]: hierarchicalByFunction(documentBudgetaire, DF).total,
+                [DI]: hierarchicalByFunction(documentBudgetaire, DI).total,
+                [RF]: hierarchicalByFunction(documentBudgetaire, RF).total,
+                [RI]: hierarchicalByFunction(documentBudgetaire, RI).total
             });
         }
 
         return {
             currentYear,
-            totalById,
             totals,
-            m52Instruction,
+            m52Instruction: documentBudgetaire,
+            recetteTree: '',
+            dépenseTree: '',
             labelsById: textsById.map(texts => texts.label),
-            // All of this is poorly hardcoded. TODO: code proper formulas based on what was transmitted by CD33
-            constructionAmounts: m52Instruction
-                ? {
-                    DotationEtat: totalById.get("RF-5"),
-                    FiscalitéDirecte: totalById.get("RF-1"),
-                    FiscalitéIndirecte: sum(
-                        ["RF-2", "RF-3", "RF-4"].map(i => totalById.get(i))
-                    ),
-                    RecettesDiverses:
-                          totalById.get("RF") -
-                          sum(
-                              ["RF-1", "RF-2", "RF-3", "RF-4", "RF-5"].map(i =>
-                                  totalById.get(i)
-                              )
-                          ),
-
-                    Solidarité: totalById.get("DF-1"),
-                    Interventions: totalById.get("DF-3"),
-                    DépensesStructure:
-                          totalById.get("DF") -
-                          sum(["DF-1", "DF-3"].map(i => totalById.get(i))),
-
-                    Emprunt: totalById.get("RI-EM"),
-                    RIPropre: totalById.get("RI") - totalById.get("RI-EM"),
-
-                    RemboursementEmprunt: totalById.get("DI-EM"),
-                    Routes: totalById.get("DI-1-2"),
-                    Colleges: totalById.get("DI-1-1"),
-                    Amenagement:
-                          totalById.get("DI-1-3") +
-                          totalById.get("DI-1-4") +
-                          totalById.get("DI-1-5"),
-                    Subventions: totalById.get("DI-2")
-                }
-                : undefined,
             assets: {
                 expenditures: "#!/finance-details/" + EXPENDITURES,
                 revenue: "#!/finance-details/" + REVENUE,

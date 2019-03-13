@@ -13,6 +13,9 @@ function makeFormulaFromMontreuilRows(rows){
     return rows.toJS()
         .map(r => {
             const RDFI = FORMULA_MAP[r['Sens']] + FORMULA_MAP[r['Section']]
+            // the two following lines seem to have weird characters in the property names
+            // I've copied-pasted the values from agregation-Montreuil-v4
+            // if only rewriting by hand via easily-accessible keyboard keys, it does not work :-/
             const fonction = r["Fonction - Code"]
             const nature = r['Nature - Code']
 
@@ -39,7 +42,7 @@ function nomenclatureNodeToAggregationNode(node, name){
             label: name,
             children: new ImmutableSet(
                 node.entrySeq()
-                    .map(([name, node]) => nomenclatureNodeToAggregationNode(node, name)))
+                    .map(([childName, node]) => nomenclatureNodeToAggregationNode(node, name+' '+childName)))
         })
     }
     else{
@@ -55,7 +58,9 @@ function nomenclatureNodeToAggregationNode(node, name){
 export default function MontreuilNomenclatureToAggregationDescription(montreuilNomenclature){
     let map = new ImmutableMap()
 
-    montreuilNomenclature = montreuilNomenclature.filter(r => r["Nature Mvt"] === "REELLE")
+    montreuilNomenclature = montreuilNomenclature
+        .filter(r => r["Nature Mvt"] === "REELLE")
+        .slice(0, 200) // TODO remove this, this is for testing purposes only
 
     for(const row of montreuilNomenclature){
         map = map.updateIn(getMontreuilNomenclatureRowKeys(row), val => val ? val.add(row) : new ImmutableSet([row]))
