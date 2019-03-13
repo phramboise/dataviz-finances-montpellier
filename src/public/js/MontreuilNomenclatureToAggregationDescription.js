@@ -60,7 +60,7 @@ export default function MontreuilNomenclatureToAggregationDescription(montreuilN
 
     montreuilNomenclature = montreuilNomenclature
         .filter(r => r["Nature Mvt"] === "REELLE")
-        .slice(0, 200) // TODO remove this, this is for testing purposes only
+        //.slice(11000, 12000) // TODO remove this, this is for testing purposes only
 
     for(const row of montreuilNomenclature){
         map = map.updateIn(getMontreuilNomenclatureRowKeys(row), val => val ? val.add(row) : new ImmutableSet([row]))

@@ -21,7 +21,6 @@ import {
 } from "../../../../shared/js/finance/memoized";
 import { flattenTree } from "../../../../shared/js/finance/visitHierarchical.js";
 import makeAggregateFunction from "../../../../shared/js/finance/makeAggregateFunction.js"
-import {aggregatedDocumentBudgetaireNodeTotal} from "../../../../shared/js/finance/AggregationDataStructures.js"
 
 
 import PageTitle from "../../../../shared/js/components/gironde.fr/PageTitle";
@@ -46,6 +45,8 @@ export function TotalBudget({
     currentYear,
     totals,
     m52Instruction,
+    recetteTree,
+    dépenseTree,
     labelsById,
     assets: {
         expenditures: expURL,
@@ -126,7 +127,7 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
         <section>
             <h2>Explorer le budget</h2>
 
-            <BubbleChartCluster m52Instruction={m52Instruction} />
+            <BubbleChartCluster recetteTree={recetteTree} dépenseTree={dépenseTree} />
         </section>
 
         <section className="m52">
@@ -156,8 +157,6 @@ export default connect(
 
         const hierAgg = documentBudgetaire && aggregate && aggregate(documentBudgetaire);
 
-        console.log('hierAgg', hierAgg && hierAgg.toJS())
-
         let totals = new ImmutableMap();
         if (documentBudgetaire) {
             totals = new ImmutableMap({
@@ -174,8 +173,8 @@ export default connect(
             currentYear,
             totals,
             m52Instruction: documentBudgetaire,
-            recetteTree: '',
-            dépenseTree: '',
+            recetteTree: hierAgg && hierAgg.children.find(c => c.id.includes('RECETTE')),
+            dépenseTree: hierAgg && hierAgg.children.find(c => c.id.includes('DEPENSE')),
             labelsById: textsById.map(texts => texts.label),
             assets: {
                 expenditures: "#!/finance-details/" + EXPENDITURES,

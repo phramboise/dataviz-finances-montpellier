@@ -65,7 +65,7 @@ function rawAggregatedDocumentBudgetaireNodeElements(node){
     if(!node.children)
         return node.elements
     else{
-        return (new ImmutableSet()).union(node.children.map(aggregatedDocumentBudgetaireNodeElements))
+        return ImmutableSet.union(node.children.map(aggregatedDocumentBudgetaireNodeElements))
     }
 }
 
@@ -73,7 +73,7 @@ export const aggregatedDocumentBudgetaireNodeElements = memoize(rawAggregatedDoc
 
 
 function rawAggregatedDocumentBudgetaireNodeTotal(node){
-    return sum(aggregatedDocumentBudgetaireNodeElements(node).toJS().map(aggregatedDocumentBudgetaireNodeTotal))
+    return sum(aggregatedDocumentBudgetaireNodeElements(node).toJS().map(row => row['MtReal']))
 }
 
 export const aggregatedDocumentBudgetaireNodeTotal = memoize(rawAggregatedDocumentBudgetaireNodeTotal)
