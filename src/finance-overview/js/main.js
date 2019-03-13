@@ -1,4 +1,3 @@
-
 import { Record, OrderedSet as ImmutableSet } from 'immutable';
 
 import { createStore } from 'redux';

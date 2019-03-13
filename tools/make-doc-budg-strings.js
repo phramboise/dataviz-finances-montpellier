@@ -8,10 +8,7 @@ const {readFile, writeFile} = fs;
 const BUILD_FINANCE_DIR = './build/finances';
 const SOURCE_FINANCE_DIR = './data/finances/plansDeCompte';
 
-Promise.all([
-    'plan-de-compte-M14-M14_COM_SUP3500-2016.xml',
-    'plan-de-compte-M14-M14_COM_SUP3500-2017.xml',
-].map(f => {
+Promise.all(process.env.PLANS_DE_COMPTE.split(':').map(f => {
     return readFile(join(SOURCE_FINANCE_DIR, f))
     .then(xmlBufferToString)
     .then( str => {

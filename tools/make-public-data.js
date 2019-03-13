@@ -11,10 +11,7 @@ const BUILD_FINANCE_DIR = './build/finances';
 const SOURCE_FINANCE_DIR = './data/finances';
 
 
-const natureToChapitreFIP = Promise.all([
-    'plan-de-compte-M14-M14_COM_SUP3500-2016.xml',
-    'plan-de-compte-M14-M14_COM_SUP3500-2017.xml',
-].map(f => {
+const natureToChapitreFIP = Promise.all(process.env.PLANS_DE_COMPTE.split(':').map(f => {
     return readFile(join(SOURCE_FINANCE_DIR, 'plansDeCompte', f), {encoding: 'utf-8'})
     .then( str => {
         return (new DOMParser()).parseFromString(str, "text/xml");
@@ -33,10 +30,7 @@ mkdir(BUILD_FINANCE_DIR)
     throw err;
 })
 .then( () => {
-    return Promise.all([
-        'CA 2016.xml',
-        'CA 2017.xml',
-    ].map(f => {
+    return Promise.all(process.env.CA_FILES.split(':').map(f => {
         return readFile(join(SOURCE_FINANCE_DIR, 'CA', f), {encoding: 'utf-8'})
         .then( str => {
             return (new DOMParser()).parseFromString(str, "text/xml");
