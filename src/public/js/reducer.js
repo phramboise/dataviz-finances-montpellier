@@ -22,21 +22,6 @@ export default function reducer(state, action) {
     switch (type) {
         case DOCUMENTS_BUDGETAIRES_RECEIVED:{
             const {docBudgs} = action;
-            const {corrections} = state;
-
-            if(corrections){
-                // these variables will be unused. These calls exist for the sole purpose of memoization as
-                // soon as the data arrives
-                docBudgs.forEach(db => {
-                    const aggregated = m52ToAggregated(db, corrections);
-                    const hierAgg = hierarchicalAggregated(aggregated);
-                    const hierarchicalByFunctionDF = hierarchicalByFunction(db, DF);
-                    const hierarchicalByFunctionDI = hierarchicalByFunction(db, DI);
-
-                    // to prevent minifier optimizations
-                    console.log('memz', hierarchicalByFunctionDI, hierarchicalByFunctionDF, hierAgg);
-                })
-            }
 
             let newState = state;
 
