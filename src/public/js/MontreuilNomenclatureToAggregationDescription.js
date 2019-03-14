@@ -35,21 +35,22 @@ function getMontreuilNomenclatureRowKeys(MontreuilNomenclatureRow){
     ].map(key => MontreuilNomenclatureRow[key])
 }
 
-function nomenclatureNodeToAggregationNode(node, name){
+function nomenclatureNodeToAggregationNode(node, label, id){
+
     if(ImmutableMap.isMap(node)){
         return new AggregationDescription({
-            id: name,
-            label: name,
+            id,
+            label,
             children: new ImmutableSet(
                 node.entrySeq()
-                    .map(([childName, node]) => nomenclatureNodeToAggregationNode(node, name+' '+childName)))
+                    .map(([childName, childNode]) => nomenclatureNodeToAggregationNode(childNode, childName, id+' '+childName)))
         })
     }
     else{
         // ImmutableSet.isSet(node) === true
         return new AggregationLeaf({
-            id: name,
-            label: name,
+            id,
+            label,
             formula: makeFormulaFromMontreuilRows(node)
         })
     }
@@ -66,5 +67,5 @@ export default function MontreuilNomenclatureToAggregationDescription(montreuilN
         map = map.updateIn(getMontreuilNomenclatureRowKeys(row), val => val ? val.add(row) : new ImmutableSet([row]))
     }
     
-    return nomenclatureNodeToAggregationNode(map, 'Budget Montreuil');
+    return nomenclatureNodeToAggregationNode(map, 'Budget Montreuil', 'Budget Montreuil');
 }
