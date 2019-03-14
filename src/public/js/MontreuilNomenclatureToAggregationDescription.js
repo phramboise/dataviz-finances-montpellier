@@ -10,18 +10,34 @@ const FORMULA_MAP = {
 }
 
 function makeFormulaFromMontreuilRows(rows){
-    return rows.toJS()
-        .map(r => {
-            const RDFI = FORMULA_MAP[r['Sens']] + FORMULA_MAP[r['Section']]
+    const rowsByRDFI = new Map()
+
+    for(const row of rows){
+        const RDFI = FORMULA_MAP[row['Sens']] + FORMULA_MAP[row['Section']]
+
+        let rdfiRows = rowsByRDFI.get(RDFI)
+        if(!rdfiRows){
+            rdfiRows = []
+            rowsByRDFI.set(RDFI, rdfiRows)
+        }
+        rdfiRows.push(row) // mutating array used as map value
+    }
+
+    return [...rowsByRDFI.entries()].map(([RDFI, rows]) => {
+        const rowsFormula = rows.map(r => {
             // the two following lines seem to have weird characters in the property names
             // I've copied-pasted the values from agregation-Montreuil-v4
             // if only rewriting by hand via easily-accessible keyboard keys, it does not work :-/
             const fonction = r["Fonction - Code"]
             const nature = r['Nature - Code']
 
-            return `${RDFI}*F${fonction}*N${nature}`
+            return `F${fonction}*N${nature}`
         })
         .join(' + ')
+
+        return `${RDFI}*(${rowsFormula})`
+    }).join(' + ')
+        
 }
 
 function getMontreuilNomenclatureRowKeys(MontreuilNomenclatureRow){
