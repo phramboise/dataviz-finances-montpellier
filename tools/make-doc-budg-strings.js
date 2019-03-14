@@ -5,17 +5,17 @@ import {DOMParser} from 'xmldom';
 
 const {readFile, writeFile} = fs;
 
-const BUILD_FINANCE_DIR = './build/finances';
-const SOURCE_FINANCE_DIR = './data/finances/plansDeCompte';
+const SOURCE_FINANCE_DIR = process.env.SOURCE_FINANCE_DIR;
+const BUILD_FINANCE_DIR = process.env.BUILD_FINANCE_DIR;
 
-Promise.all(process.env.PLANS_DE_COMPTE.split(':').map(f => {
-    return readFile(join(SOURCE_FINANCE_DIR, f))
-    .then(xmlBufferToString)
-    .then( str => {
-        return (new DOMParser()).parseFromString(str, "text/xml");
-    })
-}))
-.then(plansDeComptes => {
+
+const natureToChapitreFIP = new Promise((resolve, reject) =>
+    fs.readdir(SOURCE_FINANCE_DIR, (err, items) => resolve(Promise.all(items
+        .filter(item => item.endsWith('.xml'))
+        .map(f => readFile(join(SOURCE_FINANCE_DIR, f), 'utf-8')
+            .then(str => (new DOMParser()).parseFromString(str, "text/xml")))
+    )))
+).then(plansDeComptes => {
 
     // sort with most recent years first
     plansDeComptes = plansDeComptes.sort((pc1, pc2) => {

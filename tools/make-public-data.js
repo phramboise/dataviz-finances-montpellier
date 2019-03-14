@@ -7,43 +7,44 @@ import makeNatureToChapitreFI from '../src/shared/js/finance/makeNatureToChapitr
 
 const {mkdir, readFile, writeFile} = fs;
 
-const BUILD_FINANCE_DIR = './build/finances';
-const SOURCE_FINANCE_DIR = './data/finances';
+const SOURCE_FINANCE_DIR = process.env.SOURCE_FINANCE_DIR;
+const BUILD_FINANCE_DIR = process.env.BUILD_FINANCE_DIR;
+
+const PLANS_DE_COMPTE_DIR = join(SOURCE_FINANCE_DIR, 'plansDeCompte');
+const CA_DIR = join(SOURCE_FINANCE_DIR, 'CA');
 
 
-const natureToChapitreFIP = Promise.all(process.env.PLANS_DE_COMPTE.split(':').map(f => {
-    return readFile(join(SOURCE_FINANCE_DIR, 'plansDeCompte', f), {encoding: 'utf-8'})
-    .then( str => {
-        return (new DOMParser()).parseFromString(str, "text/xml");
-    })
-}))
+const natureToChapitreFIP = new Promise((resolve, reject) =>
+    fs.readdir(PLANS_DE_COMPTE_DIR, (err, items) => resolve(Promise.all(items
+        .filter(item => item.endsWith('.xml'))
+        .map(f => readFile(join(PLANS_DE_COMPTE_DIR, f), 'utf-8')
+            .then(str => (new DOMParser()).parseFromString(str, "text/xml")))
+    )))
+)
 .then(makeNatureToChapitreFI);
-
 
 
 mkdir(BUILD_FINANCE_DIR)
 .catch(err => {
-    if(err.code === 'EEXIST'){
-        return; // ignore
-    }
-
-    throw err;
+    // ignore if folder already exists
+    if(err.code !== 'EEXIST') { throw err; }
 })
-.then( () => {
-    return Promise.all(process.env.CA_FILES.split(':').map(f => {
-        return readFile(join(SOURCE_FINANCE_DIR, 'CA', f), {encoding: 'utf-8'})
-        .then( str => {
-            return (new DOMParser()).parseFromString(str, "text/xml");
-        })
-        .then(doc => {
-            return natureToChapitreFIP.then(natureToChapitreFI => {
-                return xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
-            })
-        })
-    }))
-    .then( docBudgs => JSON.stringify(docBudgs, null, 2) )
+.then(() => {
+    new Promise((resolve, reject) =>
+        fs.readdir(CA_DIR, (err, items) => resolve(Promise.all(items
+            .filter(item => item.endsWith('.xml'))
+            .map(f => fs.readFile(join(SOURCE_FINANCE_DIR, 'CA', f), 'utf-8')
+                .then(str => (new DOMParser()).parseFromString(str, "text/xml"))
+                .then(doc => natureToChapitreFIP
+                    .then(natureToChapitreFI =>
+                        xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
+                    )
+                )
+            )
+        )))
+    )
+    .then(docBudgs => JSON.stringify(docBudgs, null, 2))
     .then(str => writeFile(join(BUILD_FINANCE_DIR, 'doc-budgs.json'), str, 'utf-8'))
-
 })
 .catch(err => {
     console.error('err', err);
