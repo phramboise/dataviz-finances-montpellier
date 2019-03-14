@@ -111,7 +111,7 @@ fetch(assets[CORRECTIONS_AGGREGATED]).then(resp => resp.text())
     });
 
 
-fetch(assets[COMPTES_ADMINISTRATIFS]).then(resp => resp.json())
+const docBudgsP = fetch(assets[COMPTES_ADMINISTRATIFS]).then(resp => resp.json())
     .then(docBudgs => {
         docBudgs = docBudgs.map(db => {
             db.rows = new ImmutableSet(db.rows.map(LigneBudgetRecord))
@@ -122,6 +122,8 @@ fetch(assets[COMPTES_ADMINISTRATIFS]).then(resp => resp.json())
             type: DOCUMENTS_BUDGETAIRES_RECEIVED,
             docBudgs,
         });
+
+        return docBudgs;
     });
 
 
@@ -141,8 +143,8 @@ csv(assets[AGGREGATED_TEMPORAL])
         });
     });
 
-csv(assets[MONTREUIL_NOMENCLATURE])
-    .then(MontreuilNomenclatureToAggregationDescription)
+Promise.all([ csv(assets[MONTREUIL_NOMENCLATURE]), docBudgsP ])
+    .then(([aggrDesc, docBudgs]) => MontreuilNomenclatureToAggregationDescription(aggrDesc, docBudgs))
     .then(aggregationDescription => {
         console.log('aggregationDescription', aggregationDescription.toJS())
 

@@ -56,12 +56,27 @@ function nomenclatureNodeToAggregationNode(node, label, id){
     }
 }
 
-export default function MontreuilNomenclatureToAggregationDescription(montreuilNomenclature){
+function makeFonctionNatureCombo(fonction, nature){
+    return fonction + '-' + nature
+}
+
+export default function MontreuilNomenclatureToAggregationDescription(montreuilNomenclature, docBudgs){
     let map = new ImmutableMap()
 
+    const docBudgsFonctionNatureCombos = new Set()
+    for(const {rows} of docBudgs){
+        for(const {Nature, Fonction} of rows){
+            docBudgsFonctionNatureCombos.add(makeFonctionNatureCombo(Fonction, Nature))
+        }
+    }
+
     montreuilNomenclature = montreuilNomenclature
-        .filter(r => r["Nature Mvt"] === "REELLE")
+        .filter(r => r["Nature Mvt"] === "REELLE" && 
+            docBudgsFonctionNatureCombos.has(makeFonctionNatureCombo(r["Fonction - Code"], r['Nature - Code']))
+        )
         //.slice(11000, 12000) // TODO remove this, this is for testing purposes only
+
+    console.log('montreuilNomenclature.length', montreuilNomenclature.length)
 
     for(const row of montreuilNomenclature){
         map = map.updateIn(getMontreuilNomenclatureRowKeys(row), val => val ? val.add(row) : new ImmutableSet([row]))
