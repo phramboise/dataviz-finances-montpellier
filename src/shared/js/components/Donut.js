@@ -22,8 +22,9 @@ export default function Donut ({
         .value(el => el.value)
         (items.toArray())
     const arc = _arc();
+    const {colorClassName} = items.first();
 
-    return (<figure className="donut">
+    return (<figure className={`donut ${colorClassName}`}>
         <svg viewBox={`0 0 ${width} ${height}`}>
             <g transform={`translate(${width/2}, ${height/2})`}>
                 {arcDescs.map(ad => {

@@ -41,7 +41,7 @@ export default class BubbleChartNode extends React.Component {
             .map((obj) => [obj.data.id, obj]))
         const RorD = listMapNodes.values().next().value.data.rdfi[0]
 
-        return (<figure className="bubble-chart">
+        return (<figure className={`bubble-chart rdfi-${RorD}`}>
             <figurelegend>
                 <MoneyAmount amount={total} />
                 <span>{label}</span>
@@ -75,7 +75,7 @@ export default class BubbleChartNode extends React.Component {
                 getContent={(nodeId) => {
                     if (!nodeId) return null;
                     const data = listMapNodes.get(nodeId).data;
-                    return (<div>
+                    return (<div className={`rdfi-${data.rdfi[0]} rdfi-${data.rdfi[1]}`}>
                         <p className='react-tooltip-type-aggregation'>
                             {data.rdfi[0] === 'R'? 'Recette': 'Dépense'}
                             {data.rdfi[1] === 'F'? ' de fonctionnement': ' d’investissement'}
