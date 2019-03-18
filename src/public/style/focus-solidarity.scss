@@ -1,10 +1,10 @@
-$insertion-color: $area-color-1;
-$handicap-color: $area-color-2;
-$elderly-color: $area-color-3;
-$childhood-color: $area-color-4;
-$solidarity-other-color : $area-color-5;
+$insertion-color: $discrete-grey;
+$handicap-color: $discrete-grey;
+$elderly-color: $discrete-grey;
+$childhood-color: $discrete-grey;
+$solidarity-other-color : $discrete-grey;
 
-$focus-highlight-color : #F62727;
+$focus-highlight-color : $brand-color;
 
 @import './focus-detail';
 @import './focus-donut';
@@ -43,7 +43,7 @@ $focus-highlight-color : #F62727;
             justify-content: center;
 
             text-align: justify;
-            
+
             line-height: 1.4em;
             font-size: 1.1em;
 
@@ -72,11 +72,11 @@ $focus-highlight-color : #F62727;
             min-width: 10em;
             transform: translateX(-40%);
 
-            @media screen and (min-width: $focus-layout-breakpoint) {                
+            @media screen and (min-width: $focus-layout-breakpoint) {
                 font-size: 1.3em;
                 transform: initial;
                 min-width: 0;
-            } 
+            }
 
             & > *{
                 position: absolute;
@@ -84,9 +84,9 @@ $focus-highlight-color : #F62727;
                 width: 50%;
                 transform: translateY(30%);
 
-                @media screen and (min-width: $focus-layout-breakpoint) {   
+                @media screen and (min-width: $focus-layout-breakpoint) {
                     transform: translateY(50%);
-                } 
+                }
             }
 
             .number{
@@ -116,13 +116,13 @@ $focus-highlight-color : #F62727;
 
         @media screen and (min-width: $stackchart-medium-breakpoint) {
             align-items: flex-start;
-        } 
+        }
 
         @media screen and (min-width: $stackchart-large-breakpoint) {
             flex-direction: row;
             justify-content: space-around;
             align-items: center;
-        } 
+        }
     }
 
 
@@ -143,5 +143,3 @@ $focus-highlight-color : #F62727;
         background-color: $childhood-color;
     }
 }
-
-

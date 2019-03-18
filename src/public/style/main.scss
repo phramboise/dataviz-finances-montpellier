@@ -3,14 +3,14 @@
 @import '../../shared/style/stackchart';
 
 @import 'top-level';
-@import 'money-amount';
 @import 'color-palette';
+@import 'money-amount';
 @import 'home';
 @import 'finance-element';
 @import 'explore-budget';
-@import 'focus-solidarity';
-@import 'focus-investments';
-@import 'focus-presence';
+// @import 'focus-solidarity';
+// @import 'focus-investments';
+// @import 'focus-presence';
 
 /** Temporaire **/
 @mixin placeholder ($text) {
@@ -62,7 +62,7 @@
 .btn {
 	display: inline-block;
 	color: white;
-	background: #903;
+	background: $brand-color;
 	font-size: 1em;
 	font-weight: 500;
 	text-transform: uppercase;

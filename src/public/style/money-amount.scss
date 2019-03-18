@@ -1,4 +1,12 @@
 .money-amount{
+    font-size: 1.2em;
     font-variant-numeric: oldstyle-nums tabular-nums;
+    font-weight: bold;
     white-space: nowrap;
+
+    @each $rd, $palette in $rdfi {
+        .rdfi-#{$rd} & {
+            color: map-get($palette, 'F');
+        }
+    }
 }

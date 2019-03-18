@@ -61,13 +61,13 @@ export function TotalBudget({
     const revenue = totals.get(REVENUE);
 
     const expenditureItems = new List([
-        { id: 'DF', colorClassName:'rdfi-F', text: 'Dépenses de fonctionnement', value: totals.get(DF) },
-        { id: 'DI', colorClassName:'rdfi-I', text: 'Dépenses d\'investissement', value: totals.get(DI) },
+        { id: 'DF', colorClassName:'rdfi-D rdfi-F', text: 'Dépenses de fonctionnement', value: totals.get(DF) },
+        { id: 'DI', colorClassName:'rdfi-D rdfi-I', text: 'Dépenses d\'investissement', value: totals.get(DI) },
     ]);
 
     const revenueItems = new List([
-        { id: 'RF', colorClassName:'rdfi-F', text: 'Recettes de fonctionnement', value: totals.get(RF) },
-        { id: 'RI', colorClassName:'rdfi-I', text: 'Recettes d\'investissement', value: totals.get(RI) },
+        { id: 'RF', colorClassName:'rdfi-R rdfi-F', text: 'Recettes de fonctionnement', value: totals.get(RF) },
+        { id: 'RI', colorClassName:'rdfi-R rdfi-I', text: 'Recettes d\'investissement', value: totals.get(RI) },
     ]);
 
     return <article className="explore-budget">
@@ -99,13 +99,13 @@ Ainsi les résultats financiers de la Gironde pour cet exercice se traduisent pa
             <h2>Le budget {currentYear}</h2>
 
             <figure className="side-by-side">
-                <Donut items={revenueItems} padAngle={0}>
-                    <MoneyAmount amount={revenue} as="tspan" />
+                <Donut items={revenueItems} padAngle={0.015}>
+                    <MoneyAmount amount={revenue} />
                     de recettes
                 </Donut>
 
-                <Donut items={expenditureItems} padAngle={0}>
-                    <MoneyAmount amount={expenditures} as="tspan" />
+                <Donut items={expenditureItems} padAngle={0.015}>
+                    <MoneyAmount amount={expenditures} />
                     de dépenses
                 </Donut>
 

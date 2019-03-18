@@ -182,7 +182,8 @@ export function FinanceElement({contentId, RDFI, amountByYear, contextElements, 
                 } : undefined,
                 legendItems: !isLeaf ? legendItems : undefined,
                 uniqueColorClass: isLeaf ? colorClassById.get(contentId) : undefined,
-                yValueDisplay: makeAmountString
+                yValueDisplay: makeAmountString,
+                contentId,
             })
         ),
 
