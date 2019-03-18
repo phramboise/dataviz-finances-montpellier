@@ -1,21 +1,26 @@
 import {join} from 'path';
-import * as fs from 'fs-extra';
+import {readdir, readFile, writeFile} from 'fs-extra';
 import xmlBufferToString from 'xml-buffer-tostring';
 import {DOMParser} from 'xmldom';
 
-const {readFile, writeFile} = fs;
-
-const SOURCE_FINANCE_DIR = process.env.SOURCE_FINANCE_DIR;
+const SOURCE_COMPTES_DIR = process.env.SOURCE_COMPTES_DIR;
 const BUILD_FINANCE_DIR = process.env.BUILD_FINANCE_DIR;
 
+export function readXmlFilesInDir(sourceDir) {
+    return readdir(sourceDir).then(items => Promise.all(
+        items
+            .filter(item => item.endsWith('.xml'))
+            .map(item => readFile(join(sourceDir, item)))
+    ))
+    .then(files => {
+        return files
+            .map(xmlBufferToString)
+            .map(fileContent => (new DOMParser()).parseFromString(fileContent, "text/xml"))
+    })
+}
 
-const natureToChapitreFIP = new Promise((resolve, reject) =>
-    fs.readdir(SOURCE_FINANCE_DIR, (err, items) => resolve(Promise.all(items
-        .filter(item => item.endsWith('.xml'))
-        .map(f => readFile(join(SOURCE_FINANCE_DIR, f), 'utf-8')
-            .then(str => (new DOMParser()).parseFromString(str, "text/xml")))
-    )))
-).then(plansDeComptes => {
+
+readXmlFilesInDir(SOURCE_COMPTES_DIR).then(plansDeComptes => {
 
     // sort with most recent years first
     plansDeComptes = plansDeComptes.sort((pc1, pc2) => {
