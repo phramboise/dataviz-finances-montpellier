@@ -33,7 +33,7 @@ export default class BubbleChartCluster extends React.Component {
         super(props);
 
         this.state = {
-            RorD: 'R',
+            RorD: 'D',
             F: true,
             I: true,
             activeElement: null
@@ -42,15 +42,9 @@ export default class BubbleChartCluster extends React.Component {
         this.toggle = this.toggle.bind(this);
     }
 
-    toggle (...stateRDFI) {
-        stateRDFI.forEach(RDFI => {
-            const stateValue = this.state[RDFI];
-            if (RDFI === 'RorD') {
-                this.setState({ [RDFI]: stateValue == 'R'? 'D': 'R'})
-            } else {
-                this.setState({ [RDFI]: !stateValue });
-            }
-        });
+    toggle (RDFI) {
+        const stateValue = this.state[RDFI];
+        this.setState({ [RDFI]: !stateValue });
     }
 
     render() {
@@ -70,12 +64,12 @@ export default class BubbleChartCluster extends React.Component {
                 <ul>
                     <li>
                         <label>
-                            <input type="radio" name="rd" value="R" onClick={() => this.toggle('RorD')} defaultChecked={RorD} /> recettes
+                            <input type="radio" name="rd" value="R" onClick={() => this.setState({ RorD: 'R' })} defaultChecked={RorD === 'R'} /> recettes
                         </label>
                     </li>
                     <li>
                         <label>
-                            <input type="radio" name="rd" value="D" onClick={() => this.toggle('RorD')} defaultChecked={RorD} /> dépenses
+                            <input type="radio" name="rd" value="D" onClick={() => this.setState({ RorD: 'D' })} defaultChecked={RorD === 'D'} /> dépenses
                         </label>
                     </li>
                 </ul>
