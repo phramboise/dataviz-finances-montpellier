@@ -1,48 +1,33 @@
 import {join} from 'path';
-import * as fs from 'fs-extra';
-import {DOMParser} from 'xmldom';
+import {mkdir, writeFile} from 'fs-extra';
 
 import xmlDocumentToDocumentBudgetaire from '../src/shared/js/finance/xmlDocumentToDocumentBudgetaire';
 import makeNatureToChapitreFI from '../src/shared/js/finance/makeNatureToChapitreFI';
 
-const {mkdir, readFile, writeFile} = fs;
+import {readXmlFilesInDir} from './make-doc-budg-strings.js';
 
-const BUILD_FINANCE_DIR = './build/finances';
-const SOURCE_FINANCE_DIR = './data/finances';
+const SOURCE_COMPTES_DIR = process.env.SOURCE_COMPTES_DIR;
+const SOURCE_CA_DIR = process.env.SOURCE_CA_DIR;
+const BUILD_FINANCE_DIR = process.env.BUILD_FINANCE_DIR;
 
-
-const natureToChapitreFIP = Promise.all(process.env.PLANS_DE_COMPTE.split(':').map(f => {
-    return readFile(join(SOURCE_FINANCE_DIR, 'plansDeCompte', f), {encoding: 'utf-8'})
-    .then( str => {
-        return (new DOMParser()).parseFromString(str, "text/xml");
-    })
-}))
-.then(makeNatureToChapitreFI);
-
+const natureToChapitreFIP = readXmlFilesInDir(SOURCE_COMPTES_DIR).then(makeNatureToChapitreFI);
 
 
 mkdir(BUILD_FINANCE_DIR)
 .catch(err => {
-    if(err.code === 'EEXIST'){
-        return; // ignore
-    }
-
-    throw err;
+    // ignore if folder already exists
+    if(err.code !== 'EEXIST') { throw err; }
 })
-.then( () => {
-    return Promise.all(process.env.CA_FILES.split(':').map(f => {
-        return readFile(join(SOURCE_FINANCE_DIR, 'CA', f), {encoding: 'utf-8'})
-        .then( str => {
-            return (new DOMParser()).parseFromString(str, "text/xml");
+.then(() => readXmlFilesInDir(SOURCE_CA_DIR))
+.then(files => {
+    natureToChapitreFIP
+        .then(natureToChapitreFI => {
+            return files
+                .map(doc => xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI))
+
         })
-        .then(doc => {
-            return natureToChapitreFIP.then(natureToChapitreFI => {
-                return xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
-            })
-        })
-    }))
-    .then( docBudgs => JSON.stringify(docBudgs, null, 2) )
-    .then(str => writeFile(join(BUILD_FINANCE_DIR, 'doc-budgs.json'), str, 'utf-8'))
+        .then(docBudgs => JSON.stringify(docBudgs, null, 2))
+        .then(str => writeFile(join(BUILD_FINANCE_DIR, 'doc-budgs.json'), str, 'utf-8'))
 
 })
 .catch(err => {
