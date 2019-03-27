@@ -60,8 +60,13 @@ export default class BubbleChartCluster extends React.Component {
         }
        
         // PROBLEM This is super-hardcoded
+        if(!(RorD === 'D' && F)){
+            return null
+        }
+
         const families = dépenseTree
             .children.find(c => c.id.includes('FONCTIONNEMENT'))
+            .children.find(c => c.id.includes('Gestion courante'))
             .children.toJS()
             .map(node => {
                 return {

@@ -45,9 +45,9 @@ function getMontreuilNomenclatureRowKeys(MontreuilNomenclatureRow){
         'Sens',
         'Section',
         'Niveau 2 - Catégorie',
-        'Niveau 3 - Type',
         'Niveau a - Politique',
-        'Niveau b - Sous Politique'
+        'Niveau b - Sous Politique',
+        'Niveau 3 - Type'
     ].map(key => MontreuilNomenclatureRow[key])
 }
 
@@ -90,7 +90,6 @@ export default function MontreuilNomenclatureToAggregationDescription(montreuilN
         .filter(r => r["Nature Mvt"] === "REELLE" && 
             docBudgsFonctionNatureCombos.has(makeFonctionNatureCombo(r["Fonction - Code"], r['Nature - Code']))
         )
-        //.slice(11000, 12000) // TODO remove this, this is for testing purposes only
 
     console.log('montreuilNomenclature.length', montreuilNomenclature.length)
 
