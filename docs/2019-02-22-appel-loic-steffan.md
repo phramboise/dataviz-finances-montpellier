@@ -1,6 +1,8 @@
 ---
 title: Entretien avec Loïc Steffan
 date: 2019-02-22
+participants:
+- Thomas
 ---
 
 # Contexte
