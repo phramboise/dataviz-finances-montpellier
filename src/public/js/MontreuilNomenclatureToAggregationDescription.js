@@ -91,7 +91,7 @@ export default function MontreuilNomenclatureToAggregationDescription(montreuilN
             docBudgsFonctionNatureCombos.has(makeFonctionNatureCombo(r["Fonction - Code"], r['Nature - Code']))
         )
 
-    console.log('montreuilNomenclature.length', montreuilNomenclature.length)
+    console.log('montreuilNomenclature.length', montreuilNomenclature)
 
     for(const row of montreuilNomenclature){
         map = map.updateIn(getMontreuilNomenclatureRowKeys(row), val => val ? val.add(row) : new ImmutableSet([row]))
