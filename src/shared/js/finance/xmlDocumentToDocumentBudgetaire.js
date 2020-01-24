@@ -17,6 +17,11 @@ export default function(doc, natureToChapitreFI){
             const hasNon0Amount = Number(l.getElementsByTagName('MtReal')[0].getAttribute('V')) !== 0;
 
             const n = l.getElementsByTagName('Nature')[0].getAttribute('V');
+            // skip lines w/o "fonction"
+            if (!l.getElementsByTagName('Fonction')[0]) {
+                console.warn('No fonction for nature', n);
+                return false;
+            }
             const f = l.getElementsByTagName('Fonction')[0].getAttribute('V');
 
 
@@ -56,7 +61,7 @@ export default function(doc, natureToChapitreFI){
         xmlRowsById.set(id, idRows);
     }
 
-    return DocumentBudgetaire({
+    const _doc = DocumentBudgetaire({
         LibelleColl: doc.getElementsByTagName('LibelleColl')[0].getAttribute('V'),
         Nomenclature: doc.getElementsByTagName('Nomenclature')[0].getAttribute('V'),
         NatDec: BlocBudget.getElementsByTagName('NatDec')[0].getAttribute('V'),
@@ -82,5 +87,7 @@ export default function(doc, natureToChapitreFI){
                 ))
             }))
     })
+    console.log('------------doc----------', _doc.rows)
+    return _doc
 
 }

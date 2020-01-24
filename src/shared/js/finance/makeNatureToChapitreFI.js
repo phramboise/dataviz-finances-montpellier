@@ -14,13 +14,13 @@ export default function(plansDeCompte){
 
             if(!chapitreCodeByNatureR.has(code))
                 chapitreCodeByNatureR.set(code, c.getAttribute('RR'))
-            
+
             if(!chapitreCodeByNatureD.has(code))
                 chapitreCodeByNatureD.set(code, c.getAttribute('DR'))
         })
         Array.from(pc.getElementsByTagName('Chapitre')).map(c => {
             const code = c.getAttribute('Code');
-            
+
             if(!FIByChapitreCode.has(code))
                 FIByChapitreCode.set(code, c.getAttribute('Section'))
         })

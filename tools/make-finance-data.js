@@ -30,7 +30,11 @@ mkdir(BUILD_FINANCE_DIR)
     return natureToChapitreFIP
         .then(natureToChapitreFI => {
             return files
-                .map(doc => xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI))
+                .map(doc => {
+                    const res = xmlDocumentToDocumentBudgetaire(doc, natureToChapitreFI)
+                    console.log('xmlDocumentToDocumentBudgetaire', res)
+                    return res
+                })
 
         })
 })
